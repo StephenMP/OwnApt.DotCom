@@ -1,6 +1,6 @@
 ﻿{
   "userSecretsId": "aspnet5-DotCom-a810be16-c528-40ef-94e5-b7f45363d485",
-"version": "1.6873.4005-10f2b2c4",
+  "version": "1.0.0-*",
   "compilationOptions": {
     "emitEntryPoint": true
   },
