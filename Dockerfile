@@ -1,9 +1,9 @@
 FROM microsoft/aspnet:latest
 
 EXPOSE 5000  
-ENTRYPOINT ["dnx", "-p", "src/TestDnx/project.json", "web"]
+ENTRYPOINT ["dnx", "-p", "src/DotCom/project.json", "web"]
 
-COPY src/TestDnx/project.json /app/  
+COPY src/DotCom/project.json /app/  
 WORKDIR /app  
 RUN ["dnu", "restore"]  
 COPY . /app 
