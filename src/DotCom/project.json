@@ -12,6 +12,7 @@
 
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel",
+    "docker-web": "Microsoft.AspNet.Server.Kestrel --server.urls http://0.0.0.0:5000",
     "ef": "EntityFramework.Commands",
     "test": "xunit.runner.dnx"
   },
