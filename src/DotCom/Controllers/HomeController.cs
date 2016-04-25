@@ -12,5 +12,10 @@ namespace DotCom.Controllers
         {
             return View();
         }
+
+        public async Task<bool> SubmitForm()
+        {
+            return await Task.FromResult(true);
+        }
     }
 }

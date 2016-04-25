@@ -9,7 +9,7 @@
             <h1>OwnApt, LLC</h1>
             <hr>
             <p>Bringing property management out of the stone-age and into the future!</p>
-            <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+            <a href="#about" class="btn btn-primary btn-xl page-scroll">See More</a>
         </div>
     </div>
 </header>
@@ -27,7 +27,7 @@
                     we believe in innovating property management by implementing our own cutting-edge software
                     solutions to provide a better, faster, more reliable management service.
                 </p>
-                <a href="#services" class="btn btn-default btn-xl page-scroll">See What We Do</a>
+                <a href="#services" class="btn btn-default btn-xl page-scroll">Explore Our Services</a>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
                 <div class="service-box">
                     <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".3s"></i>
                     <h3>Integrated</h3>
-                    <p class="text-muted">We integrate with top name listing sites like Craigslist and Zillow.</p>
+                    <p class="text-muted">We integrate with top name listing sites like Craigslist.</p>
                 </div>
             </div>
         </div>
@@ -104,8 +104,8 @@
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-mouse-pointer wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        <h3>Just a Click Away</h3>
-                        <p class="text-muted">We offer an easy to use, online maintenance request system.</p>
+                        <h3>Online Payments</h3>
+                        <p class="text-muted">We offer an easy to use, online payment system for tenants.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
@@ -193,23 +193,70 @@
 </section>
 
 <section class="container-fluid" id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Let's Get In Touch!</h2>
-                <hr class="primary">
-                <p>
-                    Ready for us to take on your properties? That's great! Give us a call or send us an
-                    email and we will get back to you as soon as possible!
-                </p>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+            <h2 class="section-heading">Let's Get In Touch!</h2>
+            <hr class="primary">
+            <p>
+                Ready for us to take on your properties? That's great! Give us a call or send us an
+                email and we will get back to you as soon as possible!
+            </p>
+        </div>
+        <div class="col-lg-4 col-lg-offset-2 text-center">
+            <i class="fa fa-phone fa-3x wow bounceIn"></i>
+            <p>Call or Text: (208) 991-0492</p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+            <p><a href="mailto:support@@ownapt.com">support@@ownapt.com</a></p>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="javascript:void(0);" id="contactFormToggle" class="btn btn-primary btn-xl">Contact Form</a>
+    </div>
+
+    <div class="row contactForm" hidden>
+        <div class="row form-group">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">First Name</span>
+                    <input type="text" class="form-control" aria-label="First Name">
+                </div><!-- /input-group -->
             </div>
-            <div class="col-lg-4 col-lg-offset-2 text-center">
-                <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                <p>Call or Text: (208) 991-0492</p>
+
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Last Name</span>
+                    <input type="text" class="form-control" aria-label="Last Name">
+                </div><!-- /input-group -->
             </div>
-            <div class="col-lg-4 text-center">
-                <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p><a href="mailto:support@@ownapt.com">support@@ownapt.com</a></p>
+        </div><!-- /.col-lg-6 -->
+
+        <div class="row form-group">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Email</span>
+                    <input id="email" type="text" class="form-control" aria-label="Email">
+                </div><!-- /input-group -->
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Phone #</span>
+                    <input type="text" class="form-control" aria-label="Phone Number">
+                </div><!-- /input-group -->
+            </div>
+        </div><!-- /.col-lg-6 -->
+
+        <div class="row form-group">
+            <span class="input-group-addon">Message</span>
+            <textarea id="message" type="text" rows="5" class="form-control" aria-label="Phone Number"></textarea>
+        </div><!-- /.col-lg-6 -->
+
+        <div class="row form-group">
+            <div class="text-center">
+                <a href="javascript:void(0);" id="contactFormCancel" class="btn btn-default btn-xl">Cancel</a>
+                <a href="javascript:void(0);" id="contactFormSubmit" class="btn btn-primary btn-xl">Submit</a>
             </div>
         </div>
     </div>
@@ -226,3 +273,56 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="~/lib-unmanaged/creative/js/creative.js"></script>>
+
+<script>
+    $("#contactFormToggle").click(function () {
+        $("#contactFormToggle").hide();
+        $(".contactForm").slideDown();
+    });
+
+    $("#contactFormCancel").click(function () {
+        $("#contactFormToggle").show();
+        $(".contactForm").slideUp();
+    });
+
+    $('input').each(function () {
+        $(this).change(function () {
+            $(this).removeClass('warning');
+        })
+    });
+
+    $('#message').change(function () {
+        $(this).removeClass('warning');
+    });
+
+    $("#contactFormSubmit").click(function () {
+        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var valid = true;
+
+        $('input').each(function () {
+            if (!$(this).val()) {
+                $(this).addClass('warning');
+                valid = false;
+            }
+        });
+
+        if (!$('#message').val()) {
+            $('#message').addClass('warning');
+            valid = false;
+        }
+
+        if (!valid) {
+            return false;
+        }
+
+        if(!regex.test($('#email').val())){
+            $('#email').addClass('warning');
+            alert('Please enter a valid email address');
+            return false;
+        }
+
+        $.post('@Url.Action("SubmitForm", "Home")', function (result) {
+            alert(result);
+        });
+    });
+</script>
