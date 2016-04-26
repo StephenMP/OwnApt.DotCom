@@ -378,7 +378,7 @@ namespace DotCom.Controllers
             var message = "Your security code is: " + code;
             if (model.SelectedProvider == "Email")
             {
-                await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
+                await _emailSender.SendEmailAsync("name", message);
             }
             else if (model.SelectedProvider == "Phone")
             {

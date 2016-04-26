@@ -9,6 +9,7 @@
     "jquery-easing": "*",
     "classie": "~1.0.1",
     "WOW": "~1.1.2",
-    "font-awesome": "4.4.0"
+    "font-awesome": "4.4.0",
+    "toastr": "2.1.2"
   }
 }

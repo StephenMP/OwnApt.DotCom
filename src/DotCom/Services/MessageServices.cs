@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace DotCom.Services
@@ -10,10 +12,10 @@ namespace DotCom.Services
     // For more details see this link http://go.microsoft.com/fwlink/?LinkID=532713
     public class AuthMessageSender : IEmailSender, ISmsSender
     {
-        public Task SendEmailAsync(string email, string subject, string message)
+        public async Task<bool> SendEmailAsync(string name, string message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            // Plug in your email service here to send a text message.
+            return await Task.FromResult(true);
         }
 
         public Task SendSmsAsync(string number, string message)

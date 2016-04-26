@@ -8,6 +8,7 @@
 /// <reference path="lib/jquery-easing/jquery.easing.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+/// <reference path="lib/toastr/toastr.js" />
 /// <reference path="lib/wow/dist/wow.js" />
 /// <reference path="lib-unmanaged/animated-header/js/cbpAnimatedHeader.js" />
 /// <reference path="lib-unmanaged/creative/js/creative.js" />

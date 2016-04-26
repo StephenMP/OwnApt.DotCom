@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DotCom.Models;
 using DotCom.Services;
+using OwnApt.DotCom.Services;
 
 namespace DotCom
 {
@@ -53,6 +54,7 @@ namespace DotCom
             services.AddMvc();
 
             // Add application services.
+            services.AddTransient<IEmailSender, ContactFormEmailSender>();
             //services.AddTransient<IEmailSender, AuthMessageSender>();
             //services.AddTransient<ISmsSender, AuthMessageSender>();
         }
