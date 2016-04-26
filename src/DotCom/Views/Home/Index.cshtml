@@ -338,13 +338,9 @@
     }
 
     $('#playVideo').click(function () {
-        var src = '/videos/explainer_HD1080.mp4';
+        var src = 'https://www.youtube.com/embed/C6v6fS6xeJ0?html5=1&rel=0&autoplay=1';
         $('#videoModal').modal('show');
         $('#videoModal iframe').attr('src', src);
-    });
-
-    $('#videoModal button').click(function () {
-        $('#videoModal iframe').removeAttr('src');
     });
 
     $('#videoModal').on('hidden.bs.modal', function () {
