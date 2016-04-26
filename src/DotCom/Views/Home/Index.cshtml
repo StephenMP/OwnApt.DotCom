@@ -6,10 +6,14 @@
 <header id="page-top">
     <div class="header-content">
         <div class="header-content-inner">
+            <img width="200" height="193" src="~/images/Logo/Logo_250x241.png" />
             <h1>OwnApt, LLC</h1>
-            <hr>
-            <p>Bringing property management out of the stone-age and into the future!</p>
-            <a href="#about" class="btn btn-primary btn-xl page-scroll">See More</a>
+            <p>Redefining Property Management</p>
+            <hr />
+            <div class="btn-group">
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">See More</a>
+                <a href="javascript:void(0);" id="playVideo" class="btn btn-grey btn-xl">See Video</a>
+            </div>
         </div>
     </div>
 </header>
@@ -18,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">Redefining Property Management</h2>
+                <h2 class="section-heading">Reshaping the Property Management World</h2>
                 <hr class="light">
                 <p class="text-faded">
                     We believe in a two-fold approach to reshaping what it means
@@ -256,12 +260,28 @@
 
         <div class="row form-group">
             <div class="text-center">
-                <a href="javascript:void(0);" id="contactFormCancel" class="btn btn-default btn-xl">Cancel</a>
-                <a href="javascript:void(0);" id="contactFormSubmit" class="btn btn-primary btn-xl">Submit</a>
+                <div class="btn-group">
+                    <a href="javascript:void(0);" id="contactFormCancel" class="btn btn-grey btn-xl">Cancel</a>
+                    <a href="javascript:void(0);" id="contactFormSubmit" class="btn btn-primary btn-xl">Submit</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<div id="videoModal" class="modal fade" role="dialog" aria-labelledby="videoModallLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i></button>
+                <h4></h4>
+            </div>
+            <div class="modal-body">
+                <iframe style="width: 100%; height: 75%;" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- jQuery -->
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -284,12 +304,18 @@
         });
 
         $('#message').val('');
+        $('#charCount').text('0/1000');
 
         $("#contactFormToggle").show();
         $(".contactForm").slideUp();
     }
 
     function showToast(message, error) {
+        var selector = "success";
+        if (error) {
+            selector = "error";
+        }
+
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -308,14 +334,22 @@
             "hideMethod": "fadeOut"
         }
 
-        if (error) {
-            toastr["error"](message, "There was an issue :(");
-        }
-
-        else {
-            toastr["success"](message, "All is well :)");
-        }
+        toastr[selector](message);
     }
+
+    $('#playVideo').click(function () {
+        var src = '/videos/explainer_HD1080.mp4';
+        $('#videoModal').modal('show');
+        $('#videoModal iframe').attr('src', src);
+    });
+
+    $('#videoModal button').click(function () {
+        $('#videoModal iframe').removeAttr('src');
+    });
+
+    $('#videoModal').on('hidden.bs.modal', function () {
+        $('#videoModal iframe').removeAttr('src');
+    })
 
     $("#contactFormToggle").click(function () {
         $("#contactFormToggle").hide();
@@ -332,7 +366,7 @@
         })
     });
 
-    $('#message').keypress(function () {
+    $('#message').keyup(function () {
         $(this).removeClass('warning');
 
         var count = $(this).val().length;
@@ -389,7 +423,7 @@
 
         $.post('@Url.Action("SubmitForm", "Home")', contactFormViewModel, function (result) {
             if (result) {
-                showToast("Message sent successfully!");
+                showToast("Message sent successfully! We'll be in touch soon <i class=\"fa fa-smile-o\"></i>");
                 resetForm();
             }
 

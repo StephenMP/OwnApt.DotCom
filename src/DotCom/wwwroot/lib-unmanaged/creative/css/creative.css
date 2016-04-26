@@ -14,11 +14,21 @@ body {
     margin-top: 20px;
 }
 
-.warning{
+.btn-grey {
+    background-color: #666;
+    color: white;
+}
+
+.btn-grey:hover {
+    background-color: #555;
+    color: white;
+}
+
+.warning {
     border-color: red;
 }
 
-.contactForm{
+.contactForm {
     margin-left: 5em;
     margin-right: 5em;
 }
@@ -33,9 +43,9 @@ hr {
     border-width: 3px;
 }
 
-    hr.light {
-        border-color: #fff;
-    }
+hr.light {
+    border-color: #fff;
+}
 
 a {
     color: #f05f40;
@@ -44,10 +54,10 @@ a {
     transition: all .35s;
 }
 
-    a:hover,
-    a:focus {
-        color: #eb3812;
-    }
+a:hover,
+a:focus {
+    color: #eb3812;
+}
 
 h1,
 h2,
@@ -59,7 +69,7 @@ h6 {
 }
 
 p {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     font-size: 16px;
     line-height: 1.5;
 }
@@ -218,7 +228,7 @@ header {
         }
 
         header .header-content .header-content-inner p {
-            margin-bottom: 50px;
+            /*margin-bottom: 50px;*/
             font-size: 16px;
             font-weight: 300;
             color: rgba(255,255,255,.7);
