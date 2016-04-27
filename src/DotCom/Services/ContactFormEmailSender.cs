@@ -25,7 +25,7 @@ namespace OwnApt.DotCom.Services
                         client.UseDefaultCredentials = false;
                         client.DeliveryMethod = SmtpDeliveryMethod.Network;
                         client.EnableSsl = true;
-                        client.Credentials = new NetworkCredential("ownapt.contact.form@gmail.com", "61a201eb34dcbb5eb1b4e0f08f5b8d95470a591abd90406a7d2ff2a8bc13e64c");
+                        client.Credentials = new NetworkCredential("ownapt.contact.form@gmail.com", "trldbpjlzlhbzkof");
                         await client.SendMailAsync(mailMessage);
                     }
                 }
