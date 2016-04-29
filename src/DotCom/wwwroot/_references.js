@@ -8,5 +8,6 @@
 /// <reference path="lib/toastr/toastr.js" />
 /// <reference path="lib/wow/dist/wow.js" />
 /// <reference path="lib-unmanaged/animated-header/js/cbpAnimatedHeader.js" />
+/// <reference path="lib-unmanaged/contact-form/js/contactform.js" />
 /// <reference path="lib-unmanaged/creative/js/creative.js" />
 /// <reference path="lib-unmanaged/jquery-fittext/js/jquery.fittext.js" />
