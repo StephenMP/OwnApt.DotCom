@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet5-DotCom-a810be16-c528-40ef-94e5-b7f45363d485",
   "version": "1.0.0-*",
   "compilationOptions": {
@@ -6,6 +6,7 @@
   },
 
   "dependencies": {
+    "RestSharp": "105.2.3",
     "xunit": "2.1.0",
     "xunit.runner.dnx": "2.1.0-rc1-build204"
   },

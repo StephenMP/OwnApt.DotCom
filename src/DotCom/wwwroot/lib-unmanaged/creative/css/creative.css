@@ -28,7 +28,7 @@ body {
     border-color: red;
 }
 
-.contactForm {
+#contactForm {
     margin-left: 5em;
     margin-right: 5em;
 }

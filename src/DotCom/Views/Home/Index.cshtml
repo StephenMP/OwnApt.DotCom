@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "OwnApt, LLC";
-    Layout = "_HomeLayout";
+    Layout = "_Layout";
 }
 
 <header id="page-top">
@@ -220,7 +220,7 @@
         <a href="javascript:void(0);" id="contactFormToggle" class="btn btn-primary btn-xl">Contact Form</a>
     </div>
 
-    <div class="row contactForm" hidden>
+    <div id="contactForm" class="row" hidden>
         <div class="row form-group">
             <div class="col-lg-6">
                 <div class="input-group">
@@ -289,7 +289,7 @@
 <!-- Plugin JavaScript -->
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
-<script src="~/lib-unmanaged/jquery-fittext/js/jquery.fittext.js" )"></script>
+<script src="~/lib-unmanaged/jquery-fittext/js/jquery.fittext.js"></script>
 <script src="~/lib/WOW/dist/wow.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
@@ -307,7 +307,7 @@
         $('#charCount').text('0/1000');
 
         $("#contactFormToggle").show();
-        $(".contactForm").slideUp();
+        $("#contactForm").slideUp();
     }
 
     function showToast(message, error) {
@@ -349,7 +349,7 @@
 
     $("#contactFormToggle").click(function () {
         $("#contactFormToggle").hide();
-        $(".contactForm").slideDown();
+        $("#contactForm").slideDown();
     });
 
     $("#contactFormCancel").click(function () {

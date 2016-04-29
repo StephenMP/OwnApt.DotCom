@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DotCom.Services;
 using Microsoft.AspNet.Mvc;
-using System.Net.Mail;
-using System.Net;
-using DotCom.Services;
 using OwnApt.DotCom.ViewModels.Home;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace DotCom.Controllers
 {
     public class HomeController : Controller
     {
-        private IEmailSender emailSender;
+        private IEmailService emailSender;
 
-        public HomeController(IEmailSender emailSender)
+        public HomeController(IEmailService emailSender)
         {
             this.emailSender = emailSender;
         }
@@ -26,7 +22,8 @@ namespace DotCom.Controllers
 
         public async Task<bool> SubmitForm(ContactFormViewModel contactFormViewModel)
         {
-            return await this.emailSender.SendEmailAsync(contactFormViewModel.FullName, contactFormViewModel.ToString());
+            var meh = await this.emailSender.SendEmailAsync(contactFormViewModel.FullName, contactFormViewModel.ToString());
+            return meh.StatusCode == HttpStatusCode.OK;
         }
     }
 }
