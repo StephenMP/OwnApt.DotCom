@@ -84,7 +84,7 @@ ContactForm.submit = function () {
 $(document).ready(function () {
     $('#playVideo').click(function () {
         $('#videoModal').modal('show');
-        $('#videoModal iframe').attr('src', 'https://www.youtube.com/embed/C6v6fS6xeJ0?html5=1&rel=0&autoplay=1');
+        $('#videoModal iframe').attr('src', '/videos/explainer_HD1080.mp4');
     });
 
     $('#videoModal').on('hidden.bs.modal', function () {
