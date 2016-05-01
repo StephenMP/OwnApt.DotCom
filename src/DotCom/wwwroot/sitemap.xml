@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" 
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url> 
+    <loc>http://www.ownapt.com/</loc> 
+    <image:image>
+       <image:loc>http://ownapt.com/images/Logo/Logo_250x241.png</image:loc>
+       <image:caption>OwnApt, LLC</image:caption>
+    </image:image>
+    <video:video>
+      <video:content_loc>
+        http://ownapt.com/videos/explainer_HD1080.mp4
+      </video:content_loc>
+      <video:player_loc allow_embed="yes" autoplay="ap=1">
+        http://ownapt.com/videos/explainer_HD1080.mp4
+      </video:player_loc>
+      <video:thumbnail_loc>
+        http://ownapt.com/images/Logo/Logo_250x241.png
+      </video:thumbnail_loc>
+      <video:title>OwnApt, LLC</video:title>  
+      <video:description>
+        Redefining Property Management
+      </video:description>
+    </video:video>
+  </url>
+</urlset>
