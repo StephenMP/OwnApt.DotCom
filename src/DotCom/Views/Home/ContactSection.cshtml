@@ -64,12 +64,36 @@
             <div class="text-center">
                 <div class="btn-group">
                     <a href="javascript:void(0);" id="contactFormCancel" class="btn btn-grey btn-xl">Cancel</a>
-                    <a href="javascript:void(0);" id="contactFormSubmit" class="btn btn-primary btn-xl">Submit</a>
+                    <a href="javascript:void(0);" id="contactFormSubmit" class="btn btn-primary btn-xl has-spinner">
+                        Submit
+                        <span class="spinner"><i class="fa fa-spin fa-refresh"></i></span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .spinner {
+        display: inline-block;
+        opacity: 0;
+        width: 0;
+        -webkit-transition: opacity 0.25s, width 0.25s;
+        -moz-transition: opacity 0.25s, width 0.25s;
+        -o-transition: opacity 0.25s, width 0.25s;
+        transition: opacity 0.25s, width 0.25s;
+    }
+
+    .has-spinner.active {
+        cursor: progress;
+    }
+
+        .has-spinner.active .spinner {
+            opacity: 1;
+            width: auto; /* This doesn't work, just fix for unkown width elements */
+        }
+</style>
 
 <script src="~/lib-unmanaged/contact-form/js/contactForm.js"></script>
 <script>

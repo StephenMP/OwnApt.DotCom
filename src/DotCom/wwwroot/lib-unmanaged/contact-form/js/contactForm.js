@@ -25,6 +25,7 @@
         $('#message').val('');
         $('#charCount').text('0/1000');
         this.hide();
+        $('#contactFormSubmit').removeClass('active');
     },
 
     showToast: function (message, error) {
@@ -74,6 +75,8 @@
     },
 
     submit: function () {
+        $('#contactFormSubmit').addClass('active');
+
         var self = this;
         var contactFormViewModel = {
             FirstName: $('#firstName').val(),
@@ -91,6 +94,7 @@
 
             else {
                 self.showToast("Message NOT sent!", true);
+                $('#contactFormSubmit').removeClass('active');
             }
         });
     }
