@@ -20,10 +20,10 @@ namespace OwnApt.DotCom.Services
         public async Task<IRestResponse> SendEmailAsync(string name, string message)
         {
             RestRequest request = new RestRequest("{domain}/messages", Method.POST);
-            request.AddParameter("domain", "sandbox8a317734176742dca88b5a4fa1663bda.mailgun.org", ParameterType.UrlSegment);
-            //request.AddParameter("domain", "mailgun.ownapt.com", ParameterType.UrlSegment);
-            request.AddParameter("from", "Contact Form <postmaster@sandbox8a317734176742dca88b5a4fa1663bda.mailgun.org>");
-            request.AddParameter("to", "support@ownapt.com");
+            //request.AddParameter("domain", "sandbox8a317734176742dca88b5a4fa1663bda.mailgun.org", ParameterType.UrlSegment);
+            request.AddParameter("domain", "mailgun.ownapt.com", ParameterType.UrlSegment);
+            request.AddParameter("from", "Contact Form <mailgun@ownapt.com>");
+            request.AddParameter("to", "admin@ownapt.com");
             request.AddParameter("subject", $"New Contact: {name}");
             request.AddParameter("text", message);
 

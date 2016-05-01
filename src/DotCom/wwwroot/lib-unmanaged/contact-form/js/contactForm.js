@@ -4,7 +4,7 @@
         },
 
     initialize: function (submitUrl) {
-        this.submitUrl = submitUrl;
+        this.urls.submitUrl = submitUrl;
     },
 
     hide: function () {
@@ -74,6 +74,7 @@
     },
 
     submit: function () {
+        var self = this;
         var contactFormViewModel = {
             FirstName: $('#firstName').val(),
             LastName: $('#lastName').val(),
@@ -82,14 +83,14 @@
             Message: $('#message').val()
         };
 
-        $.post(ContactForm.urls.submitUrl, contactFormViewModel, function (result) {
+        $.post(self.urls.submitUrl, contactFormViewModel, function (result) {
             if (result) {
-                ContactForm.showToast("Message sent successfully! We'll be in touch soon <i class=\"fa fa-smile-o\"></i>");
-                ContactForm.resetForm();
+                self.showToast("Message sent successfully! We'll be in touch soon <i class=\"fa fa-smile-o\"></i>");
+                self.resetForm();
             }
 
             else {
-                ContactForm.showToast("Message NOT sent!", true);
+                self.showToast("Message NOT sent!", true);
             }
         });
     }
