@@ -27,4 +27,11 @@
   <url>
     <loc>http://blog.ownapt.com/</loc>
   </url>
+  <url> 
+    <loc>http://www.ownapt.com/Listings</loc> 
+    <image:image>
+       <image:loc>http://ownapt.com/images/Logo/Logo_250x241.png</image:loc>
+       <image:caption>OwnApt, LLC</image:caption>
+    </image:image>
+  </url>
 </urlset>

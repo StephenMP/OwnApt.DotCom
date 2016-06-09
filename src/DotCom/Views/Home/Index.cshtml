@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "_Layout";
-    ViewData["Title"] = "OwnApt, LLC";
+    ViewData["Title"] = "OwnApt";
+    ViewData["ShowListings"] = false;
 }
 
 <header id="page-top">
@@ -10,16 +11,10 @@
             <h1>OwnApt, LLC</h1>
             <p>Redefining Property Management</p>
             <hr />
-            <div class="row btn-group">
-                <div style="margin-top: 5px;" class="col-lg-4 col-md-4 col-xs-12">
-                    <a href="#about" class="btn btn-primary btn-xl page-scroll">Learn More</a>
-                </div>
-                <div style="margin-top: 5px;" class="col-lg-4 col-md-4 col-xs-12">
-                    <a href="#contact" class="btn btn-default btn-xl page-scroll">Get Started</a>
-                </div>
-                <div style="margin-top: 5px;" class="col-lg-4 col-md-4 col-xs-12">
-                    <a href="javascript:void(0);" id="playVideo" class="btn btn-grey btn-xl">Watch Video</a>
-                </div>
+            <div class="row btn-group-lg">
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">Learn More</a>
+                <a href="@Url.Action("Index", "Listings")" class="btn btn-grey btn-xl page-scroll">See Listings</a>
+                <a href="#contact" class="btn btn-default btn-xl page-scroll">Get Started</a>
             </div>
         </div>
     </div>

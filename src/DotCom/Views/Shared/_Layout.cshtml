@@ -33,30 +33,73 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">OwnApt</a>
+
+                @if (Convert.ToBoolean(ViewData["ShowListings"]))
+                {
+                    <a class="navbar-brand page-scroll" href="@Url.Action("Index", "Home")">OwnApt</a>
+                }
+                else
+                {
+                    <a class="navbar-brand page-scroll" href="#page-top">OwnApt</a>
+                }
+
                 <div class="fb-like navbar-brand" data-href="https://www.facebook.com/ownapt" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#pricing">Pricing</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="http://blog.ownapt.com/" target="_blank">Blog</a>
-                    </li>
-                </ul>
-            </div>
+            @if (Convert.ToBoolean(ViewData["ShowListings"]))
+            {
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" href="@(Url.Action("Index", "Home") + "#about")">About</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="@(Url.Action("Index", "Home") + "#services")">Services</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="@(Url.Action("Index", "Home") + "#pricing")">Pricing</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="@(Url.Action("Index", "Home") + "#contact")">Contact</a>
+                        </li>
+                        <li>
+                            <a href="http://blog.ownapt.com/" target="_blank">Blog</a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Listings")">Listings</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+            else
+            {
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" href="#about">About</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#services">Services</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#pricing">Pricing</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="http://blog.ownapt.com/" target="_blank">Blog</a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "Listings")">Listings</a>
+                        </li>
+                    </ul>
+                </div>
+            }
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
