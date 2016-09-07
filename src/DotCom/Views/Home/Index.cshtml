@@ -4,17 +4,28 @@
     ViewData["ShowListings"] = false;
 }
 
+<style>
+    @@media (max-width: 600px) {
+        #id-btn-header-contact {
+            display: none;
+        }
+    }
+</style>
+
 <header id="page-top">
     <div class="header-content">
         <div class="header-content-inner">
-            <img width="200" height="193" src="~/images/Logo/Logo_250x241.png" />
-            <h1>OwnApt, LLC</h1>
-            <p>Redefining Property Management</p>
-            <hr />
-            <div class="row btn-group-lg">
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Learn More</a>
-                <a href="@Url.Action("Index", "Listings")" class="btn btn-grey btn-xl page-scroll">See Listings</a>
-                <a href="#contact" class="btn btn-default btn-xl page-scroll">Get Started</a>
+            <div class="page-header">
+                <img width="200" height="193" src="~/images/Logo/Logo_250x241.png" />
+                <h1>OwnApt, LLC</h1>
+                <p>Redefining Property Management</p>
+            </div>
+            <div class="row">
+                <div class="btn-group-lg col-lg-12">
+                    <a href="#about" class="btn btn-primary btn-lg page-scroll">Learn More</a>
+                    <a href="@Url.Action("Index", "Listings")" class="btn btn-grey btn-lg page-scroll">See Listings</a>
+                    <a id="id-btn-header-contact" href="#contact" class="btn btn-default btn-lg page-scroll">Get Started</a>
+                </div>
             </div>
         </div>
     </div>
@@ -22,7 +33,7 @@
 
 @{ await Html.RenderPartialAsync("AboutSection"); }
 
-<section class="container-fluid no-padding" id="portfolio">
+<section class="container-fluid no-padding">
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="col-lg-3 col-md-3 col-sm-6">
@@ -45,7 +56,7 @@
 
 @{ await Html.RenderPartialAsync("PricingSection"); }
 
-<section class="container-fluid no-padding" id="portfolio">
+<section class="container-fluid no-padding">
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -65,4 +76,5 @@
 </section>
 
 @{ await Html.RenderPartialAsync("ContactSection"); }
+
 @{ await Html.RenderPartialAsync("VideoModal"); }

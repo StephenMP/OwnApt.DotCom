@@ -1,0 +1,22 @@
+﻿// Configure bundling and minification for the project.
+// Documentation: https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  // Stylesheet Bundles
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/css/site.css"
+    ]
+  },
+
+  // JavaScript Bundles
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/js/site.js"
+    ]
+  }
+]

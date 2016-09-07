@@ -1,5 +1,5 @@
 ﻿using DotCom.Services;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using OwnApt.DotCom.ViewModels.Home;
 using System.Net;
 using System.Threading.Tasks;
