@@ -16,6 +16,7 @@ namespace DotCom
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("https://0.0.0.0:5000")
                 .Build();
 
             host.Run();
