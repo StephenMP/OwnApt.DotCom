@@ -1,5 +1,5 @@
---temp-output:C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\
---out:C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\bin\Debug\netcoreapp1.0\DotCom.dll
+--temp-output:F:\Dev\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\
+--out:F:\Dev\DotCom\src\DotCom\bin\Debug\netcoreapp1.0\DotCom.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -198,13 +198,13 @@
 --reference:C:\Users\Stephen\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Stephen\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
 --reference:C:\Users\Stephen\.nuget\packages\System.Xml.XmlSerializer\4.0.11\ref\netstandard1.3\System.Xml.XmlSerializer.dll
---resource:"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\DotComdotnet-compile.deps.json",DotCom.deps.json
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Program.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Startup.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Controllers\HomeController.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Controllers\ListingsController.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\ContactFormEmailService.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\IEmailService.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\IMailGunRestClient.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\MailGunRestClient.cs
-C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\ViewModels\Home\ContactFormModel.cs
+--resource:"F:\Dev\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\DotComdotnet-compile.deps.json",DotCom.deps.json
+F:\Dev\DotCom\src\DotCom\Program.cs
+F:\Dev\DotCom\src\DotCom\Startup.cs
+F:\Dev\DotCom\src\DotCom\Controllers\HomeController.cs
+F:\Dev\DotCom\src\DotCom\Controllers\ListingsController.cs
+F:\Dev\DotCom\src\DotCom\Services\ContactFormEmailService.cs
+F:\Dev\DotCom\src\DotCom\Services\IEmailService.cs
+F:\Dev\DotCom\src\DotCom\Services\IMailGunRestClient.cs
+F:\Dev\DotCom\src\DotCom\Services\MailGunRestClient.cs
+F:\Dev\DotCom\src\DotCom\ViewModels\Home\ContactFormModel.cs

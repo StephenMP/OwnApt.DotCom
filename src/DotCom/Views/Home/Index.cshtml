@@ -1,12 +1,18 @@
 ﻿@{
-    Layout = "_Layout";
-    ViewData["Title"] = "OwnApt";
+    Layout = "_HomeLayout";
+    ViewData["Title"] = "OwnApt, LLC";
     ViewData["ShowListings"] = false;
 }
 
 <style>
-    @@media (max-width: 600px) {
+    @@media (max-width: 768px) {
         #id-btn-header-contact {
+            display: none;
+        }
+    }
+
+    @@media (max-width: 992px) {
+        .extraneous-image {
             display: none;
         }
     }
@@ -22,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="btn-group-lg col-lg-12">
-                    <a href="#about" class="btn btn-primary btn-lg page-scroll">Learn More</a>
+                    <a href="#about" class="btn btn-ownapt-orange btn-lg page-scroll">Learn More</a>
                     <a href="@Url.Action("Index", "Listings")" class="btn btn-grey btn-lg page-scroll">See Listings</a>
                     <a id="id-btn-header-contact" href="#contact" class="btn btn-default btn-lg page-scroll">Get Started</a>
                 </div>
@@ -42,10 +48,10 @@
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <img src="~/images/portfolio/2.jpg" class="img-responsive" alt="">
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 extraneous-image">
                 <img src="~/images/portfolio/3.jpg" class="img-responsive" alt="">
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 extraneous-image">
                 <img src="~/images/portfolio/4.jpg" class="img-responsive" alt="">
             </div>
         </div>
@@ -65,10 +71,10 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <img src="~/images/portfolio/6.jpg" class="img-responsive" alt="">
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-6 col-sm-6 extraneous-image">
                 <img src="~/images/portfolio/7.jpg" class="img-responsive" alt="">
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-6 col-sm-6 extraneous-image">
                 <img src="~/images/portfolio/8.jpg" class="img-responsive" alt="">
             </div>
         </div>

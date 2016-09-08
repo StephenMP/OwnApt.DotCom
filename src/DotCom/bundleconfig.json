@@ -1,22 +1,98 @@
-﻿// Configure bundling and minification for the project.
-// Documentation: https://go.microsoft.com/fwlink/?LinkId=808241
+﻿// Documentation: https://go.microsoft.com/fwlink/?LinkId=808241
 [
-  // Stylesheet Bundles
+  ////////////////////////
+  // Stylesheet Bundles //
+  ////////////////////////
+  /*Site*/
   {
     "outputFileName": "wwwroot/css/site.min.css",
     "inputFiles": [
       "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
-      "wwwroot/css/site.css"
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/wow/css/libs/animate.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/css/ownapt.css"
     ]
   },
+  {
+    "outputFileName": "wwwroot/css/site.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/wow/css/libs/animate.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/css/ownapt.css"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "includeInProject": true
+  },
+  /*Home*/
+  {
+    "outputFileName": "wwwroot/css/home.min.css",
+    "inputFiles": [
+      "wwwroot/css/animate.min.css",
+      "wwwroot/lib-unmanaged/creative/css/creative.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/home.css",
+    "inputFiles": [
+      "wwwroot/css/animate.min.css",
+      "wwwroot/lib-unmanaged/creative/css/creative.css"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "includeInProject": true
+  },
 
-  // JavaScript Bundles
+  ////////////////////////
+  // JavaScript Bundles //
+  ////////////////////////
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/lib/jquery/dist/jquery.js",
       "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/wow/dist/wow.min.js",
+      "wwwroot/lib/toastr/toastr.min.js",
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/wow/dist/wow.min.js",
+      "wwwroot/lib/toastr/toastr.min.js",
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "includeInProject": true
+  },
+  {
+    "outputFileName": "wwwroot/js/home/home.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-easing/jquery.easing.js",
+      "wwwroot/lib-unmanaged/jquery-fittext/js/jquery.fittext.js",
+      "wwwroot/lib-unmanaged/creative/js/creative.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/home/home.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-easing/jquery.easing.js",
+      "wwwroot/lib-unmanaged/jquery-fittext/js/jquery.fittext.js",
+      "wwwroot/lib-unmanaged/creative/js/creative.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "includeInProject": true
   }
 ]

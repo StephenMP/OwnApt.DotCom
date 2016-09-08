@@ -7,8 +7,8 @@
 -debug:full
 -nostdlib
 -nologo
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
--out:"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\bin\Debug\netcoreapp1.0\DotCom.dll"
+"F:\Dev\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
+-out:"F:\Dev\DotCom\src\DotCom\bin\Debug\netcoreapp1.0\DotCom.dll"
 -r:"C:\Users\Stephen\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll"
 -r:"C:\Users\Stephen\.nuget\packages\Microsoft.AspNetCore.Authorization\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Authorization.dll"
 -r:"C:\Users\Stephen\.nuget\packages\Microsoft.AspNetCore.Cors\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Cors.dll"
@@ -194,13 +194,13 @@
 -r:"C:\Users\Stephen\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\Stephen\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll"
 -r:"C:\Users\Stephen\.nuget\packages\System.Xml.XmlSerializer\4.0.11\ref\netstandard1.3\System.Xml.XmlSerializer.dll"
--resource:"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\DotComdotnet-compile.deps.json",DotCom.deps.json
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Program.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Startup.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Controllers\HomeController.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Controllers\ListingsController.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\ContactFormEmailService.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\IEmailService.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\IMailGunRestClient.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\Services\MailGunRestClient.cs"
-"C:\Users\Stephen\Documents\Visual Studio 2015\Projects\DotCom\src\DotCom\ViewModels\Home\ContactFormModel.cs"
+-resource:"F:\Dev\DotCom\src\DotCom\obj\Debug\netcoreapp1.0\DotComdotnet-compile.deps.json",DotCom.deps.json
+"F:\Dev\DotCom\src\DotCom\Program.cs"
+"F:\Dev\DotCom\src\DotCom\Startup.cs"
+"F:\Dev\DotCom\src\DotCom\Controllers\HomeController.cs"
+"F:\Dev\DotCom\src\DotCom\Controllers\ListingsController.cs"
+"F:\Dev\DotCom\src\DotCom\Services\ContactFormEmailService.cs"
+"F:\Dev\DotCom\src\DotCom\Services\IEmailService.cs"
+"F:\Dev\DotCom\src\DotCom\Services\IMailGunRestClient.cs"
+"F:\Dev\DotCom\src\DotCom\Services\MailGunRestClient.cs"
+"F:\Dev\DotCom\src\DotCom\ViewModels\Home\ContactFormModel.cs"

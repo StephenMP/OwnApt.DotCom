@@ -16,7 +16,6 @@
     ".NETCoreApp,Version=v1.0": {
       "DotCom/1.0.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.0",
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
@@ -28,9 +27,10 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+          "Microsoft.NETCore.App": "1.0.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01",
-          "RestSharp.NetCore": "105.2.4-rc4-24214-01"
+          "RestSharp.NetCore": "105.2.4-rc4-24214-01",
+          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01"
         },
         "compile": {
           "DotCom.dll": {}
@@ -2677,7 +2677,6 @@
     ".NETCoreApp,Version=v1.0/": {
       "DotCom/1.0.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.0",
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
@@ -2689,9 +2688,10 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+          "Microsoft.NETCore.App": "1.0.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01",
-          "RestSharp.NetCore": "105.2.4-rc4-24214-01"
+          "RestSharp.NetCore": "105.2.4-rc4-24214-01",
+          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01"
         },
         "runtime": {
           "DotCom.dll": {}
