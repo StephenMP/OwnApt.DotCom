@@ -78,7 +78,7 @@
   {
     "outputFileName": "wwwroot/js/home/home.min.js",
     "inputFiles": [
-      "wwwroot/lib/jquery-easing/jquery.easing.js",
+      "wwwroot/lib/jquery.easing/js/jquery.easing.js",
       "wwwroot/lib-unmanaged/jquery-fittext/js/jquery.fittext.js",
       "wwwroot/lib-unmanaged/creative/js/creative.js"
     ]
@@ -86,7 +86,7 @@
   {
     "outputFileName": "wwwroot/js/home/home.js",
     "inputFiles": [
-      "wwwroot/lib/jquery-easing/jquery.easing.js",
+      "wwwroot/lib/jquery.easing/js/jquery.easing.js",
       "wwwroot/lib-unmanaged/jquery-fittext/js/jquery.fittext.js",
       "wwwroot/lib-unmanaged/creative/js/creative.js"
     ],
