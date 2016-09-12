@@ -1,6 +1,6 @@
-﻿namespace OwnApt.DotCom.Domain.Context
+﻿namespace OwnApt.DotCom.Model
 {
-    public class LockContext
+    public class LockContextModel
     {
         #region Properties
 

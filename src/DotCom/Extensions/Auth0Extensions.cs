@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Authentication;
-using OwnApt.DotCom.Domain.Context;
+using OwnApt.DotCom.Model;
 using System;
 using System.Security.Cryptography;
 
@@ -23,9 +23,9 @@ namespace OwnApt.DotCom.Extensions
 
         #region Methods
 
-        public static LockContext GenerateLockContext(this HttpContext httpContext, OpenIdConnectOptions options, string returnUrl = null)
+        public static LockContextModel GenerateLockContext(this HttpContext httpContext, OpenIdConnectOptions options, string returnUrl = null)
         {
-            var lockContext = new LockContext
+            var lockContext = new LockContextModel
             {
                 ClientId = options.ClientId
             };
