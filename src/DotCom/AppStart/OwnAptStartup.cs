@@ -1,6 +1,4 @@
-﻿using System;
-using AutoMapper;
-using DotCom.Services;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,20 +7,31 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using OwnApt.DotCom.Services;
+using OwnApt.DotCom.Domain.Interface;
+using OwnApt.DotCom.Domain.Service;
+using OwnApt.DotCom.Domain.Settings;
+using OwnApt.RestfulProxy.Client;
+using OwnApt.RestfulProxy.Interface;
 using RestSharp.Authenticators;
+using Serilog;
 
-namespace DotCom.AppStart
+namespace OwnApt.DotCom.AppStart
 {
     public static class OwnAptStartup
     {
-        #region Private Fields
+        #region Fields
 
         private static IConfigurationRoot Configuration;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Methods
+        #region Properties
+
+        public static IHostingEnvironment HostEnvironment { get; private set; }
+
+        #endregion Properties
+
+        #region Methods
 
         public static IMapper BuildMapper()
         {
@@ -31,15 +40,16 @@ namespace DotCom.AppStart
             }).CreateMapper();
         }
 
-        public static void ConfigureOwnAptBuild(IConfigurationRoot configuration)
+        public static void ConfigureOwnAptStartup(IConfigurationRoot configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            HostEnvironment = env;
         }
 
-        public static void UseOwnAptConfiguration(this IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IOptions<OpenIdConnectOptions> oidcOptions)
+        public static void UseOwnAptConfiguration(this IApplicationBuilder app, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime, IOptions<OpenIdConnectOptions> oidcOptions)
         {
-            ConfigureLogging(loggerFactory);
-            ConfigureExceptionHandling(app, env);
+            ConfigureLogging(loggerFactory, appLifetime);
+            ConfigureExceptionHandling(app);
 
             UseStaticFiles(app);
             UseCookieAuthentication(app);
@@ -53,24 +63,17 @@ namespace DotCom.AppStart
             AddOpenIdOptions(services);
             AddMvc(services);
             AddOptions(services);
+            AddServiceUris(services);
             AddAuth0(services);
             AddAutoMapper(services);
             AddServices(services);
+            AddRestfulProxy(services);
         }
 
         private static void AddAuth0(IServiceCollection services)
         {
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
         }
-
-        private static void AddOptions(IServiceCollection services)
-        {
-            services.AddOptions();
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private static void AddAutoMapper(IServiceCollection services)
         {
@@ -103,10 +106,32 @@ namespace DotCom.AppStart
             });
         }
 
+        private static void AddOptions(IServiceCollection services)
+        {
+            services.AddOptions();
+        }
+
+        private static void AddRestfulProxy(IServiceCollection services)
+        {
+            var appId = Configuration["HmacCredentials:AppId"];
+            var secretKey = Configuration["HmacCredentials:SecretKey"];
+            var proxyConfiguration = new ProxyConfiguration(appId, secretKey);
+            var proxy = new Proxy(proxyConfiguration);
+
+            services.AddSingleton<IProxy>(proxy);
+        }
+
         private static void AddServices(IServiceCollection services)
         {
-            services.AddTransient<IEmailService, ContactFormEmailService>();
+            services.AddTransient<IClaimsService, ClaimsService>();
+            services.AddTransient<ISignUpService, SignUpService>();
+            services.AddTransient<IContactFormService, ContactFormService>();
             services.AddSingleton<IMailGunRestClient>(BuildMailGunRestClient());
+        }
+
+        private static void AddServiceUris(IServiceCollection services)
+        {
+            services.Configure<ServiceUriSettings>(Configuration.GetSection("ServiceUris"));
         }
 
         private static IMailGunRestClient BuildMailGunRestClient()
@@ -117,9 +142,9 @@ namespace DotCom.AppStart
             };
         }
 
-        private static void ConfigureExceptionHandling(IApplicationBuilder app, IHostingEnvironment env)
+        private static void ConfigureExceptionHandling(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (HostEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
@@ -130,10 +155,30 @@ namespace DotCom.AppStart
             }
         }
 
-        private static void ConfigureLogging(ILoggerFactory loggerFactory)
+        private static void ConfigureLogging(ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            /* Serilog Configuration */
+            var loggerConfig = new LoggerConfiguration()
+                .Enrich.FromLogContext();
+
+            if (HostEnvironment.IsDevelopment())
+            {
+                loggerConfig
+                    .MinimumLevel.Debug()
+                    .WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
+                    .WriteTo.Console();
+            }
+            else
+            {
+                loggerConfig
+                    .MinimumLevel.Information()
+                    .WriteTo.Logentries("0adf8813-4dbb-453a-b30d-2dc0f2f7a2dd");
+            }
+
+            Log.Logger = loggerConfig.CreateLogger();
+
+            loggerFactory.AddSerilog();
+            appLifetime.ApplicationStopped.Register(Log.CloseAndFlush);
         }
 
         private static void UseCookieAuthentication(IApplicationBuilder app)
@@ -165,6 +210,6 @@ namespace DotCom.AppStart
             app.UseStaticFiles();
         }
 
-        #endregion Private Methods
+        #endregion Methods
     }
 }

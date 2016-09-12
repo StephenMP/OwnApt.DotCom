@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "b49f8719dd543345b659d0788fa6863f439c70c3"
+    "signature": "61e2e9817bcafd0aa8243d612c15a522b429712a"
   },
   "compilationOptions": {
     "defines": [
@@ -16,7 +16,11 @@
     ".NETCoreApp,Version=v1.0": {
       "DotCom/1.0.0": {
         "dependencies": {
+          "ApiContract": "14.7356.41",
           "AutoMapper": "5.1.1",
+          "Microsoft.AspNetCore.Authentication": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.0",
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
@@ -30,14 +34,38 @@
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "Microsoft.NETCore.App": "1.0.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+          "OwnApt": "14.7353.6685",
+          "RestfulProxy": "14.7330.5861",
           "RestSharp.NetCore": "105.2.4-rc4-24214-01",
-          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01",
-          "Microsoft.AspNetCore.Authentication": "1.0.0",
-          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
-          "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0"
+          "Serilog": "2.2.1",
+          "Serilog.Extensions.Logging": "1.2.0",
+          "Serilog.Sinks.Console": "2.1.0",
+          "Serilog.Sinks.Logentries": "3.0.0-dev-00020",
+          "Serilog.Sinks.RollingFile": "3.0.1",
+          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01"
         },
         "compile": {
           "DotCom.dll": {}
+        }
+      },
+      "ApiContract/14.7356.41": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "OwnApt": "14.7353.6685"
+        },
+        "compile": {
+          "lib/netstandard1.6/ApiContract.dll": {}
+        }
+      },
+      "Authentication/14.7248.6946": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/Authentication.dll": {}
         }
       },
       "AutoMapper/5.1.1": {
@@ -134,6 +162,17 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.Internal.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.Internal": "1.0.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
         }
       },
       "Microsoft.AspNetCore.DataProtection/1.0.0": {
@@ -313,6 +352,17 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Identity/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "1.0.0",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+          "System.Text.RegularExpressions": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Identity.dll": {}
         }
       },
       "Microsoft.AspNetCore.JsonPatch/1.0.0": {
@@ -1314,6 +1364,27 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
+      "OwnApt/14.7353.6685": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Primitives": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/OwnApt.dll": {}
+        }
+      },
+      "RestfulProxy/14.7330.5861": {
+        "dependencies": {
+          "Authentication": "14.7248.6946",
+          "Microsoft.AspNetCore.Mvc": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Net.Http": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/RestfulProxy.dll": {}
+        }
+      },
       "RestSharp.NetCore/105.2.4-rc4-24214-01": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -1361,6 +1432,89 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
           "Microsoft.NETCore.Targets": "1.0.1"
+        }
+      },
+      "Serilog/2.2.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.Linq": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.dll": {}
+        }
+      },
+      "Serilog.Extensions.Logging/1.2.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
+          "Serilog": "2.2.1",
+          "System.Threading": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Extensions.Logging.dll": {}
+        }
+      },
+      "Serilog.Sinks.Console/2.1.0": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "System.Console": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.Console.dll": {}
+        }
+      },
+      "Serilog.Sinks.File/3.0.1": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem": "4.0.1",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.File.dll": {}
+        }
+      },
+      "Serilog.Sinks.Logentries/3.0.0-dev-00020": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "Serilog.Sinks.PeriodicBatching": "2.0.0",
+          "System.Net.Security": "4.0.0",
+          "System.Net.Sockets": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.Logentries.dll": {}
+        }
+      },
+      "Serilog.Sinks.PeriodicBatching/2.0.0": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.Threading.Thread": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.dll": {}
+        }
+      },
+      "Serilog.Sinks.RollingFile/3.0.1": {
+        "dependencies": {
+          "Serilog.Sinks.File": "3.0.1",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.RollingFile.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -2795,7 +2949,11 @@
     ".NETCoreApp,Version=v1.0/": {
       "DotCom/1.0.0": {
         "dependencies": {
+          "ApiContract": "14.7356.41",
           "AutoMapper": "5.1.1",
+          "Microsoft.AspNetCore.Authentication": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.0",
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
@@ -2809,14 +2967,38 @@
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "Microsoft.NETCore.App": "1.0.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+          "OwnApt": "14.7353.6685",
+          "RestfulProxy": "14.7330.5861",
           "RestSharp.NetCore": "105.2.4-rc4-24214-01",
-          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01",
-          "Microsoft.AspNetCore.Authentication": "1.0.0",
-          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
-          "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0"
+          "Serilog": "2.2.1",
+          "Serilog.Extensions.Logging": "1.2.0",
+          "Serilog.Sinks.Console": "2.1.0",
+          "Serilog.Sinks.Logentries": "3.0.0-dev-00020",
+          "Serilog.Sinks.RollingFile": "3.0.1",
+          "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01"
         },
         "runtime": {
           "DotCom.dll": {}
+        }
+      },
+      "ApiContract/14.7356.41": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "OwnApt": "14.7353.6685"
+        },
+        "runtime": {
+          "lib/netstandard1.6/ApiContract.dll": {}
+        }
+      },
+      "Authentication/14.7248.6946": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Authentication.dll": {}
         }
       },
       "AutoMapper/5.1.1": {
@@ -2913,6 +3095,17 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.Internal.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.Internal": "1.0.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Security.Cryptography.Algorithms": "4.2.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
         }
       },
       "Microsoft.AspNetCore.DataProtection/1.0.0": {
@@ -3092,6 +3285,17 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Identity/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "1.0.0",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+          "System.Text.RegularExpressions": "4.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Identity.dll": {}
         }
       },
       "Microsoft.AspNetCore.JsonPatch/1.0.0": {
@@ -4090,6 +4294,27 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
+      "OwnApt/14.7353.6685": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Primitives": "4.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/OwnApt.dll": {}
+        }
+      },
+      "RestfulProxy/14.7330.5861": {
+        "dependencies": {
+          "Authentication": "14.7248.6946",
+          "Microsoft.AspNetCore.Mvc": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Net.Http": "4.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/RestfulProxy.dll": {}
+        }
+      },
       "RestSharp.NetCore/105.2.4-rc4-24214-01": {
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -4137,6 +4362,89 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
           "Microsoft.NETCore.Targets": "1.0.1"
+        }
+      },
+      "Serilog/2.2.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.Linq": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.dll": {}
+        }
+      },
+      "Serilog.Extensions.Logging/1.2.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
+          "Serilog": "2.2.1",
+          "System.Threading": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Extensions.Logging.dll": {}
+        }
+      },
+      "Serilog.Sinks.Console/2.1.0": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "System.Console": "4.0.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.Console.dll": {}
+        }
+      },
+      "Serilog.Sinks.File/3.0.1": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem": "4.0.1",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.File.dll": {}
+        }
+      },
+      "Serilog.Sinks.Logentries/3.0.0-dev-00020": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "Serilog.Sinks.PeriodicBatching": "2.0.0",
+          "System.Net.Security": "4.0.0",
+          "System.Net.Sockets": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.Logentries.dll": {}
+        }
+      },
+      "Serilog.Sinks.PeriodicBatching/2.0.0": {
+        "dependencies": {
+          "Serilog": "2.2.1",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.Threading.Thread": "4.0.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.dll": {}
+        }
+      },
+      "Serilog.Sinks.RollingFile/3.0.1": {
+        "dependencies": {
+          "Serilog.Sinks.File": "3.0.1",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.RollingFile.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -5473,6 +5781,16 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ApiContract/14.7356.41": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6HcbVMm8ubkeQhTFy0l7xTdWU8tzdm+WrpfSnow7UCsor8w8hwilwg4vGYQ8cL8ZoE01GunhrobwUmDXgTy/UA=="
+    },
+    "Authentication/14.7248.6946": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e74EYDS6MUAVBoB+Bcg9g1OChEGXC17CKyspfbdD/yEUniAa6Yz6Eoeh43R2reZ+MIWNSaeHnAQrb68+7YQjrw=="
+    },
     "AutoMapper/5.1.1": {
       "type": "package",
       "serviceable": true,
@@ -5517,6 +5835,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-0btvxwOqYNpKTUQrD7LA3p6Wi0vrhfWGBVqIKPS1KtEdkCv3QoVgFO4eJYuClGDS9NXhqk7TWh46/8x8wtZHaw=="
+    },
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OUBTk5RS7b3+Q9Z7F1jAL9JzdWlkITNpUw8EO5Yu1sP4Rq2jaidXKLiEw7oKFbD1Wmcee2s+U/UyHQfy/og7Sw=="
     },
     "Microsoft.AspNetCore.DataProtection/1.0.0": {
       "type": "package",
@@ -5582,6 +5905,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-gHpdaaAzhaTWJZuJVo3ler2zzdQWrm8wnsoSjcNtoZZdTOkwImndRwK8o4GYoM18dfmfNheM7i4EENI7XHM/lA=="
+    },
+    "Microsoft.AspNetCore.Identity/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qQXsxDocbx3xMPBVBZ2Es6vw5QalV+z9mGXUPbn/XRbjY1viwQjVToE7BrCanqr7q97ds0ciI2AgQhvny0kkqw=="
     },
     "Microsoft.AspNetCore.JsonPatch/1.0.0": {
       "type": "package",
@@ -5963,6 +6291,16 @@
       "serviceable": true,
       "sha512": "sha512-U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw=="
     },
+    "OwnApt/14.7353.6685": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BNh3fy099rSLJZG0Jb5OXu9Fm7tWQwbL9yzBxZnLfal0RBKI9KYDOjZ0LJhv0jUDMG+AGD43MuLlHykG4BC2+g=="
+    },
+    "RestfulProxy/14.7330.5861": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lqbm3DLVxwVaU+SYdbvMOdi2D/x2bKxBf5UmdkpLW1SSzeeuP1TF0HXdbDDPqjs7/zp0D4Mej5XI/H36N8yTow=="
+    },
     "RestSharp.NetCore/105.2.4-rc4-24214-01": {
       "type": "package",
       "serviceable": true,
@@ -5992,6 +6330,41 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-2CQK0jmO6Eu7ZeMgD+LOFbNJSXHFVQbCJJkEyEwowh1SCgYnrn9W9RykMfpeeVGw7h4IBvYikzpGUlmZTUafJw=="
+    },
+    "Serilog/2.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rQcldf93blfFel7X66LCPzIxXUDvkwlkvb3NbZOziZo9TgqcSRrxx1DiMW/gMsTbd46iAr7ZJF2LgCUa/kR2ng=="
+    },
+    "Serilog.Extensions.Logging/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kAZoUF/U/X+/ep5ZytpydcURbt1tvhyArOrWct0QLW72j6cquu2JyJlzNAaKW1yBZcblx1PvzvFJADhBuaIiMQ=="
+    },
+    "Serilog.Sinks.Console/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LqTjUgmfuKNgnkVY7S1ocotis9qpt+l7yvqTgvxi0GWCrtMW39W9L08mpxiA1mLVGbSDbxIlFRAnqo/fEEBX9Q=="
+    },
+    "Serilog.Sinks.File/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9eCg2aGA9gSU2H3AeKcefXcEeHLpmvR3gMxiLqXRvqBNozZOd8Kdng24r7erEkC6E3FD7mCroUHclvDwdycc4A=="
+    },
+    "Serilog.Sinks.Logentries/3.0.0-dev-00020": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mTQqMjsmKNGP0ee4UlzAxiuUC4GIn0XBRf892rT3LJCXEGYsYcOrSVwoGA4wXWDFLhH0T9Lj/k8gSHT0QYBhwA=="
+    },
+    "Serilog.Sinks.PeriodicBatching/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gfG5MaAKdGw0CFPdoXV9I0m+s5CbUxihFeiRMD/nSPzP/S8Lmop0McQhz8o1tKBU/7SkM1UOjWsBdv5LObDBOg=="
+    },
+    "Serilog.Sinks.RollingFile/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-l4Ei4+YmMGF3RoWYu8TanMPFdwd6hywYtNDv+PCG84sUxoba377B6YVSJJx/yaGuDRcH48ZhfLjITT7pJUqGrQ=="
     },
     "System.AppContext/4.1.0": {
       "type": "package",

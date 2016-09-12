@@ -1,0 +1,38 @@
+﻿@model OwnApt.DotCom.Domain.Context.LockContext
+
+<environment names="Development">
+    <script src="~/lib/auth0-lock/build/lock.js"></script>
+</environment>
+
+<environment names="Staging,Production">
+    <script src="~/lib/auth0-lock/build/lock.min.js"></script>
+</environment>
+
+<script>
+    var redirectUrl = '@Model.CallbackUrl';
+    var state= '@Model.State';
+    var nonce= '@Model.Nonce';
+
+    var lockOptions = {
+        closable: false,
+        allowLogin: false,
+        auth: {
+            redirectUrl: redirectUrl,
+            responseType: 'code',
+            params: {
+                state: state,
+                nonce: nonce,
+                scope: 'openid email'
+            }
+        },
+        theme: {
+            logo: '@Url.Content("~/images/Logo/Logo_50x48.png")',
+            primaryColor: '#f05f40'
+        },
+        languageDictionary: {
+            title: "OwnApt, LLC"
+        }
+    };
+
+    var lock = new Auth0Lock('@Model.ClientId', '@Model.Domain', lockOptions).show();
+</script>

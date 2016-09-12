@@ -43,7 +43,7 @@ hr {
     border-width: 3px;
 }
 
-    hr.light {
+    .light {
         border-color: #fff;
     }
 

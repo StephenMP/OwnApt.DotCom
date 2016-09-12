@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 
-namespace DotCom
+namespace OwnApt.DotCom
 {
     public class Program
     {
+        #region Methods
+
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
@@ -21,5 +19,7 @@ namespace DotCom
 
             host.Run();
         }
+
+        #endregion Methods
     }
 }

@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "ApiContract": "14.7356.41",
     "AutoMapper": "5.1.1",
+    "Microsoft.AspNetCore.Authentication": "1.0.0",
+    "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+    "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Razor.Tools": {
@@ -17,15 +21,19 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.NETCore.App": {
-      "version": "1.0.0",
-      "type": "platform"
+      "type": "platform",
+      "version": "1.0.0"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+    "OwnApt": "14.7353.6685",
+    "RestfulProxy": "14.7330.5861",
     "RestSharp.NetCore": "105.2.4-rc4-24214-01",
-    "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01",
-    "Microsoft.AspNetCore.Authentication": "1.0.0",
-    "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
-    "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0"
+    "Serilog": "2.2.1",
+    "Serilog.Extensions.Logging": "1.2.0",
+    "Serilog.Sinks.Console": "2.1.0",
+    "Serilog.Sinks.Logentries": "3.0.0-dev-00020",
+    "Serilog.Sinks.RollingFile": "3.0.1",
+    "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01"
   },
 
   "tools": {
