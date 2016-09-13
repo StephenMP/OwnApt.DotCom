@@ -1,7 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="js/home/home.min.js" />
 /// <reference path="js/site.js" />
-/// <reference path="lib/auth0-lock/build/lock.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
 /// <reference path="lib/jquery.easing/js/jquery.easing.js" />
 /// <reference path="lib/jquery/dist/jquery.js" />

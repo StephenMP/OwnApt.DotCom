@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.ViewModels.Dto;
 using System.Net;
@@ -24,6 +25,13 @@ namespace OwnApt.DotCom.Controllers
         #endregion Constructors
 
         #region Methods
+
+        public IActionResult Error()
+        {
+            var feature = HttpContext.Features.Get<IExceptionHandlerFeature>();
+            var error = feature?.Error;
+            return View("~/Views/Shared/Error.cshtml", error);
+        }
 
         public IActionResult Index()
         {

@@ -2,5 +2,10 @@
     ViewData["Title"] = "Error";
 }
 
+@model System.Exception
+
 <h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h2 class="text-danger">An error occurred while processing your request. Please contact support@ownapt.com with the following information:</h2>
+<p>Error ID: @Model.Data["ExceptionId"]</p>
+<p>Message: @Model.Message</p>
+<p>Stack Trace: @Model.StackTrace</p>

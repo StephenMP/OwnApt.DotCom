@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DotCom.Domain.Exceptions;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Dto.Account;
@@ -14,8 +15,8 @@ namespace OwnApt.DotCom.Domain.Service
         #region Fields
 
         private const string emailBody = "<html><head><style type=\"text/css\">.ExternalClass,.ExternalClass div,.ExternalClass font,.ExternalClass p,.ExternalClass span,.ExternalClass td, img{{line-height:100%}}#outlook a{{padding:0}}.ExternalClass,.ReadMsgBody{{width:100%}}a,blockquote,body,li,p,table,td{{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}}table,td{{mso-table-lspace:0;mso-table-rspace:0}}img{{-ms-interpolation-mode:bicubic;border:0;height:auto;outline:0;text-decoration:none}}table{{border-collapse:collapse!important}}#bodyCell,#bodyTable,body{{height:100%!important;margin:0;padding:0;font-family:ProximaNova,sans-serif}}#bodyCell{{padding:20px}}#bodyTable{{width:600px}}@font-face{{font-family:ProximaNova;src:url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot);src:url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot?#iefix) format('embedded-opentype'),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.woff) format('woff');font-weight:400;font-style:normal}}@font-face{{font-family:ProximaNova;src:url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot);src:url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot?#iefix) format('embedded-opentype'),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.woff) format('woff');font-weight:600;font-style:normal}}@media only screen and (max-width:480px){{#bodyTable,body{{width:100%!important}}a,blockquote,body,li,p,table,td{{-webkit-text-size-adjust:none!important}}body{{min-width:100%!important}}#bodyTable{{max-width:600px!important}}#signIn{{max-width:280px!important}}}}</style></head><body><center><table style=\"width: 600px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 0;font-family: &quot;ProximaNova&quot;, sans-serif;border-collapse: collapse !important;height: 100% !important;\" align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" height=\"100%\" width=\"100%\" id=\"bodyTable\"><tr><td align=\"center\" valign=\"top\" id=\"bodyCell\" style=\"-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 20px;font-family: &quot;ProximaNova&quot;, sans-serif;height: 100% !important;\"><div class=\"main\"><p style=\"text-align: center;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%; margin-bottom: 30px;\"><img src=\"http://ownapt.com/images/Logo/Logo_250x241.png\" width=\"50\" alt=\"OwnApt\" style=\"-ms-interpolation-mode: bicubic;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;\"></p><h1>Welcome to OwnApt!</h1><p>Please setup your account by clicking the following link within the next 72 hours:</p><p><a href=\"http://localhost:5000/Account/SignUp?token={0}\"> Create my account</a></p><p>If you have any questions, please don't hesitate to contact us by replying to this email or using any of the contact methods below.</p><br>Best Regards,<br><strong>The OwnApt Team</strong><div>Call or Text: 208.991.0492</div><div>Email: support @ownapt.com</div><br><br><hr style=\"border: 2px solid #EAEEF3; border-bottom: 0; margin: 20px 0;\"><p style= \"text-align: center;color: #A9B3BC;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;\">If you did not make this request, please contact us as soon as possible.</p></div></td></tr></table></center></body></html>";
-        private readonly IMailGunRestClient restClient;
         private readonly ILogger logger;
+        private readonly IMailGunRestClient restClient;
 
         #endregion Fields
 
@@ -43,14 +44,14 @@ namespace OwnApt.DotCom.Domain.Service
                 UtcDateIssued = utcDateTime
             };
 
-            var signUpTokenJson = JsonConvert.SerializeObject(signUpToken);
+            var signUpTokenJson = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(signUpToken));
             var signUpTokenBytes = Encoding.UTF8.GetBytes(signUpTokenJson);
             var base64SignUpToken = Convert.ToBase64String(signUpTokenBytes);
             var rawToken = $"{base64SignUpToken}:{nonce}";
             var tokenBytes = Encoding.UTF8.GetBytes(rawToken);
             var token = Convert.ToBase64String(tokenBytes);
 
-            return await Task.FromResult(token);
+            return token;
         }
 
         public async Task<SignUpTokenDto> ParseTokenAsync(string token)
@@ -65,20 +66,18 @@ namespace OwnApt.DotCom.Domain.Service
                 var nonce = tokenArray[1];
                 var signUpTokenBytes = Convert.FromBase64String(base64SignUpToken);
                 var signUpTokenJson = Encoding.UTF8.GetString(signUpTokenBytes);
-                var signUpToken = JsonConvert.DeserializeObject<SignUpTokenDto>(signUpTokenJson);
+                var signUpToken = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SignUpTokenDto>(signUpTokenJson));
 
                 if (signUpToken.Nonce == nonce)
                 {
                     if (DateTime.UtcNow <= signUpToken.UtcDateIssued.AddHours(72))
                     {
-                        return await Task.FromResult(signUpToken);
+                        return signUpToken;
                     }
                 }
             }
 
-            var unauthorizedException = new UnauthorizedAccessException("The sign up token received has been corrupted or has expired!");
-            logger.LogError(unauthorizedException.Message);
-            throw unauthorizedException;
+            return null;
         }
 
         public async Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
@@ -93,28 +92,19 @@ namespace OwnApt.DotCom.Domain.Service
 
             try
             {
-                return await Task.FromResult(restClient.Execute(request));
+                return await Task.Factory.StartNew(() => (restClient.Execute(request)));
             }
             catch (Exception e)
             {
-                logger.LogCritical(e.Message);
+                ExceptionUtility.HandleException(e, this.logger, LogLevel.Error);
                 throw;
             }
         }
 
         public async Task<bool> ValidateTokenAsync(string stringToken)
         {
-            try
-            {
-                await this.ParseTokenAsync(stringToken);
-            }
-
-            catch (UnauthorizedAccessException)
-            {
-                return false;
-            }
-
-            return true;
+            var signUpToken = await this.ParseTokenAsync(stringToken);
+            return signUpToken != null;
         }
 
         #endregion Methods

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using DotCom.Domain.Exceptions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,6 @@ using OwnApt.DotCom.Domain.Settings;
 using OwnApt.DotCom.Extensions;
 using OwnApt.DotCom.ProxyRequests;
 using OwnApt.RestfulProxy.Interface;
-using System;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Controllers
@@ -48,13 +48,10 @@ namespace OwnApt.DotCom.Controllers
 
         #endregion Constructors
 
+        /* REMOVE : HERE FOR TESTING PURPOSES ONLY */
+
         #region Methods
 
-        /// <summary>
-        /// This is just a helper action to enable you to easily see all claims related to a user. It helps when debugging your
-        /// application to see the in claims populated from the Auth0 ID Token
-        /// </summary>
-        /// <returns></returns>
         [Authorize]
         public IActionResult Claims()
         {
@@ -62,8 +59,9 @@ namespace OwnApt.DotCom.Controllers
             return View();
         }
 
-        [HttpGet]
         /* REMOVE : HERE FOR TESTING PURPOSES ONLY */
+
+        [HttpGet]
         public bool Email()
         {
             var propId = "f254534c48fb49168188c70c1108d75b";
@@ -82,9 +80,6 @@ namespace OwnApt.DotCom.Controllers
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            var userEmail = await this.claimsService.GetUserEmailAsync(User.Claims);
-            this.logger.LogInformation($"User {userEmail} logging out");
-
             await HttpContext.Authentication.SignOutAsync("Auth0");
             await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -102,10 +97,8 @@ namespace OwnApt.DotCom.Controllers
                 return RedirectToAction(nameof(Claims));
             }
 
-            var message = result.ResponseMessage ?? result.StatusCode.ToString();
-
-            this.logger.LogCritical(message);
-            throw new Exception(message);
+            var message = result.ResponseMessage ?? $"Recieved unsuccessful status code from proxy: {result.StatusCode.ToString()}";
+            throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
         }
 
         public async Task<IActionResult> SignUp(string token)
@@ -120,15 +113,14 @@ namespace OwnApt.DotCom.Controllers
             var tokenIsValid = await this.signUpService.ValidateTokenAsync(token);
             if (tokenIsValid)
             {
-                this.logger.LogInformation($"Token sign up token {token} is valid");
+                this.logger.LogInformation($"Token sign up token is valid: {token}");
                 var returnUrl = $"/Account/MapUserToProperties?token={token}";
                 var lockContext = HttpContext.GenerateLockContext(this.options.Value, returnUrl);
                 return View(lockContext);
             }
 
-            var message = $"The sign up token {token} has been altered or has expired!";
-            this.logger.LogCritical(message);
-            throw new Exception(message);
+            var message = $"The sign up token has been altered or has expired! Token recieved: {token}";
+            throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
         }
 
         #endregion Methods
