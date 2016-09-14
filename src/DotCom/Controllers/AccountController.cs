@@ -33,12 +33,12 @@ namespace OwnApt.DotCom.Controllers
             IProxy proxy,
             ISignUpService signUpService,
             IClaimsService claimsService,
-            IOptions<OpenIdConnectOptions> options,
+            IOptions<OpenIdConnectOptions> openIdOptions,
             IOptions<ServiceUriSettings> serviceUris,
             ILoggerFactory loggerFatory
         )
         {
-            this.options = options;
+            this.options = openIdOptions;
             this.signUpService = signUpService;
             this.serviceUris = serviceUris;
             this.proxy = proxy;
