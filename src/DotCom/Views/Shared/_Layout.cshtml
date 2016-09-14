@@ -1,12 +1,31 @@
-﻿<html lang="en">
-<head>
+﻿<environment names="Development">
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
+</environment>
 
+<environment names="Staging,Production">
+    <link rel="stylesheet" type="text/css" href="~/css/site.min.css" />
+    <script src="~/js/site.min.js"></script>
+</environment>
+
+@RenderSection("Styles", false)
+
+<html lang="en">
+<head>
+    @*All styling here for top nav bar*@
+    @RenderSection("TopNavBar", true)
 </head>
 <body>
+    @*All styling here for side nav bar*@
+    @RenderSection("SideNavBar", true)
+
     @RenderBody()
 </body>
 </html>
 
-@RenderSection("Styles", false)
+<footer>
+    &copy; OwnApt, LLC | All Rights Reserved.
+</footer>
+
 
 @RenderSection("Scripts", false)
