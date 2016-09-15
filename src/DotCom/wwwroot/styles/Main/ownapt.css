@@ -1,0 +1,48 @@
+.btn-ownapt-orange {
+  border-color: #F05f40;
+  color: #ffffff;
+  background-color: #F05f40;
+  -webkit-transition: all .35s;
+  -moz-transition: all .35s;
+  transition: all .35s;
+}
+.btn-ownapt-orange:hover,
+.btn-ownapt-orange:focus,
+.btn-ownapt-orange.focus,
+.btn-ownapt-orange:active,
+.btn-ownapt-orange.active,
+.open > .dropdown-toggle.btn-ownapt-orange {
+  border-color: #ee4b28;
+  color: #ffffff;
+  background-color: #ed431f;
+}
+.btn-ownapt-orange:active,
+.btn-ownapt-orange.active,
+.open > .dropdown-toggle.btn-ownapt-orange {
+  background-image: none;
+}
+.btn-ownapt-orange.disabled,
+.btn-ownapt-orange[disabled],
+fieldset[disabled] .btn-ownapt-orange,
+.btn-ownapt-orange.disabled:hover,
+.btn-ownapt-orange[disabled]:hover,
+fieldset[disabled] .btn-ownapt-orange:hover,
+.btn-ownapt-orange.disabled:focus,
+.btn-ownapt-orange[disabled]:focus,
+fieldset[disabled] .btn-ownapt-orange:focus,
+.btn-ownapt-orange.disabled.focus,
+.btn-ownapt-orange[disabled].focus,
+fieldset[disabled] .btn-ownapt-orange.focus,
+.btn-ownapt-orange.disabled:active,
+.btn-ownapt-orange[disabled]:active,
+fieldset[disabled] .btn-ownapt-orange:active,
+.btn-ownapt-orange.disabled.active,
+.btn-ownapt-orange[disabled].active,
+fieldset[disabled] .btn-ownapt-orange.active {
+  border-color: #F05f40;
+  background-color: #F05f40;
+}
+.btn-ownapt-orange .badge {
+  color: #F05f40;
+  background-color: #ffffff;
+}
