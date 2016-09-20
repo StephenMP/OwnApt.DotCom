@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ApiContract": "14.7356.41",
+    "ApiContract": "14.7434.3850",
     "AutoMapper": "5.1.1",
     "Microsoft.AspNetCore.Authentication": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
@@ -25,15 +25,15 @@
       "version": "1.0.0"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "OwnApt": "14.7353.6685",
-    "RestfulProxy": "14.7330.5861",
+    "OwnApt": "14.7414.5775",
+    "RestfulProxy": "14.7392.6197",
     "RestSharp.NetCore": "105.2.4-rc4-24214-01",
     "Serilog": "2.2.1",
     "Serilog.Extensions.Logging": "1.2.0",
     "Serilog.Sinks.Console": "2.1.0",
     "Serilog.Sinks.Logentries": "3.0.0-dev-00020",
     "Serilog.Sinks.RollingFile": "3.0.1",
-    "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24212-01"
+    "System.Runtime.Serialization.Formatters": "4.3.0-preview1-24517-08"
   },
 
   "tools": {
