@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Authentication;
-using OwnApt.DotCom.Model;
+using OwnApt.DotCom.Model.Account;
 using System;
 using System.Security.Cryptography;
 

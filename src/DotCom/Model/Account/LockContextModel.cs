@@ -1,4 +1,4 @@
-﻿namespace OwnApt.DotCom.Model
+﻿namespace OwnApt.DotCom.Model.Account
 {
     public class LockContextModel
     {

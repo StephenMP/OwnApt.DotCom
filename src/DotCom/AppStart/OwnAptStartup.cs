@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DotCom.Presentation.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -127,6 +128,8 @@ namespace OwnApt.DotCom.AppStart
             services.AddTransient<IClaimsService, ClaimsService>();
             services.AddTransient<ISignUpService, SignUpService>();
             services.AddTransient<IContactFormService, ContactFormService>();
+            services.AddTransient<IAccountPresentationService, AccountPresentationService>();
+
             services.AddSingleton<IMailGunRestClient>(BuildMailGunRestClient());
         }
 

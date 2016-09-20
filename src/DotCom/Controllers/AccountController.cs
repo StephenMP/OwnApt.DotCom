@@ -1,4 +1,5 @@
 ﻿using DotCom.Domain.Exceptions;
+using DotCom.Presentation.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -16,13 +17,12 @@ namespace OwnApt.DotCom.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IAccountPresentationService accountPresentationService;
         #region Fields
 
         private readonly IClaimsService claimsService;
         private readonly ILogger logger;
-        private readonly IOptions<OpenIdConnectOptions> options;
-        private readonly IProxy proxy;
-        private readonly IOptions<ServiceUriSettings> serviceUris;
+        private readonly OpenIdConnectOptions openIdConnectOptions;
         private readonly ISignUpService signUpService;
 
         #endregion Fields
@@ -30,18 +30,16 @@ namespace OwnApt.DotCom.Controllers
         #region Constructors
 
         public AccountController(
-            IProxy proxy,
+            IAccountPresentationService accountPresentationService,
             ISignUpService signUpService,
             IClaimsService claimsService,
             IOptions<OpenIdConnectOptions> openIdOptions,
-            IOptions<ServiceUriSettings> serviceUris,
             ILoggerFactory loggerFatory
         )
         {
-            this.options = openIdOptions;
+            this.accountPresentationService = accountPresentationService;
+            this.openIdConnectOptions = openIdOptions.Value;
             this.signUpService = signUpService;
-            this.serviceUris = serviceUris;
-            this.proxy = proxy;
             this.claimsService = claimsService;
             this.logger = loggerFatory.CreateLogger<AccountController>();
         }
@@ -64,7 +62,7 @@ namespace OwnApt.DotCom.Controllers
         [HttpGet]
         public bool Email()
         {
-            var propId = "f254534c48fb49168188c70c1108d75b";
+            const string propId = "f254534c48fb49168188c70c1108d75b";
 
             this.signUpService.SendSignUpEmailAsync("John Doe", "1.stephen.porter@gmail.com", new string[] { propId });
 
@@ -73,7 +71,7 @@ namespace OwnApt.DotCom.Controllers
 
         public IActionResult Login(string returnUrl = "/")
         {
-            var lockContext = HttpContext.GenerateLockContext(this.options.Value, returnUrl);
+            var lockContext = HttpContext.GenerateLockContext(this.openIdConnectOptions, returnUrl);
             return View(lockContext);
         }
 
@@ -88,10 +86,7 @@ namespace OwnApt.DotCom.Controllers
 
         public async Task<IActionResult> MapUserToProperties(string token)
         {
-            var signUpToken = await this.signUpService.ParseTokenAsync(token);
-            var userId = await this.claimsService.GetUserIdAsync(User.Claims);
-            var result = await this.proxy.InvokeAsync(new MapOwnerToPropertiesProxyRequest(serviceUris.Value.ApiBaseUri, userId, signUpToken));
-
+            var result = await this.accountPresentationService.MapUserToPropertiesAsync(User, token);
             if (result.IsSuccessfulStatusCode)
             {
                 return RedirectToAction(nameof(Claims));
@@ -115,7 +110,7 @@ namespace OwnApt.DotCom.Controllers
             {
                 this.logger.LogInformation($"Token sign up token is valid: {token}");
                 var returnUrl = $"/Account/MapUserToProperties?token={token}";
-                var lockContext = HttpContext.GenerateLockContext(this.options.Value, returnUrl);
+                var lockContext = HttpContext.GenerateLockContext(this.openIdConnectOptions, returnUrl);
                 return View(lockContext);
             }
 
