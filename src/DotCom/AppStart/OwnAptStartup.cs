@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DotCom.Presentation.Service;
+using OwnApt.DotCom.Presentation.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

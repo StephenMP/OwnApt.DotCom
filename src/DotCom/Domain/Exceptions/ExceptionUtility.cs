@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 
-namespace DotCom.Domain.Exceptions
+namespace OwnApt.DotCom.Domain.Exceptions
 {
     public static class ExceptionUtility
     {

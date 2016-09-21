@@ -1,9 +1,11 @@
-﻿using DotCom.Domain.Exceptions;
+﻿using OwnApt.DotCom.Domain.Exceptions;
+using OwnApt.DotCom.ProxyRequests.Owner;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Domain.Settings;
-using OwnApt.DotCom.ProxyRequests;
+using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.RestfulProxy.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,11 +14,12 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace DotCom.Presentation.Service
+namespace OwnApt.DotCom.Presentation.Service
 {
     public interface IAccountPresentationService
     {
-        Task<IProxyResponse<Missing>> MapUserToPropertiesAsync(ClaimsPrincipal user, string token);
+        Task<IProxyResponse<OwnerModel>> CreateOwner(ClaimsPrincipal user);
+        Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(ClaimsPrincipal user, string token);
     }
     public class AccountPresentationService : IAccountPresentationService
     {
@@ -41,18 +44,37 @@ namespace DotCom.Presentation.Service
             this.logger = loggerFatory.CreateLogger<AccountPresentationService>();
         }
 
-        public async Task<IProxyResponse<Missing>> MapUserToPropertiesAsync(ClaimsPrincipal user, string token)
+        public async Task<IProxyResponse<OwnerModel>> CreateOwner(ClaimsPrincipal user)
         {
-            var signUpToken = await this.signUpService.ParseTokenAsync(token);
-
-            if (signUpToken != null)
+            var ownerModel = new OwnerModel
             {
-                var userId = await this.claimsService.GetUserIdAsync(user.Claims);
-                var result = await this.proxy.InvokeAsync(new MapOwnerToPropertiesProxyRequest(serviceUrisSettings.ApiBaseUri, userId, signUpToken));
-                return result;
+                Id = await this.claimsService.GetUserIdAsync(user.Claims)
+            };
+
+            var request = new CreateOwnerProxyRequest(serviceUrisSettings.ApiBaseUri, ownerModel);
+            var result = await this.proxy.InvokeAsync(request);
+
+            return result;
+        }
+
+        public async Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(ClaimsPrincipal user, string token)
+        {
+            var ownerId = await this.claimsService.GetUserIdAsync(user.Claims);
+            var readOwnerRequest = new ReadOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, ownerId);
+            var ownerResult = await this.proxy.InvokeAsync(readOwnerRequest);
+
+            if (ownerResult.IsSuccessfulStatusCode)
+            {
+                var owner = ownerResult.ResponseDto;
+                var signUpToken = await this.signUpService.ParseTokenAsync(token);
+                owner.PropertyIds.AddRange(signUpToken.PropertyIds);
+
+                var updateOwnerRequest = new UpdateOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, owner);
+                var updateResult = await this.proxy.InvokeAsync(updateOwnerRequest);
+                return updateResult;
             }
 
-            var message = $"The sign up token has been altered or has expired! Token recieved: {token}";
+            var message = string.IsNullOrWhiteSpace(ownerResult.ResponseMessage) ? $"An unknown issue ocurred when attempting to read owner with id {ownerId}" : ownerResult.ResponseMessage;
             throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
         }
     }

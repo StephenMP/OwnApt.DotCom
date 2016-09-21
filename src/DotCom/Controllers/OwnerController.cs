@@ -1,4 +1,4 @@
-﻿using DotCom.Presentation.Service;
+﻿using OwnApt.DotCom.Presentation.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DotCom.Controllers
+namespace OwnApt.DotCom.Controllers
 {
     [Authorize]
     public class OwnerController : Controller

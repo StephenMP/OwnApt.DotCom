@@ -1,4 +1,4 @@
-﻿using DotCom.Domain.Exceptions;
+﻿using OwnApt.DotCom.Domain.Exceptions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OwnApt.DotCom.Domain.Interface;

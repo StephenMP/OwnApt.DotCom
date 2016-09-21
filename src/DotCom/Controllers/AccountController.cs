@@ -1,5 +1,5 @@
-﻿using DotCom.Domain.Exceptions;
-using DotCom.Presentation.Service;
+﻿using OwnApt.DotCom.Domain.Exceptions;
+using OwnApt.DotCom.Presentation.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -86,7 +86,7 @@ namespace OwnApt.DotCom.Controllers
 
         public async Task<IActionResult> MapUserToProperties(string token)
         {
-            var result = await this.accountPresentationService.MapUserToPropertiesAsync(User, token);
+            var result = await this.accountPresentationService.UpdateOwnerPropertyIds(User, token);
             if (result.IsSuccessfulStatusCode)
             {
                 return RedirectToAction(nameof(Claims));
@@ -96,6 +96,7 @@ namespace OwnApt.DotCom.Controllers
             throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
         }
 
+        // TODO : Update to signup using token to support ad hoc signups
         public async Task<IActionResult> SignUp(string token)
         {
             if (User.Identity.IsAuthenticated)
