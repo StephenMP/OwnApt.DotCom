@@ -14,15 +14,17 @@
 <head>
 </head>
 <body>
-    <div id="TopNavBar">
-        @*All styling here for top nav bar*@
-        @RenderSection("TopNavBar", true)
+    <div class="body-div">
+        <div id="TopNavBar">
+            @*All styling here for top nav bar*@
+            @RenderSection("TopNavBar", true)
+        </div>
+        <div id="SideNavBar">
+            @*All styling here for side nav bar*@
+            @RenderSection("SideNavBar", true)
+        </div>
+        @RenderBody()
     </div>
-    <div id="SideNavBar">
-        @*All styling here for side nav bar*@
-        @RenderSection("SideNavBar", true)
-    </div>
-    @RenderBody()
 </body>
 </html>
 

@@ -1,23 +1,30 @@
-﻿@{ 
+﻿@{
     Layout = "_Layout";
 }
-
 @section Styles{
-
 }
-
 @*Put links for the top nav bar*@
 @section TopNavBar{
-    <div>TOP NAV BAR BABY</div>
+    <div class="container-fluid">
+        <a class="topnav-home" href="~/Owner"><img src="~/images/Logo/Logo_50x48.png" />OwnApt</a>
+        <ul class="topnav">
+            <li><a href="#">logout</a></li>
+        </ul>
+    </div>
 }
-
 @*Put links for the side nav bar*@
 @section SideNavBar{
-    <div>SIDE NAV BAR BABY</div>
+    <div class="sidenav">
+        <ul>
+            <li class="sidenav-placeholder"></li>
+            <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_OverviewIcon_Active_32x32.png" /></a></li>
+            <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_ViewProfileIcon_Active_32x32.png" /></a></li>
+            <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_AddHomeIcon_Active_32x32.png" /></a></li>
+            <li class="sidenav-placeholder"></li>
+            <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_HelpIcon_Active_32x32.png" /></a></li>
+        </ul>
+    </div>
 }
-
 @section Scripts{
-
 }
-
 @RenderBody()

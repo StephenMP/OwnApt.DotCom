@@ -1,0 +1,23 @@
+.owner-container {
+  position: static;
+  background-color: #808080;
+  margin-left: 60px;
+}
+.owner-container .property-list {
+  background-color: aqua;
+  margin-top: 40px;
+}
+.owner-container .property-list div {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 15px;
+}
+.owner-container .property-list .property-sort {
+  background-color: burlywood;
+  height: 40px;
+}
+.owner-container .property-list .property {
+  background-color: red;
+  margin-bottom: 15px;
+  height: 300px;
+}

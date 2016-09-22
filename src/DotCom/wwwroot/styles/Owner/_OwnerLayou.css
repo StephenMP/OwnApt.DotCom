@@ -1,0 +1,80 @@
+#TopNavBar {
+  background-color: #333333;
+  height: 40px;
+}
+#TopNavBar .topnav-home {
+  float: left;
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 8px 16px 8px 0px;
+  text-decoration: none;
+  font-size: 17px;
+}
+#TopNavBar .topnav-home img {
+  height: 25px;
+  width: 24px;
+  margin-right: 5px;
+}
+#TopNavBar .topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+#TopNavBar .topnav li {
+  float: right;
+}
+#TopNavBar .topnav li a {
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: 0.2s;
+  font-size: 17px;
+}
+#TopNavBar .topnav li a:hover {
+  background-color: #5c5c5c;
+}
+.sidenav {
+  background-color: #333333;
+  height: 90%;
+  width: 60px;
+  position: relative;
+}
+.sidenav ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.sidenav ul li .greyscale-hover {
+  display: block;
+  margin: 18px auto;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.sidenav ul li .greyscale-hover:hover {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+.sidenav ul li .greyscale-hover:active {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+@media screen and (max-height: 415px) {
+  .sidenav ul li .greyscale-hover {
+    margin: 8px auto;
+  }
+}
+.sidenav ul .sidenav-placeholder {
+  height: 20%;
+  display: block;
+}
+@media screen and (max-height: 415px) {
+  .sidenav ul .sidenav-placeholder {
+    height: 0%;
+  }
+}

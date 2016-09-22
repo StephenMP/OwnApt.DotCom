@@ -1,0 +1,98 @@
+﻿@import "../Main/variables.less";
+
+#TopNavBar {
+    background-color: @background-navbar;
+    height: 40px;
+
+    .topnav-home {
+        float: left;
+        display: inline-block;
+        color: @navbar-text-color;
+        text-align: center;
+        padding: 8px 16px 8px 0px;
+        text-decoration: none;
+        font-size: 17px;
+
+        img {
+            height: 25px;
+            width: 24px;
+            margin-right: 5px;
+        }
+    }
+
+    .topnav {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+
+        li {
+            float: right;
+
+            a {
+                display: inline-block;
+                color: @navbar-text-color;
+                text-align: center;
+                padding: 8px 16px;
+                text-decoration: none;
+                transition: @navbar-hover-transition;
+                font-size: 17px;
+
+                &:hover {
+                    background-color: @navbar-hover-color;
+                }
+            }
+        }
+    }
+}
+#SideNavBar {
+        width: 60px;
+        background-color: @background-navbar;
+        position:absolute;
+        left:0px;
+        top:40px;
+        bottom: 0px;
+
+    .sidenav {
+        //TODO fix sidenav and footer
+
+        ul {
+            list-style-type: none;
+
+            li {
+
+                .greyscale-hover {
+                    display: block;
+                    margin: 18px auto;
+                    -webkit-filter: grayscale(100%);
+                    filter: grayscale(100%);
+                    -webkit-transition: @navbar-hover-transition ease-in-out;
+                    transition: @navbar-hover-transition ease-in-out;
+
+                    &:hover {
+                        -webkit-filter: grayscale(0);
+                        filter: grayscale(0);
+                    }
+
+                    &:active {
+                        -webkit-filter: grayscale(0);
+                        filter: grayscale(0);
+                    }
+
+                    @media screen and (max-height: @navbar-media-max-height) {
+                        margin: 8px auto;
+                    }
+                }
+            }
+
+            .sidenav-placeholder {
+                height: 20%;
+                display: block;
+
+                @media screen and (max-height: @navbar-media-max-height) {
+                    height: 0%;
+                }
+            }
+        }
+    }
+}

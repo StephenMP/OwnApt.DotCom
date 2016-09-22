@@ -1,52 +1,5 @@
 ﻿// Documentation: https://go.microsoft.com/fwlink/?LinkId=808241
 [
-  ////////////////////////
-  // Stylesheet Bundles //
-  ////////////////////////
-  /*Site*/
-  {
-    "outputFileName": "wwwroot/css/site.min.css",
-    "inputFiles": [
-      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
-      "wwwroot/lib/font-awesome/css/font-awesome.css",
-      "wwwroot/lib/wow/css/libs/animate.css",
-      "wwwroot/lib/toastr/toastr.css",
-      "wwwroot/css/siteless.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/site.css",
-    "inputFiles": [
-      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
-      "wwwroot/lib/font-awesome/css/font-awesome.css",
-      "wwwroot/lib/wow/css/libs/animate.css",
-      "wwwroot/lib/toastr/toastr.css",
-      "wwwroot/css/siteless.css"
-    ],
-    "minify": {
-      "enabled": false
-    },
-    "includeInProject": true
-  },
-  /*Home*/
-  {
-    "outputFileName": "wwwroot/css/home.min.css",
-    "inputFiles": [
-      "wwwroot/css/animate.min.css",
-      "wwwroot/lib-unmanaged/creative/css/creative.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/home.css",
-    "inputFiles": [
-      "wwwroot/css/animate.min.css",
-      "wwwroot/lib-unmanaged/creative/css/creative.css"
-    ],
-    "minify": {
-      "enabled": false
-    },
-    "includeInProject": true
-  },
 
   ////////////////////////
   // JavaScript Bundles //
