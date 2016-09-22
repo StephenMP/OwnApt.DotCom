@@ -1,5 +1,4 @@
 ﻿using OwnApt.Api.Contract.Model;
-using OwnApt.DotCom.Dto.Account;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
 using System;
@@ -10,7 +9,7 @@ namespace OwnApt.DotCom.ProxyRequests.Owner
 {
     public class UpdateOwnerProxyRequest : IProxyRequest<OwnerModel, Missing>
     {
-        #region Constructors
+        #region Public Constructors
 
         public UpdateOwnerProxyRequest(string apiBaseUri, OwnerModel ownerModel)
         {
@@ -23,15 +22,15 @@ namespace OwnApt.DotCom.ProxyRequests.Owner
             };
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Properties
+        #region Public Properties
 
         public IDictionary<string, IEnumerable<string>> Headers { get; }
         public HttpRequestMethod HttpRequestMethod { get; }
         public OwnerModel RequestDto { get; }
         public Uri RequestUri { get; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

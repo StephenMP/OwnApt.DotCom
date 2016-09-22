@@ -5,10 +5,10 @@ namespace OwnApt.DotCom.Domain.Interface
 {
     public interface IContactFormService
     {
-        #region Methods
+        #region Public Methods
 
         Task<IRestResponse> SendEmailAsync(string name, string message);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

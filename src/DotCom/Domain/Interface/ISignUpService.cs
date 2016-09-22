@@ -6,7 +6,7 @@ namespace OwnApt.DotCom.Domain.Interface
 {
     public interface ISignUpService
     {
-        #region Methods
+        #region Public Methods
 
         Task<string> CreateTokenAsync(params string[] propertyIds);
 
@@ -16,6 +16,6 @@ namespace OwnApt.DotCom.Domain.Interface
 
         Task<bool> ValidateTokenAsync(string stringToken);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

@@ -6,7 +6,7 @@ namespace OwnApt.DotCom.Domain.Service
 {
     public class MailGunRestClient : RestClient, IMailGunRestClient
     {
-        #region Constructors
+        #region Public Constructors
 
         public MailGunRestClient()
         {
@@ -20,6 +20,6 @@ namespace OwnApt.DotCom.Domain.Service
         {
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
     }
 }

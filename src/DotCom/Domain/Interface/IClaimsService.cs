@@ -6,12 +6,12 @@ namespace OwnApt.DotCom.Domain.Interface
 {
     public interface IClaimsService
     {
-        #region Methods
+        #region Public Methods
 
         Task<string> GetUserEmailAsync(IEnumerable<Claim> userClaims);
 
         Task<string> GetUserIdAsync(IEnumerable<Claim> userClaims);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

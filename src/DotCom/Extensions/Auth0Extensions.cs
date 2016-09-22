@@ -11,7 +11,7 @@ namespace OwnApt.DotCom.Extensions
 {
     public static class Auth0Extensions
     {
-        #region Fields
+        #region Private Fields
 
         private const string CorrelationMarker = "N";
         private const string CorrelationPrefix = ".AspNetCore.Correlation.";
@@ -19,9 +19,9 @@ namespace OwnApt.DotCom.Extensions
         private const string NonceProperty = "N";
         private static readonly RandomNumberGenerator CryptoRandom = RandomNumberGenerator.Create();
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Methods
+        #region Public Methods
 
         public static LockContextModel GenerateLockContext(this HttpContext httpContext, OpenIdConnectOptions options, string returnUrl = null)
         {
@@ -64,6 +64,10 @@ namespace OwnApt.DotCom.Extensions
             return lockContext;
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
         private static string BuildRedirectUri(HttpRequest request, PathString redirectPath)
         {
             return request.Scheme + "://" + request.Host + request.PathBase + redirectPath;
@@ -94,6 +98,6 @@ namespace OwnApt.DotCom.Extensions
             httpContext.Response.Cookies.Append(cookieName, CorrelationMarker, cookieOptions);
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

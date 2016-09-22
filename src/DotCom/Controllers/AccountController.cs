@@ -1,33 +1,31 @@
-﻿using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.Presentation.Service;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
-using OwnApt.DotCom.Domain.Settings;
 using OwnApt.DotCom.Extensions;
-using OwnApt.DotCom.ProxyRequests;
-using OwnApt.RestfulProxy.Interface;
+using OwnApt.DotCom.Presentation.Service;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Controllers
 {
     public class AccountController : Controller
     {
+        #region Private Fields
+
         private readonly IAccountPresentationService accountPresentationService;
-        #region Fields
 
         private readonly IClaimsService claimsService;
         private readonly ILogger logger;
         private readonly OpenIdConnectOptions openIdConnectOptions;
         private readonly ISignUpService signUpService;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public AccountController(
             IAccountPresentationService accountPresentationService,
@@ -44,11 +42,11 @@ namespace OwnApt.DotCom.Controllers
             this.logger = loggerFatory.CreateLogger<AccountController>();
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
         /* REMOVE : HERE FOR TESTING PURPOSES ONLY */
 
-        #region Methods
+        #region Public Methods
 
         [Authorize]
         public IActionResult Claims()
@@ -86,14 +84,20 @@ namespace OwnApt.DotCom.Controllers
 
         public async Task<IActionResult> MapUserToProperties(string token)
         {
-            var result = await this.accountPresentationService.UpdateOwnerPropertyIds(User, token);
-            if (result.IsSuccessfulStatusCode)
+            var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
+            var createOwnerResponse = await this.accountPresentationService.CreateOwner(ownerId);
+            if (createOwnerResponse.IsSuccessfulStatusCode)
             {
-                return RedirectToAction(nameof(Claims));
+                var updateOwnerPropertyResponse = await this.accountPresentationService.UpdateOwnerPropertyIds(ownerId, token);
+                if (updateOwnerPropertyResponse.IsSuccessfulStatusCode)
+                {
+                    return RedirectToAction(nameof(Claims));
+                }
+
+                throw ExceptionUtility.RaiseException(updateOwnerPropertyResponse, this.logger);
             }
 
-            var message = result.ResponseMessage ?? $"Recieved unsuccessful status code from proxy: {result.StatusCode.ToString()}";
-            throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
+            throw ExceptionUtility.RaiseException(createOwnerResponse, this.logger);
         }
 
         // TODO : Update to signup using token to support ad hoc signups
@@ -119,6 +123,6 @@ namespace OwnApt.DotCom.Controllers
             throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

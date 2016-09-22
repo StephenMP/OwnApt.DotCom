@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using OwnApt.DotCom.Presentation.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +10,7 @@ using Microsoft.Extensions.Options;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Domain.Settings;
+using OwnApt.DotCom.Presentation.Service;
 using OwnApt.RestfulProxy.Client;
 using OwnApt.RestfulProxy.Interface;
 using RestSharp.Authenticators;
@@ -21,19 +21,19 @@ namespace OwnApt.DotCom.AppStart
 {
     public static class OwnAptStartup
     {
-        #region Fields
+        #region Private Fields
 
         private static IConfigurationRoot Configuration;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Properties
+        #region Public Properties
 
         public static IHostingEnvironment HostEnvironment { get; private set; }
 
-        #endregion Properties
+        #endregion Public Properties
 
-        #region Methods
+        #region Public Methods
 
         public static IMapper BuildMapper()
         {
@@ -71,6 +71,10 @@ namespace OwnApt.DotCom.AppStart
             AddServices(services);
             AddRestfulProxy(services);
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static void AddAuth0(IServiceCollection services)
         {
@@ -216,6 +220,6 @@ namespace OwnApt.DotCom.AppStart
             app.UseStaticFiles();
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

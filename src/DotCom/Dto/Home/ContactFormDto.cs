@@ -4,7 +4,7 @@ namespace OwnApt.DotCom.ViewModels.Dto
 {
     public class ContactFormViewDto
     {
-        #region Properties
+        #region Public Properties
 
         public string Email { get; set; }
         public string FirstName { get; set; }
@@ -13,9 +13,9 @@ namespace OwnApt.DotCom.ViewModels.Dto
         public string Message { get; set; }
         public string Phone { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
 
-        #region Methods
+        #region Public Methods
 
         public override string ToString()
         {
@@ -31,6 +31,6 @@ namespace OwnApt.DotCom.ViewModels.Dto
             return builder.ToString();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

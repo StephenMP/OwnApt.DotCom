@@ -4,13 +4,13 @@ namespace OwnApt.DotCom.Controllers
 {
     public class ListingsController : Controller
     {
-        #region Methods
+        #region Public Methods
 
         public IActionResult Index()
         {
             return View();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

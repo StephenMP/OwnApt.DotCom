@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
+using OwnApt.RestfulProxy.Interface;
 using System;
+using System.Text;
 
 namespace OwnApt.DotCom.Domain.Exceptions
 {
     public static class ExceptionUtility
     {
-        #region Methods
+        #region Public Methods
 
         public static Exception HandleException(Exception exception, ILogger logger, LogLevel logLevel)
         {
@@ -22,6 +24,25 @@ namespace OwnApt.DotCom.Domain.Exceptions
         {
             return HandleException(new Exception(message), logger, logLevel);
         }
+
+        public static Exception RaiseException<TResponseDto>(IProxyResponse<TResponseDto> proxyResponse, ILogger logger)
+        {
+            var builder = new StringBuilder();
+
+            builder.AppendLine("Recieved unsuccessful status code from proxy");
+            builder.AppendLine($"{nameof(proxyResponse.RequestHeaders)}: {proxyResponse.RequestHeaders.ToString()}");
+            builder.AppendLine($"{nameof(proxyResponse.ResponseHeaders)}: {proxyResponse.ResponseHeaders.ToString()}");
+            builder.AppendLine($"{nameof(proxyResponse.RequestUri)}: {proxyResponse.RequestUri.ToString()}");
+            builder.AppendLine($"{nameof(proxyResponse.ResponseMessage)}: {proxyResponse.ResponseMessage}");
+            builder.AppendLine($"{nameof(proxyResponse.StatusCode)}: {proxyResponse.StatusCode}");
+
+            var message = proxyResponse.ResponseMessage ?? $": {proxyResponse.StatusCode.ToString()}";
+            return HandleException(new Exception(builder.ToString()), logger, LogLevel.Critical);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static void LogException(string message, ILogger logger, LogLevel logLevel)
         {
@@ -45,6 +66,6 @@ namespace OwnApt.DotCom.Domain.Exceptions
             }
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

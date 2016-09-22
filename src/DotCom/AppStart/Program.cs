@@ -5,7 +5,7 @@ namespace OwnApt.DotCom
 {
     public class Program
     {
-        #region Methods
+        #region Public Methods
 
         public static void Main(string[] args)
         {
@@ -20,6 +20,6 @@ namespace OwnApt.DotCom
             host.Run();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

@@ -9,22 +9,22 @@ namespace OwnApt.DotCom.Controllers
 {
     public class HomeController : Controller
     {
-        #region Fields
+        #region Private Fields
 
         private readonly IContactFormService emailSender;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public HomeController(IContactFormService emailSender)
         {
             this.emailSender = emailSender;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         public IActionResult Error()
         {
@@ -44,6 +44,6 @@ namespace OwnApt.DotCom.Controllers
             return meh.StatusCode == HttpStatusCode.OK;
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

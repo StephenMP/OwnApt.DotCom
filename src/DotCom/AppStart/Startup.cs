@@ -10,7 +10,7 @@ namespace OwnApt.DotCom
 {
     public class Startup
     {
-        #region Constructors
+        #region Public Constructors
 
         public Startup(IHostingEnvironment env)
         {
@@ -24,15 +24,15 @@ namespace OwnApt.DotCom
             OwnAptStartup.ConfigureOwnAptStartup(Configuration, env);
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Properties
+        #region Public Properties
 
         public IConfigurationRoot Configuration { get; }
 
-        #endregion Properties
+        #endregion Public Properties
 
-        #region Methods
+        #region Public Methods
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime, IOptions<OpenIdConnectOptions> oidcOptions)
         {
@@ -44,6 +44,6 @@ namespace OwnApt.DotCom
             services.UseOwnAptServices();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

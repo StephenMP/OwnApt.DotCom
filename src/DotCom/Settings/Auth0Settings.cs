@@ -2,13 +2,13 @@
 {
     public class Auth0Settings
     {
-        #region Properties
+        #region Public Properties
 
         public string CallbackUrl { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
         public string Domain { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

@@ -1,81 +1,89 @@
-﻿using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.ProxyRequests.Owner;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
+using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Domain.Settings;
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.RestfulProxy.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Presentation.Service
 {
     public interface IAccountPresentationService
     {
-        Task<IProxyResponse<OwnerModel>> CreateOwner(ClaimsPrincipal user);
-        Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(ClaimsPrincipal user, string token);
+        #region Public Methods
+
+        Task<IProxyResponse<OwnerModel>> CreateOwner(string ownerId);
+
+        Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(string ownerId, string token);
+
+        #endregion Public Methods
     }
+
     public class AccountPresentationService : IAccountPresentationService
     {
-        private readonly IClaimsService claimsService;
+        #region Private Fields
+
+        private readonly ILogger<AccountPresentationService> logger;
+        private readonly IProxy proxy;
         private readonly ServiceUriSettings serviceUrisSettings;
         private readonly ISignUpService signUpService;
-        private readonly IProxy proxy;
-        private readonly ILogger<AccountPresentationService> logger;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public AccountPresentationService(
             IProxy proxy,
             ISignUpService signUpService,
-            IClaimsService claimsService,
             IOptions<ServiceUriSettings> serviceUris,
             ILoggerFactory loggerFatory
         )
         {
             this.proxy = proxy;
             this.signUpService = signUpService;
-            this.claimsService = claimsService;
             this.serviceUrisSettings = serviceUris.Value;
             this.logger = loggerFatory.CreateLogger<AccountPresentationService>();
         }
 
-        public async Task<IProxyResponse<OwnerModel>> CreateOwner(ClaimsPrincipal user)
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public async Task<IProxyResponse<OwnerModel>> CreateOwner(string ownerId)
         {
             var ownerModel = new OwnerModel
             {
-                Id = await this.claimsService.GetUserIdAsync(user.Claims)
+                Id = ownerId
             };
 
-            var request = new CreateOwnerProxyRequest(serviceUrisSettings.ApiBaseUri, ownerModel);
-            var result = await this.proxy.InvokeAsync(request);
+            var createOwnerRequest = new CreateOwnerProxyRequest(serviceUrisSettings.ApiBaseUri, ownerModel);
+            var createOwnerResult = await this.proxy.InvokeAsync(createOwnerRequest);
 
-            return result;
+            return createOwnerResult;
         }
 
-        public async Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(ClaimsPrincipal user, string token)
+        public async Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(string ownerId, string token)
         {
-            var ownerId = await this.claimsService.GetUserIdAsync(user.Claims);
             var readOwnerRequest = new ReadOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, ownerId);
-            var ownerResult = await this.proxy.InvokeAsync(readOwnerRequest);
+            var readOwnerResponse = await this.proxy.InvokeAsync(readOwnerRequest);
 
-            if (ownerResult.IsSuccessfulStatusCode)
+            if (readOwnerResponse.IsSuccessfulStatusCode)
             {
-                var owner = ownerResult.ResponseDto;
+                var ownerModel = readOwnerResponse.ResponseDto;
                 var signUpToken = await this.signUpService.ParseTokenAsync(token);
-                owner.PropertyIds.AddRange(signUpToken.PropertyIds);
+                ownerModel.PropertyIds.AddRange(signUpToken.PropertyIds);
 
-                var updateOwnerRequest = new UpdateOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, owner);
-                var updateResult = await this.proxy.InvokeAsync(updateOwnerRequest);
-                return updateResult;
+                var updateOwnerRequest = new UpdateOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, ownerModel);
+                var updateResponse = await this.proxy.InvokeAsync(updateOwnerRequest);
+                return updateResponse;
             }
 
-            var message = string.IsNullOrWhiteSpace(ownerResult.ResponseMessage) ? $"An unknown issue ocurred when attempting to read owner with id {ownerId}" : ownerResult.ResponseMessage;
-            throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
+            throw ExceptionUtility.RaiseException(readOwnerResponse, this.logger);
         }
+
+        #endregion Public Methods
     }
 }

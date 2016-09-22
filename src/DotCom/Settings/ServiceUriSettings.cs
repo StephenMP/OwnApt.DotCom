@@ -2,10 +2,10 @@
 {
     public class ServiceUriSettings
     {
-        #region Properties
+        #region Public Properties
 
         public string ApiBaseUri { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

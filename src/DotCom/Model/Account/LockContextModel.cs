@@ -2,7 +2,7 @@
 {
     public class LockContextModel
     {
-        #region Properties
+        #region Public Properties
 
         public string CallbackUrl { get; set; }
         public string ClientId { get; set; }
@@ -11,6 +11,6 @@
         public string Nonce { get; set; }
         public string State { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

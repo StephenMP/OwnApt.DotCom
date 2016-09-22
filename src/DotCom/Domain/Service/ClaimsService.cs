@@ -8,7 +8,7 @@ namespace OwnApt.DotCom.Domain.Service
 {
     public class ClaimsService : IClaimsService
     {
-        #region Methods
+        #region Public Methods
 
         public async Task<string> GetUserEmailAsync(IEnumerable<Claim> userClaims)
         {
@@ -26,6 +26,6 @@ namespace OwnApt.DotCom.Domain.Service
             return await Task.FromResult(userId);
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

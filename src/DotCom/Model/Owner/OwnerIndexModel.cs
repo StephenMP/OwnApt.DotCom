@@ -1,11 +1,16 @@
-﻿using System;
+﻿using OwnApt.Api.Contract.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Model.Owner
 {
     public class OwnerIndexModel
     {
+        #region Public Properties
+
+        public Dictionary<string, LeaseTermModel> LeaseTermsByPropertyId { get; set; }
+        public string OwnerId { get; set; }
+        public List<PropertyModel> Properties { get; set; }
+
+        #endregion Public Properties
     }
 }

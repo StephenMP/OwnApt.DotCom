@@ -6,22 +6,22 @@ namespace OwnApt.DotCom.Domain.Service
 {
     public class ContactFormService : IContactFormService
     {
-        #region Fields
+        #region Private Fields
 
         private readonly IMailGunRestClient restClient;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public ContactFormService(IMailGunRestClient restClient)
         {
             this.restClient = restClient;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         public async Task<IRestResponse> SendEmailAsync(string name, string message)
         {
@@ -36,6 +36,6 @@ namespace OwnApt.DotCom.Domain.Service
             return await Task.FromResult(restClient.Execute(request));
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }
