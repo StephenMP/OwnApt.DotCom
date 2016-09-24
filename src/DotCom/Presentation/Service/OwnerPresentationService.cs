@@ -79,7 +79,7 @@ namespace OwnApt.DotCom.Presentation.Service
             model.LeaseTermsByPropertyId = leaseTermsByPropertyId;
             model.Properties = properties;
 
-            return await Task.FromResult(model);
+            return model;
         }
 
         public async Task<LeaseTermModel> ReadLeaseTermByPropertyId(string propertyId)

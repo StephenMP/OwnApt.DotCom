@@ -60,7 +60,7 @@ namespace OwnApt.DotCom.Controllers
         [HttpGet]
         public bool Email()
         {
-            const string propId = "f254534c48fb49168188c70c1108d75b";
+            const string propId = "6395bfba2bd543e9bf2dd2b7618baf7a";
 
             this.signUpService.SendSignUpEmailAsync("John Doe", "1.stephen.porter@gmail.com", new string[] { propId });
 

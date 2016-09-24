@@ -39,6 +39,7 @@ namespace OwnApt.DotCom.Controllers
         {
             var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
             var model = await this.ownerPresentationService.BuildIndexModelAsync(ownerId);
+
             return View(model);
         }
 

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -70,6 +71,12 @@ namespace OwnApt.DotCom.AppStart
             AddAutoMapper(services);
             AddServices(services);
             AddRestfulProxy(services);
+            AddMemoryCache(services);
+        }
+
+        private static void AddMemoryCache(IServiceCollection services)
+        {
+            services.AddMemoryCache();
         }
 
         #endregion Public Methods
@@ -133,6 +140,7 @@ namespace OwnApt.DotCom.AppStart
             services.AddTransient<ISignUpService, SignUpService>();
             services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IAccountPresentationService, AccountPresentationService>();
+            services.AddTransient<IOwnerPresentationService, OwnerPresentationService>();
 
             services.AddSingleton<IMailGunRestClient>(BuildMailGunRestClient());
         }

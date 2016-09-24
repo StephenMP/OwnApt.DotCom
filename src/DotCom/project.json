@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ApiContract": "14.7443.345",
+    "ApiContract": "14.7469.5651",
     "AutoMapper": "5.1.1",
     "Microsoft.AspNetCore.Authentication": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
@@ -25,7 +25,7 @@
       "version": "1.0.0"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "OwnApt": "14.7414.5775",
+    "OwnApt": "14.7469.5876",
     "RestfulProxy": "14.7392.6197",
     "RestSharp.NetCore": "105.2.4-rc4-24214-01",
     "Serilog": "2.2.1",
