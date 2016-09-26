@@ -7,8 +7,8 @@ COPY src/DotCom/project.json /app
 COPY NuGet.config /app
 
 RUN ["apt-get", "update"]
-RUN ["apt-get", "install", "nodejs"]
-RUN ["apt-get", "install", "npm"]
+RUN ["apt-get", "install", "-y", "nodejs"]
+RUN ["apt-get", "install", "-y", "npm"]
 RUN ["npm", "install", "-g", "bower"]
 RUN ["npm", "install", "-g", "gulp"]
 RUN ["dotnet", "restore"]
