@@ -9,15 +9,19 @@ namespace OwnApt.DotCom
 
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
+            var hostBuilder = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseUrls("https://0.0.0.0:5000")
-                .Build();
+                .UseStartup<Startup>();
 
-            host.Run();
+            if (args.Length == 1)
+            {
+                hostBuilder.UseUrls(args[0]);
+            }
+
+
+            hostBuilder.Build().Run();
         }
 
         #endregion Public Methods
