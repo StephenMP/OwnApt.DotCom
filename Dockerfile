@@ -5,6 +5,8 @@ RUN apt-get update
 RUN apt-get -y install curl
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash
 RUN apt-get -y install nodejs
+RUN npm install -g bower
+RUN npm install -g gulp
 
 # Create working directory
 RUN mkdir /app
