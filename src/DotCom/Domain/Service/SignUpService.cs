@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
@@ -83,6 +84,7 @@ namespace OwnApt.DotCom.Domain.Service
         public async Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
         {
             var signUpToken = await this.CreateTokenAsync(propertyIds);
+
             var request = new RestRequest("{domain}/messages", Method.POST);
             request.AddParameter("domain", "mailgun.ownapt.com", ParameterType.UrlSegment);
             request.AddParameter("from", "OwnApt <support@ownapt.com>");

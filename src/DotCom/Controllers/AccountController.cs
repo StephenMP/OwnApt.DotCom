@@ -21,7 +21,6 @@ namespace OwnApt.DotCom.Controllers
         private readonly IClaimsService claimsService;
         private readonly ILogger logger;
         private readonly OpenIdConnectOptions openIdConnectOptions;
-        private readonly ISignUpService signUpService;
 
         #endregion Private Fields
 
@@ -29,7 +28,6 @@ namespace OwnApt.DotCom.Controllers
 
         public AccountController(
             IAccountPresentationService accountPresentationService,
-            ISignUpService signUpService,
             IClaimsService claimsService,
             IOptions<OpenIdConnectOptions> openIdOptions,
             ILoggerFactory loggerFatory
@@ -37,7 +35,6 @@ namespace OwnApt.DotCom.Controllers
         {
             this.accountPresentationService = accountPresentationService;
             this.openIdConnectOptions = openIdOptions.Value;
-            this.signUpService = signUpService;
             this.claimsService = claimsService;
             this.logger = loggerFatory.CreateLogger<AccountController>();
         }
@@ -55,14 +52,14 @@ namespace OwnApt.DotCom.Controllers
             return View();
         }
 
-        /* REMOVE : HERE FOR TESTING PURPOSES ONLY */
+        /* IT SUPPORT */
 
         [HttpGet]
         public bool Email()
         {
             const string propId = "6395bfba2bd543e9bf2dd2b7618baf7a";
 
-            this.signUpService.SendSignUpEmailAsync("John Doe", "1.stephen.porter@gmail.com", new string[] { propId });
+            this.accountPresentationService.SendSignUpEmailAsync("John Doe", "1.stephen.porter@gmail.com", new string[] { propId });
 
             return true;
         }
@@ -88,10 +85,11 @@ namespace OwnApt.DotCom.Controllers
             var createOwnerResponse = await this.accountPresentationService.CreateOwner(ownerId);
             if (createOwnerResponse.IsSuccessfulStatusCode)
             {
+                await this.accountPresentationService.RegisterSignUpTokenAsync(token);
                 var updateOwnerPropertyResponse = await this.accountPresentationService.UpdateOwnerPropertyIds(ownerId, token);
                 if (updateOwnerPropertyResponse.IsSuccessfulStatusCode)
                 {
-                    return RedirectToAction(nameof(Claims));
+                    return RedirectToAction("Index", "Owner");
                 }
 
                 throw ExceptionUtility.RaiseException(updateOwnerPropertyResponse, this.logger);
@@ -109,8 +107,7 @@ namespace OwnApt.DotCom.Controllers
             }
 
             this.logger.LogInformation($"Received sign up token: {token}");
-
-            var tokenIsValid = await this.signUpService.ValidateTokenAsync(token);
+            var tokenIsValid = await this.accountPresentationService.ValidateSignUpTokenAsync(token);
             if (tokenIsValid)
             {
                 this.logger.LogInformation($"Token sign up token is valid: {token}");

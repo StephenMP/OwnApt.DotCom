@@ -6,8 +6,11 @@ using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Domain.Settings;
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.RestfulProxy.Interface;
+using RestSharp;
 using System.Reflection;
 using System.Threading.Tasks;
+using System;
+using System.Text;
 
 namespace OwnApt.DotCom.Presentation.Service
 {
@@ -16,8 +19,10 @@ namespace OwnApt.DotCom.Presentation.Service
         #region Public Methods
 
         Task<IProxyResponse<OwnerModel>> CreateOwner(string ownerId);
-
+        Task<bool> ValidateSignUpTokenAsync(string token);
+        Task RegisterSignUpTokenAsync(string token);
         Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(string ownerId, string token);
+        Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds);
 
         #endregion Public Methods
     }
@@ -37,8 +42,8 @@ namespace OwnApt.DotCom.Presentation.Service
 
         public AccountPresentationService(
             IProxy proxy,
-            ISignUpService signUpService,
             IOptions<ServiceUriSettings> serviceUris,
+            ISignUpService signUpService,
             ILoggerFactory loggerFatory
         )
         {
@@ -65,6 +70,23 @@ namespace OwnApt.DotCom.Presentation.Service
             return createOwnerResult;
         }
 
+        public async Task<bool> ValidateSignUpTokenAsync(string token)
+        {
+            var signUpToken = await this.signUpService.ParseTokenAsync(token);
+            var subToken = $"{signUpToken.Nonce}-{signUpToken.UtcDateIssued.ToFileTimeUtc()}";
+
+            var request = new ReadRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, subToken);
+            var response = await this.proxy.InvokeAsync(request);
+
+            if (response.IsSuccessfulStatusCode)
+            {
+                var isValid = await this.signUpService.ValidateTokenAsync(token) && response.ResponseDto == null;
+                return isValid;
+            }
+
+            throw ExceptionUtility.RaiseException(response, this.logger);
+        }
+
         public async Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(string ownerId, string token)
         {
             var readOwnerRequest = new ReadOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, ownerId);
@@ -74,6 +96,13 @@ namespace OwnApt.DotCom.Presentation.Service
             {
                 var ownerModel = readOwnerResponse.ResponseDto;
                 var signUpToken = await this.signUpService.ParseTokenAsync(token);
+
+                /////////////////////////////////////////////////////////////////////////
+                // TODO REMOVE                                                         //
+                /////////////////////////////////////////////////////////////////////////
+                ownerModel.PropertyIds = new System.Collections.Generic.List<string>();
+                /////////////////////////////////////////////////////////////////////////
+
                 ownerModel.PropertyIds.AddRange(signUpToken.PropertyIds);
 
                 var updateOwnerRequest = new UpdateOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, ownerModel);
@@ -82,6 +111,24 @@ namespace OwnApt.DotCom.Presentation.Service
             }
 
             throw ExceptionUtility.RaiseException(readOwnerResponse, this.logger);
+        }
+
+        public Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
+        {
+            return this.signUpService.SendSignUpEmailAsync(name, email, propertyIds);
+        }
+
+        public async Task RegisterSignUpTokenAsync(string token)
+        {
+            var signUpToken = await this.signUpService.ParseTokenAsync(token);
+            var subToken = $"{signUpToken.Nonce}-{signUpToken.UtcDateIssued.ToFileTimeUtc()}";
+            var request = new CreateRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, subToken);
+            var response = await this.proxy.InvokeAsync(request);
+
+            if (!response.IsSuccessfulStatusCode)
+            {
+                throw ExceptionUtility.RaiseException(response, this.logger);
+            }
         }
 
         #endregion Public Methods

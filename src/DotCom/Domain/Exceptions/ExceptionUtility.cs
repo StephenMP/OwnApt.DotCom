@@ -30,11 +30,11 @@ namespace OwnApt.DotCom.Domain.Exceptions
             var builder = new StringBuilder();
 
             builder.AppendLine("Recieved unsuccessful status code from proxy");
-            builder.AppendLine($"{nameof(proxyResponse.RequestHeaders)}: {proxyResponse.RequestHeaders.ToString()}");
-            builder.AppendLine($"{nameof(proxyResponse.ResponseHeaders)}: {proxyResponse.ResponseHeaders.ToString()}");
-            builder.AppendLine($"{nameof(proxyResponse.RequestUri)}: {proxyResponse.RequestUri.ToString()}");
-            builder.AppendLine($"{nameof(proxyResponse.ResponseMessage)}: {proxyResponse.ResponseMessage}");
-            builder.AppendLine($"{nameof(proxyResponse.StatusCode)}: {proxyResponse.StatusCode}");
+            builder.AppendLine($"RequestHeaders: {proxyResponse.RequestHeaders?.ToString()}");
+            builder.AppendLine($"ResponseHeaders: {proxyResponse.ResponseHeaders?.ToString()}");
+            builder.AppendLine($"RequestUri: {proxyResponse.RequestUri?.ToString()}");
+            builder.AppendLine($"ResponseMessage: {proxyResponse.ResponseMessage}");
+            builder.AppendLine($"StatusCode: {proxyResponse.StatusCode}");
 
             var message = proxyResponse.ResponseMessage ?? $": {proxyResponse.StatusCode.ToString()}";
             return HandleException(new Exception(builder.ToString()), logger, LogLevel.Critical);
