@@ -21,7 +21,7 @@ src/DotCom/[Ll]ogs/
 [Xx]64/
 [Xx]86/
 [Bb]uild/
-!wwwroot/lib/auth0-lock/build
+!src/DotCom/wwwroot/lib/auth0-lock/build/
 bld/
 [Bb]in/
 [Oo]bj/
