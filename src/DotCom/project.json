@@ -70,9 +70,5 @@
       "appsettings.json",
       "web.config"
     ]
-  },
-
-  "scripts": {
-    "postcompile": [ "dotnet bundle clean", "gulp clean:css", "npm install", "bower install", "dotnet bundle", "gulp concat:css" ]
   }
 }
