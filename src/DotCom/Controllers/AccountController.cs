@@ -66,7 +66,7 @@ namespace OwnApt.DotCom.Controllers
             return true;
         }
 
-        public IActionResult Login(string returnUrl = "/")
+        public IActionResult Login(string returnUrl = "/Owner/Index")
         {
             var lockContext = HttpContext.GenerateLockContext(this.openIdConnectOptions, returnUrl);
             return View(lockContext);

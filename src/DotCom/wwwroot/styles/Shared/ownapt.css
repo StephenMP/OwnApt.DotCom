@@ -1,6 +1,6 @@
 .btn-ownapt-orange {
   border-color: #F05f40;
-  color: #ffffff;
+  color: #fff;
   background-color: #F05f40;
   -webkit-transition: all .35s;
   -moz-transition: all .35s;
@@ -13,7 +13,7 @@
 .btn-ownapt-orange.active,
 .open > .dropdown-toggle.btn-ownapt-orange {
   border-color: #ee4b28;
-  color: #ffffff;
+  color: #fff;
   background-color: #ed431f;
 }
 .btn-ownapt-orange:active,
@@ -44,5 +44,5 @@ fieldset[disabled] .btn-ownapt-orange.active {
 }
 .btn-ownapt-orange .badge {
   color: #F05f40;
-  background-color: #ffffff;
+  background-color: #fff;
 }

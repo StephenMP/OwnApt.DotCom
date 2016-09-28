@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Dto.Account;
+using OwnApt.DotCom.Model.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,13 @@ namespace OwnApt.DotCom.Mapping
         public MainProfile()
         {
             ConfigureSignUp();
+            ConfigureLeaseTerm();
+        }
+
+        private void ConfigureLeaseTerm()
+        {
+            CreateMap<LeaseTermModel, LeaseTermViewModel>();
+            CreateMap<LeaseTermViewModel, LeaseTermModel>();
         }
 
         private void ConfigureSignUp()

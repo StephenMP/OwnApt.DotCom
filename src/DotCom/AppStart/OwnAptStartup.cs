@@ -183,14 +183,15 @@ namespace OwnApt.DotCom.AppStart
             if (HostEnvironment.IsDevelopment())
             {
                 loggerConfig
-                    .MinimumLevel.Debug()
-                    .WriteTo.RollingFile("logs\\DotCom-{Date}.txt");
+                    .MinimumLevel.Information()
+                    .WriteTo.Console();
             }
             else
             {
                 loggerConfig
-                    .MinimumLevel.Warning()
-                    .WriteTo.Logentries(logentriesToken);
+                    .MinimumLevel.Information()
+                    .WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
+                    .WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
             }
 
             Log.Logger = loggerConfig.CreateLogger();

@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5AFCB38-5697-404E-892E-F627DA7E8FD4}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		Performance1.psess = Performance1.psess
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DotCom", "src\DotCom\DotCom.xproj", "{C37BAB2E-50F0-44BE-ADFB-6DCC1FB5C995}"
@@ -17,6 +18,9 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DotCom.Tests.Component", "test\DotCom.Tests.Component\DotCom.Tests.Component.xproj", "{8502A818-E796-4F9B-A7C6-9DFF4A333183}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

@@ -1,3 +1,4 @@
+
 html,
 body {
   height: 100%;
@@ -398,7 +399,7 @@ body {
 }
 
 body {
-  background-color: #bebebe;
+  background-color: #ddd;
 }
 .popover {
   width: 400px;
@@ -407,7 +408,7 @@ body {
 
 .btn-ownapt-orange {
   border-color: #F05f40;
-  color: #ffffff;
+  color: #fff;
   background-color: #F05f40;
   -webkit-transition: all .35s;
   -moz-transition: all .35s;
@@ -420,7 +421,7 @@ body {
 .btn-ownapt-orange.active,
 .open > .dropdown-toggle.btn-ownapt-orange {
   border-color: #ee4b28;
-  color: #ffffff;
+  color: #fff;
   background-color: #ed431f;
 }
 .btn-ownapt-orange:active,
@@ -451,260 +452,9 @@ fieldset[disabled] .btn-ownapt-orange.active {
 }
 .btn-ownapt-orange .badge {
   color: #F05f40;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
-
-.owner-container {
-  position: static;
-  background-color: #bebebe;
-  margin-left: 60px;
-}
-.owner-container .property-list {
-  margin-top: 40px;
-  padding-left: 7%;
-  padding-right: 7%;
-}
-.owner-container .property-list div {
-  margin-bottom: 15px;
-}
-.owner-container .property-list .property-sort {
-  background-color: burlywood;
-  height: 40px;
-}
-.owner-container .property-list .property {
-  padding-top: 10px;
-  background-color: #f2f2f2;
-  margin-bottom: 15px;
-  height: 300px;
-  font-size: 14px;
-  font-weight: bold;
-  -webkit-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
-}
-.owner-container .property-list .property .property-left img {
-  height: 200px;
-  width: 320px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.owner-container .property-list .property .overall-status {
-  text-align: right;
-  padding-right: 10px;
-  float: right;
-}
-.owner-container .property-list .property .overall-status img {
-  height: 20px;
-}
-.owner-container .property-list .property .property-health {
-  height: 20px;
-  width: 20px;
-  background-color: forestgreen;
-  float: right;
-}
-.owner-container .property-list .address {
-  display: block;
-  margin: auto;
-  padding-top: 10px;
-}
-.owner-container .property-list .address p {
-  text-align: center;
-  margin: 0px;
-}
-
-#TopNavBar {
-  background-color: #333333;
-  height: 40px;
-}
-#TopNavBar .topnav-home {
-  float: left;
-  display: inline-block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 8px 16px 8px 0px;
-  text-decoration: none;
-  font-size: 17px;
-}
-#TopNavBar .topnav-home img {
-  height: 25px;
-  width: 24px;
-  margin-right: 5px;
-}
-#TopNavBar .topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-#TopNavBar .topnav li {
-  float: right;
-}
-#TopNavBar .topnav li a {
-  display: inline-block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: 0.2s;
-  font-size: 17px;
-}
-#TopNavBar .topnav li a:hover {
-  background-color: #5c5c5c;
-}
-.sidenav {
-  background-color: #333333;
-  height: 90%;
-  width: 60px;
-  position: relative;
-}
-.sidenav ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-.sidenav ul li .greyscale-hover {
-  display: block;
-  margin: 18px auto;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  -webkit-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
-}
-.sidenav ul li .greyscale-hover:hover {
-  -webkit-filter: grayscale(0);
-  filter: grayscale(0);
-}
-.sidenav ul li .greyscale-hover:active {
-  -webkit-filter: grayscale(0);
-  filter: grayscale(0);
-}
-@media screen and (max-height: 415px) {
-  .sidenav ul li .greyscale-hover {
-    margin: 8px auto;
-  }
-}
-.sidenav ul .sidenav-placeholder {
-  height: 20%;
-  display: block;
-}
-@media screen and (max-height: 415px) {
-  .sidenav ul .sidenav-placeholder {
-    height: 0%;
-  }
-}
-
-#TopNavBar {
-  background-color: #333333;
-  height: 40px;
-}
-#TopNavBar .topnav-home {
-  float: left;
-  display: inline-block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 8px 16px 8px 0px;
-  text-decoration: none;
-  font-size: 17px;
-}
-#TopNavBar .topnav-home img {
-  height: 25px;
-  width: 24px;
-  margin-right: 5px;
-}
-#TopNavBar .topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-#TopNavBar .topnav li {
-  float: right;
-}
-#TopNavBar .topnav li a {
-  display: inline-block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: 0.2s;
-  font-size: 17px;
-}
-#TopNavBar .topnav li a:hover {
-  background-color: #5c5c5c;
-}
-#SideNavBar {
-  width: 60px;
-  background-color: #333333;
-  position: fixed;
-  left: 0px;
-  top: 40px;
-  bottom: 0px;
-}
-#SideNavBar .sidenav {
-  height: 100%;
-}
-#SideNavBar .sidenav ul {
-  list-style-type: none;
-}
-#SideNavBar .sidenav .contact-pulled-buttom {
-  position: absolute;
-  bottom: 0px;
-  left: 14px;
-}
-#SideNavBar .sidenav .greyscale-hover {
-  display: block;
-  margin: 18px auto;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  -webkit-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
-}
-#SideNavBar .sidenav .greyscale-hover:hover {
-  -webkit-filter: grayscale(0);
-  filter: grayscale(0);
-}
-#SideNavBar .sidenav .greyscale-hover:active {
-  -webkit-filter: grayscale(0);
-  filter: grayscale(0);
-}
-@media screen and (max-height: 415px) {
-  #SideNavBar .sidenav .greyscale-hover {
-    margin: 8px auto;
-  }
-}
-#SideNavBar .sidenav .greyscale-hover .sidenav-placeholder {
-  height: 20%;
-  display: block;
-}
-@media screen and (max-height: 415px) {
-  #SideNavBar .sidenav .greyscale-hover .sidenav-placeholder {
-    height: 0%;
-  }
-}
-
-.body-div {
-  position: relative;
-  display: block;
-<<<<<<< Updated upstream
-=======
-  background-color: #bebebe;
-  height: 100%;
-}
-footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 60px;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
->>>>>>> Stashed changes
-}
 
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)

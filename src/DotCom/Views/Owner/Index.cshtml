@@ -12,14 +12,6 @@
             <div class="property row">
                 <div class="col-lg-4 col-sm-4 property-left">
                     <img src="@property.ImageUri.AbsoluteUri" />
-                    <div class="address">
-                        <p>@property.Address.Address1</p>
-                        @if (!string.IsNullOrEmpty(@property.Address.Address2))
-                        {
-                            <p>@property.Address.Address2</p>
-                        }
-                        <p>@property.Address.City, @property.Address.State @property.Address.Zip.Base - @property.Address.Zip.Extension</p>
-                    </div>
                 </div>
                 @{var lease = Model.LeaseTermsByPropertyId[property.Id];}
                 <div class="col-lg-8 col-sm-8 ">
@@ -30,15 +22,24 @@
                             <p>Rent: @lease.Rent.ToString("C")</p>
                             <p>Lease: @lease.StartDate.ToString("MMM yyyy") - @lease.EndDate.ToString("MMM yyyy")</p>
                             <p>Remaining: @lease.Remaining month(s)</p>
+                            <div class="address">
+                                <p>@property.Address.Address1</p>
+                                @if (!string.IsNullOrEmpty(@property.Address.Address2))
+                                {
+                                    <p>@property.Address.Address2</p>
+                                }
+                                <p>@property.Address.City, @property.Address.State @property.Address.Zip.Base - @property.Address.Zip.Extension</p>
+                            </div>
                         </div>
                         <div class="col-lg-8">
                             <div class="property-health "></div>
                             <div class="overall-status">
                                 Overall Status
-                                <a role="button" data-toggle="popover" title="Very Healthy" data-placement="bottom" data-content="This property is in great shape! Rent has been disbursed and everything is up to date."><img src="~/images/views/owner/Owner_Index_HelpIcon_Active_32x32.png" /></a>
+                                <a role="button" data-toggle="popover" data-trigger="hover" title="Very Healthy" data-placement="bottom" data-content="This property is in great shape! Rent has been disbursed and everything is up to date."><img src="~/images/views/owner/Owner_Index_HelpIcon_Active_32x32.png" /></a>
                             </div>
                         </div>
                     }
+
                     else
                     {
                         <p> Rental management application not complete </p>
@@ -46,6 +47,6 @@
                     }
                 </div>
             </div>
-                    }
+        }
     </div>
 </div>

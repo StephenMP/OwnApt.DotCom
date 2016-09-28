@@ -1,7 +1,7 @@
 .owner-container {
   position: static;
-  background-color: #bebebe;
-  margin-left: 60px;
+  background-color: #ddd;
+  margin-left: 30px;
 }
 .owner-container .property-list {
   margin-top: 40px;
@@ -17,7 +17,7 @@
 }
 .owner-container .property-list .property {
   padding-top: 10px;
-  background-color: #f2f2f2;
+  background-color: #fafafa;
   margin-bottom: 15px;
   height: 300px;
   font-size: 14px;
@@ -26,15 +26,19 @@
   -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
 }
+.owner-container .property-list .property .popover-title {
+  background: #F05f40;
+  color: #fff;
+  font-weight: bold;
+}
 .owner-container .property-list .property .property-left img {
-  height: 200px;
-  width: 320px;
+  min-height: 200px;
+  max-width: 320px;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 15px;
 }
 .owner-container .property-list .property .overall-status {
   text-align: right;
@@ -56,18 +60,17 @@
   padding-top: 10px;
 }
 .owner-container .property-list .address p {
-  text-align: center;
   margin: 0px;
 }
 
 #TopNavBar {
-  background-color: #333333;
+  background-color: #333;
   height: 40px;
 }
 #TopNavBar .topnav-home {
   float: left;
   display: inline-block;
-  color: #f2f2f2;
+  color: #fff;
   text-align: center;
   padding: 8px 16px 8px 0px;
   text-decoration: none;
@@ -89,7 +92,7 @@
 }
 #TopNavBar .topnav li a {
   display: inline-block;
-  color: #f2f2f2;
+  color: #fff;
   text-align: center;
   padding: 8px 16px;
   text-decoration: none;
@@ -97,15 +100,20 @@
   font-size: 17px;
 }
 #TopNavBar .topnav li a:hover {
-  background-color: #5c5c5c;
+  background-color: #666;
 }
 #SideNavBar {
   width: 60px;
-  background-color: #333333;
+  background-color: #333;
   position: fixed;
   left: 0px;
   top: 40px;
   bottom: 0px;
+}
+#SideNavBar .popover-title {
+  background: #F05f40;
+  color: #fff;
+  font-weight: bold;
 }
 #SideNavBar .sidenav {
   height: 100%;
@@ -122,7 +130,7 @@
 }
 #SideNavBar .sidenav ul {
   list-style-type: none;
-  padding-left: 1px;
+  padding-left: 0px;
 }
 #SideNavBar .sidenav .contact-pulled-buttom {
   position: absolute;
@@ -153,7 +161,7 @@
 .body-div {
   position: relative;
   display: block;
-  background-color: #bebebe;
+  background-color: #ddd;
   height: 100%;
 }
 footer {
@@ -162,6 +170,7 @@ footer {
   bottom: 0;
   left: 60px;
   padding: 1rem;
-  background-color: #efefef;
+  background-color: #333;
+  color: #fff;
   text-align: center;
 }

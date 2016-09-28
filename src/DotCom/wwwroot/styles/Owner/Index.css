@@ -1,7 +1,7 @@
 .owner-container {
   position: static;
-  background-color: #bebebe;
-  margin-left: 60px;
+  background-color: #ddd;
+  margin-left: 30px;
 }
 .owner-container .property-list {
   margin-top: 40px;
@@ -17,7 +17,7 @@
 }
 .owner-container .property-list .property {
   padding-top: 10px;
-  background-color: #f2f2f2;
+  background-color: #fafafa;
   margin-bottom: 15px;
   height: 300px;
   font-size: 14px;
@@ -26,15 +26,19 @@
   -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
 }
+.owner-container .property-list .property .popover-title {
+  background: #F05f40;
+  color: #fff;
+  font-weight: bold;
+}
 .owner-container .property-list .property .property-left img {
-  height: 200px;
-  width: 320px;
+  min-height: 200px;
+  max-width: 320px;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 15px;
 }
 .owner-container .property-list .property .overall-status {
   text-align: right;
@@ -56,6 +60,5 @@
   padding-top: 10px;
 }
 .owner-container .property-list .address p {
-  text-align: center;
   margin: 0px;
 }

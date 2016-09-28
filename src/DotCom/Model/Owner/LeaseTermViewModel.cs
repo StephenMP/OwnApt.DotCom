@@ -13,27 +13,15 @@ namespace OwnApt.DotCom.Model.Owner
         public string PropertyId { get; set; }
         public decimal Rent { get; set; }
         public DateTime StartDate { get; set; }
-        public string Status
-        {
-            get
-            {
-                if (DateTime.Now > StartDate && DateTime.Now < EndDate)
-                {
-                    return "Occupied";
-                }
-                else
-                {
-                    return "Vacant";
-                }
-            }
-        }
+        public string Status => (DateTime.Now > this.StartDate && DateTime.Now < this.EndDate) ? "Occupied" : "Vacant";
         public int Remaining
         {
             get
             {
-                if(DateTime.Now < EndDate)
+                if(DateTime.Now < this.EndDate)
                 {
-                    return DateTime.Now.Month - EndDate.Month;
+                    var months = Math.Abs(DateTime.Now.Month - this.EndDate.Month);
+                    return months == 0 ? 12 : months;
                 }
                 else
                 {
