@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Exceptions;
@@ -35,6 +36,7 @@ namespace OwnApt.DotCom.Presentation.Service
         private readonly ILogger<OwnerPresentationService> logger;
         private readonly IProxy proxy;
         private readonly ServiceUriSettings serviceUris;
+        private readonly IMapper mapper;
 
         #endregion Private Fields
 
@@ -44,12 +46,14 @@ namespace OwnApt.DotCom.Presentation.Service
         (
             IProxy proxy,
             IOptions<ServiceUriSettings> serviceUris,
-            ILoggerFactory loggerFactory
+            ILoggerFactory loggerFactory,
+            IMapper mapper
         )
         {
             this.proxy = proxy;
             this.serviceUris = serviceUris.Value;
             this.logger = loggerFactory.CreateLogger<OwnerPresentationService>();
+            this.mapper = mapper;
         }
 
         #endregion Public Constructors
@@ -62,7 +66,7 @@ namespace OwnApt.DotCom.Presentation.Service
 
             var owner = await this.ReadOwnerAsync(ownerId);
             var properties = new List<PropertyModel>();
-            var leaseTermsByPropertyId = new Dictionary<string, LeaseTermModel>();
+            var leaseTermsByPropertyId = new Dictionary<string, LeaseTermViewModel>();
 
             foreach (var ownerPropertyId in owner.PropertyIds)
             {
@@ -73,7 +77,8 @@ namespace OwnApt.DotCom.Presentation.Service
             foreach (var property in properties)
             {
                 var leaseTerm = await this.ReadLeaseTermByPropertyId(property.Id);
-                leaseTermsByPropertyId.Add(property.Id, leaseTerm);
+                var leaseTermView = mapper.Map<LeaseTermViewModel>(leaseTerm);
+                leaseTermsByPropertyId.Add(property.Id, leaseTermView);
             }
 
             model.LeaseTermsByPropertyId = leaseTermsByPropertyId;

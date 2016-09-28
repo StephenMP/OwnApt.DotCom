@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../gulpfile.js" />
+/// <reference path="js/global.js" />
 /// <reference path="js/home/home.min.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/auth0-lock/build/lock.js" />

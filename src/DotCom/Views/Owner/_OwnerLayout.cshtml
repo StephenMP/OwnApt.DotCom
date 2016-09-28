@@ -2,13 +2,21 @@
     Layout = "_Layout";
 }
 @section Styles{
+
+    <environment names="Development">
+        <link rel="stylesheet" type="text/css" href="~/css/owner.css" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <link rel="stylesheet" type="text/css" href="~/css/owner.min.css" />
+    </environment>
 }
 @*Put links for the top nav bar*@
 @section TopNavBar{
     <div class="container-fluid">
         <a class="topnav-home" href="~/Owner"><img src="~/images/Logo/Logo_50x48.png" />OwnApt</a>
         <ul class="topnav">
-            <li><a href="#">logout</a></li>
+            <li><a href="@Url.Action("Logout", "Account")">Logout</a></li>
         </ul>
     </div>
 }
@@ -17,11 +25,10 @@
     <div class="sidenav">
         <ul>
             <li class="sidenav-placeholder"></li>
-            <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_OverviewIcon_Active_32x32.png" /></a></li>
+            <li><a href="@Url.Action("Index", "Owner")"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_OverviewIcon_Active_32x32.png" /></a></li>
             <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_ViewProfileIcon_Active_32x32.png" /></a></li>
             <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_AddHomeIcon_Active_32x32.png" /></a></li>
-            <li class="sidenav-placeholder"></li>
-            <li><a href="#"><img class="greyscale-hover" src="~/images/views/owner/Owner_Index_HelpIcon_Active_32x32.png" /></a></li>
+            <li class="contact-pulled-buttom"><a data-toggle="popover" title="Need Help?" data-html="true" data-placement="top" data-content="Phone: (208)-991-0492 <br/> Email: support@ownapt.com"><img class="greyscale-hover " src="~/images/views/owner/Owner_Index_HelpIcon_Active_32x32.png" /></a></li>
         </ul>
     </div>
 }

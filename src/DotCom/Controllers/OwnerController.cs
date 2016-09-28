@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OwnApt.DotCom.Domain.Interface;
+using OwnApt.DotCom.Model.Owner;
 using OwnApt.DotCom.Presentation.Service;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class OwnerController : Controller
     {
         #region Private Fields
@@ -39,7 +40,6 @@ namespace OwnApt.DotCom.Controllers
         {
             var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
             var model = await this.ownerPresentationService.BuildIndexModelAsync(ownerId);
-
             return View(model);
         }
 

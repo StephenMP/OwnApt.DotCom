@@ -1,4 +1,4 @@
-﻿@import "../Main/variables.less";
+﻿@import "../Shared/variables.less";
 
 #TopNavBar {
     background-color: @background-navbar;
@@ -19,6 +19,7 @@
             margin-right: 5px;
         }
     }
+
 
     .topnav {
         list-style-type: none;
@@ -45,54 +46,79 @@
         }
     }
 }
+
 #SideNavBar {
-        width: 60px;
-        background-color: @background-navbar;
-        position:absolute;
-        left:0px;
-        top:40px;
-        bottom: 0px;
+    width: 60px;
+    background-color: @background-navbar;
+    position: fixed;
+    left: 0px;
+    top: 40px;
+    bottom: 0px;
 
     .sidenav {
-        //TODO fix sidenav and footer
+        height: 100%;
 
         ul {
             list-style-type: none;
+            padding-left: 0px;
+        }
 
-            li {
+        .contact-pulled-buttom {
+            position: absolute;
+            bottom: 0px;
+            left: 14px;
+        }
 
-                .greyscale-hover {
-                    display: block;
-                    margin: 18px auto;
-                    -webkit-filter: grayscale(100%);
-                    filter: grayscale(100%);
-                    -webkit-transition: @navbar-hover-transition ease-in-out;
-                    transition: @navbar-hover-transition ease-in-out;
+        .greyscale-hover {
+            display: block;
+            margin: 18px auto;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            -webkit-transition: @navbar-hover-transition ease-in-out;
+            transition: @navbar-hover-transition ease-in-out;
 
-                    &:hover {
-                        -webkit-filter: grayscale(0);
-                        filter: grayscale(0);
-                    }
-
-                    &:active {
-                        -webkit-filter: grayscale(0);
-                        filter: grayscale(0);
-                    }
-
-                    @media screen and (max-height: @navbar-media-max-height) {
-                        margin: 8px auto;
-                    }
-                }
+            &:hover {
+                -webkit-filter: grayscale(0);
+                filter: grayscale(0);
             }
 
-            .sidenav-placeholder {
-                height: 20%;
-                display: block;
+            &:active {
+                -webkit-filter: grayscale(0);
+                filter: grayscale(0);
+            }
 
-                @media screen and (max-height: @navbar-media-max-height) {
-                    height: 0%;
-                }
+            @media screen and (max-height: @navbar-media-max-height) {
+                margin: 8px auto;
             }
         }
+
+        /*
+        .sidenav-placeholder {
+            height: 20%;
+            display: block;
+
+            @media screen and (max-height: @navbar-media-max-height) {
+                height: 0%;
+            }
+        }
+            */
     }
+}
+
+.body-div {
+    position: relative;
+    display: block;
+    background-color: @background-color;
+    height: 100%;
+}
+
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 60px;
+    padding: 1rem;
+    background-color: @background-footer-color;
+    text-align: center;
 }

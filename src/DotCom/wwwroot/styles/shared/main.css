@@ -1,3 +1,6 @@
 body {
   background-color: #bebebe;
 }
+.popover {
+  width: 400px;
+}

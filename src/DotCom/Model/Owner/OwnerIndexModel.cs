@@ -7,7 +7,7 @@ namespace OwnApt.DotCom.Model.Owner
     {
         #region Public Properties
 
-        public Dictionary<string, LeaseTermModel> LeaseTermsByPropertyId { get; set; }
+        public Dictionary<string, LeaseTermViewModel> LeaseTermsByPropertyId { get; set; }
         public string OwnerId { get; set; }
         public List<PropertyModel> Properties { get; set; }
 

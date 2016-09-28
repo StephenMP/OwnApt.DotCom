@@ -400,6 +400,9 @@ body {
 body {
   background-color: #bebebe;
 }
+.popover {
+  width: 400px;
+}
 
 
 .btn-ownapt-orange {
@@ -454,16 +457,15 @@ fieldset[disabled] .btn-ownapt-orange.active {
 
 .owner-container {
   position: static;
-  background-color: #808080;
+  background-color: #bebebe;
   margin-left: 60px;
 }
 .owner-container .property-list {
-  background-color: aqua;
   margin-top: 40px;
+  padding-left: 7%;
+  padding-right: 7%;
 }
 .owner-container .property-list div {
-  margin-left: 5%;
-  margin-right: 5%;
   margin-bottom: 15px;
 }
 .owner-container .property-list .property-sort {
@@ -471,9 +473,48 @@ fieldset[disabled] .btn-ownapt-orange.active {
   height: 40px;
 }
 .owner-container .property-list .property {
-  background-color: red;
+  padding-top: 10px;
+  background-color: #f2f2f2;
   margin-bottom: 15px;
   height: 300px;
+  font-size: 14px;
+  font-weight: bold;
+  -webkit-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+}
+.owner-container .property-list .property .property-left img {
+  height: 200px;
+  width: 320px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.owner-container .property-list .property .overall-status {
+  text-align: right;
+  padding-right: 10px;
+  float: right;
+}
+.owner-container .property-list .property .overall-status img {
+  height: 20px;
+}
+.owner-container .property-list .property .property-health {
+  height: 20px;
+  width: 20px;
+  background-color: forestgreen;
+  float: right;
+}
+.owner-container .property-list .address {
+  display: block;
+  margin: auto;
+  padding-top: 10px;
+}
+.owner-container .property-list .address p {
+  text-align: center;
+  margin: 0px;
 }
 
 #TopNavBar {
@@ -599,15 +640,23 @@ fieldset[disabled] .btn-ownapt-orange.active {
 #SideNavBar {
   width: 60px;
   background-color: #333333;
-  position: absolute;
+  position: fixed;
   left: 0px;
   top: 40px;
   bottom: 0px;
 }
+#SideNavBar .sidenav {
+  height: 100%;
+}
 #SideNavBar .sidenav ul {
   list-style-type: none;
 }
-#SideNavBar .sidenav ul li .greyscale-hover {
+#SideNavBar .sidenav .contact-pulled-buttom {
+  position: absolute;
+  bottom: 0px;
+  left: 14px;
+}
+#SideNavBar .sidenav .greyscale-hover {
   display: block;
   margin: 18px auto;
   -webkit-filter: grayscale(100%);
@@ -615,25 +664,25 @@ fieldset[disabled] .btn-ownapt-orange.active {
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
 }
-#SideNavBar .sidenav ul li .greyscale-hover:hover {
+#SideNavBar .sidenav .greyscale-hover:hover {
   -webkit-filter: grayscale(0);
   filter: grayscale(0);
 }
-#SideNavBar .sidenav ul li .greyscale-hover:active {
+#SideNavBar .sidenav .greyscale-hover:active {
   -webkit-filter: grayscale(0);
   filter: grayscale(0);
 }
 @media screen and (max-height: 415px) {
-  #SideNavBar .sidenav ul li .greyscale-hover {
+  #SideNavBar .sidenav .greyscale-hover {
     margin: 8px auto;
   }
 }
-#SideNavBar .sidenav ul .sidenav-placeholder {
+#SideNavBar .sidenav .greyscale-hover .sidenav-placeholder {
   height: 20%;
   display: block;
 }
 @media screen and (max-height: 415px) {
-  #SideNavBar .sidenav ul .sidenav-placeholder {
+  #SideNavBar .sidenav .greyscale-hover .sidenav-placeholder {
     height: 0%;
   }
 }
@@ -641,6 +690,20 @@ fieldset[disabled] .btn-ownapt-orange.active {
 .body-div {
   position: relative;
   display: block;
+<<<<<<< Updated upstream
+=======
+  background-color: #bebebe;
+  height: 100%;
+}
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 60px;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+>>>>>>> Stashed changes
 }
 
 /*!
