@@ -21,6 +21,7 @@ src/DotCom/[Ll]ogs/
 [Xx]64/
 [Xx]86/
 [Bb]uild/
+!wwwroot/*/[Bb]uild
 bld/
 [Bb]in/
 [Oo]bj/
