@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OwnApt.Common.Security;
 using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Dto.Account;
@@ -50,15 +51,21 @@ namespace OwnApt.DotCom.Domain.Service
             var base64SignUpToken = Convert.ToBase64String(signUpTokenBytes);
             var rawToken = $"{base64SignUpToken}:{nonce}";
             var tokenBytes = Encoding.UTF8.GetBytes(rawToken);
-            var token = Convert.ToBase64String(tokenBytes);
+            var base64Token = Convert.ToBase64String(tokenBytes);
+            var encryptedBase64Token = CryptoProvider.Encrypt(base64Token);
+            var base64TokenBytes = Encoding.UTF8.GetBytes(encryptedBase64Token);
+            var token = WebEncoders.Base64UrlEncode(base64TokenBytes);
 
             return token;
         }
 
         public async Task<SignUpTokenDto> ParseTokenAsync(string token)
         {
-            var tokenBytes = Convert.FromBase64String(token);
-            var rawToken = Encoding.UTF8.GetString(tokenBytes);
+            var encryptedBase64TokenBytes = WebEncoders.Base64UrlDecode(token);
+            var encryptedBase64Token = Encoding.UTF8.GetString(encryptedBase64TokenBytes);
+            var base64Token = CryptoProvider.Decrypt(encryptedBase64Token);
+            var rawTokenBytes = Convert.FromBase64String(base64Token);
+            var rawToken = Encoding.UTF8.GetString(rawTokenBytes);
             var tokenArray = rawToken.Split(':');
 
             if (tokenArray.Length == 2)

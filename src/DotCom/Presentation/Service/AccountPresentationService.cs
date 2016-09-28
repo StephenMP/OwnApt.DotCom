@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System;
 using System.Text;
+using AutoMapper;
 
 namespace OwnApt.DotCom.Presentation.Service
 {
@@ -35,6 +36,7 @@ namespace OwnApt.DotCom.Presentation.Service
         private readonly IProxy proxy;
         private readonly ServiceUriSettings serviceUrisSettings;
         private readonly ISignUpService signUpService;
+        readonly IMapper mapper;
 
         #endregion Private Fields
 
@@ -44,9 +46,11 @@ namespace OwnApt.DotCom.Presentation.Service
             IProxy proxy,
             IOptions<ServiceUriSettings> serviceUris,
             ISignUpService signUpService,
+            IMapper mapper,
             ILoggerFactory loggerFatory
         )
         {
+            this.mapper = mapper;
             this.proxy = proxy;
             this.signUpService = signUpService;
             this.serviceUrisSettings = serviceUris.Value;
@@ -73,9 +77,9 @@ namespace OwnApt.DotCom.Presentation.Service
         public async Task<bool> ValidateSignUpTokenAsync(string token)
         {
             var signUpToken = await this.signUpService.ParseTokenAsync(token);
-            var subToken = $"{signUpToken.Nonce}-{signUpToken.UtcDateIssued.ToFileTimeUtc()}";
+            //var subToken = $"{signUpToken.Nonce}-{signUpToken.UtcDateIssued.ToFileTimeUtc()}";
 
-            var request = new ReadRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, subToken);
+            var request = new ReadRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, token);
             var response = await this.proxy.InvokeAsync(request);
 
             if (response.IsSuccessfulStatusCode)
@@ -121,8 +125,9 @@ namespace OwnApt.DotCom.Presentation.Service
         public async Task RegisterSignUpTokenAsync(string token)
         {
             var signUpToken = await this.signUpService.ParseTokenAsync(token);
-            var subToken = $"{signUpToken.Nonce}-{signUpToken.UtcDateIssued.ToFileTimeUtc()}";
-            var request = new CreateRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, subToken);
+            var registeredToken = this.mapper.Map<RegisteredTokenModel>(signUpToken);
+            registeredToken.Token = token;
+            var request = new CreateRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, registeredToken);
             var response = await this.proxy.InvokeAsync(request);
 
             if (!response.IsSuccessfulStatusCode)

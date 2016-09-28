@@ -1,4 +1,5 @@
 ﻿using OwnApt.Api.Contract.Model;
+using OwnApt.DotCom.Dto.Account;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
 using System;
@@ -11,11 +12,11 @@ namespace OwnApt.DotCom.ProxyRequests.Owner
     {
         #region Public Constructors
 
-        public CreateRegisteredTokenProxyRequest(string baseUri, string token)
+        public CreateRegisteredTokenProxyRequest(string baseUri, RegisteredTokenModel requestDto)
         {
             this.RequestUri = new Uri($"{baseUri.TrimEnd('/')}/api/v1/owner/signup/token/register");
             this.HttpRequestMethod = HttpRequestMethod.Post;
-            this.RequestDto = new RegisteredTokenModel { Token = token };
+            this.RequestDto = requestDto;
             this.Headers = new Dictionary<string, IEnumerable<string>>
             {
                 { "Accept", new string[] { "application/json" } }
