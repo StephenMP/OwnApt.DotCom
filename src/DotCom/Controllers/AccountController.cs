@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Extensions;
 using OwnApt.DotCom.Presentation.Service;
+using System;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Controllers
@@ -59,7 +61,7 @@ namespace OwnApt.DotCom.Controllers
         {
             const string propId = "6395bfba2bd543e9bf2dd2b7618baf7a";
 
-            this.accountPresentationService.SendSignUpEmailAsync("John Doe", "1.stephen.porter@gmail.com", new string[] { propId });
+            this.accountPresentationService.SendSignUpEmailAsync("Stephen Porter", "1.stephen.porter@gmail.com", new string[] { propId });
 
             return true;
         }

@@ -14,9 +14,12 @@ namespace OwnApt.DotCom.ProxyRequests.Owner
 
         public ReadRegisteredTokenProxyRequest(string baseUri, string token)
         {
-            this.RequestUri = new Uri($"{baseUri.TrimEnd('/')}/api/v1/owner/signup/token");
-            this.RequestDto = new RegisteredTokenModel { Token = token };
-            this.HttpRequestMethod = HttpRequestMethod.Post;
+            this.RequestUri = new Uri($"{baseUri.TrimEnd('/')}/api/v1/owner/signup/token?token={token}");
+            this.HttpRequestMethod = HttpRequestMethod.Get;
+
+            //this.RequestUri = new Uri($"{baseUri.TrimEnd('/')}/api/v1/owner/signup/token");
+            //this.RequestDto = new RegisteredTokenModel { Token = token };
+            //this.HttpRequestMethod = HttpRequestMethod.Post;
             this.Headers = new Dictionary<string, IEnumerable<string>>
             {
                 { "Accept", new string[] { "application/json" } }

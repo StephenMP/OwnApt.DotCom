@@ -17,6 +17,7 @@ using OwnApt.RestfulProxy.Interface;
 using RestSharp.Authenticators;
 using Serilog;
 using Serilog.Events;
+using OwnApt.DotCom.Mapping;
 
 namespace OwnApt.DotCom.AppStart
 {
@@ -40,6 +41,7 @@ namespace OwnApt.DotCom.AppStart
         {
             return new MapperConfiguration(cfg =>
             {
+                cfg.AddProfile<MainProfile>();
             }).CreateMapper();
         }
 
