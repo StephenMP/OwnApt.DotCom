@@ -2,7 +2,6 @@
     <link rel="stylesheet" type="text/css" href="~/css/site.css" />
     <script src="~/js/site.js"></script>
 </environment>
-
 <environment names="Staging,Production">
     <link rel="stylesheet" type="text/css" href="~/css/site.min.css" />
     <script src="~/js/site.min.js"></script>
@@ -12,25 +11,21 @@
 
 <html lang="en">
 <head>
+
 </head>
+
 <body>
-    <div class="body-div">
-        <div id="TopNavBar">
-            @*All styling here for top nav bar*@
-            @RenderSection("TopNavBar", true)
-        </div>
-        <div id="SideNavBar">
-            @*All styling here for side nav bar*@
-            @RenderSection("SideNavBar", true)
-        </div>
-        @RenderBody()
+    <div id="TopNavBar">
+        @RenderSection("TopNavBar", true)
     </div>
+    <div id="SideNavBar">
+        @RenderSection("SideNavBar", true)
+    </div>
+
+    @RenderBody()
 </body>
 </html>
 
-<footer>
-    &copy; OwnApt, LLC | All Rights Reserved.
-</footer>
-
+@RenderSection("Footer", false);
 
 @RenderSection("Scripts", false)

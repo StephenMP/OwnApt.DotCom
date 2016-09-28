@@ -5,6 +5,7 @@
 }
 .owner-container .property-list {
   margin-top: 40px;
+  margin-left: 40px;
   padding-left: 7%;
   padding-right: 7%;
 }
@@ -65,20 +66,22 @@
 
 #TopNavBar {
   background-color: #333;
-  height: 40px;
+  height: 100px;
 }
 #TopNavBar .topnav-home {
+  margin-top: 10px;
+  margin-left: 5px;
   float: left;
   display: inline-block;
   color: #fff;
   text-align: center;
   padding: 8px 16px 8px 0px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: xx-large;
 }
 #TopNavBar .topnav-home img {
-  height: 25px;
-  width: 24px;
+  height: 64px;
+  width: 64px;
   margin-right: 5px;
 }
 #TopNavBar .topnav {
@@ -91,42 +94,28 @@
   float: right;
 }
 #TopNavBar .topnav li a {
+  margin-top: 15px;
   display: inline-block;
   color: #fff;
   text-align: center;
   padding: 8px 16px;
   text-decoration: none;
   transition: 0.2s;
-  font-size: 17px;
+  font-size: xx-large;
 }
 #TopNavBar .topnav li a:hover {
   background-color: #666;
 }
 #SideNavBar {
-  width: 60px;
+  width: 100px;
   background-color: #333;
   position: fixed;
-  left: 0px;
-  top: 40px;
+  top: 100px;
   bottom: 0px;
-}
-#SideNavBar .popover-title {
-  background: #F05f40;
-  color: #fff;
-  font-weight: bold;
 }
 #SideNavBar .sidenav {
   height: 100%;
-  /*
-        .sidenav-placeholder {
-            height: 20%;
-            display: block;
-
-            @media screen and (max-height: @navbar-media-max-height) {
-                height: 0%;
-            }
-        }
-            */
+  margin-top: 40px;
 }
 #SideNavBar .sidenav ul {
   list-style-type: none;
@@ -135,7 +124,6 @@
 #SideNavBar .sidenav .contact-pulled-buttom {
   position: absolute;
   bottom: 0px;
-  left: 14px;
 }
 #SideNavBar .sidenav .greyscale-hover {
   display: block;
@@ -158,19 +146,14 @@
     margin: 8px auto;
   }
 }
-.body-div {
+body {
   position: relative;
   display: block;
   background-color: #ddd;
   height: 100%;
 }
-footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 60px;
-  padding: 1rem;
-  background-color: #333;
+body .popover-title {
+  background: #F05f40;
   color: #fff;
-  text-align: center;
+  font-weight: bold;
 }

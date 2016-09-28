@@ -2,20 +2,22 @@
 
 #TopNavBar {
     background-color: @background-navbar;
-    height: 40px;
+    height: @navbar-top-height;
 
     .topnav-home {
+        margin-top: 10px;
+        margin-left: 5px;
         float: left;
         display: inline-block;
         color: @navbar-text-color;
         text-align: center;
         padding: 8px 16px 8px 0px;
         text-decoration: none;
-        font-size: 17px;
+        font-size: xx-large;
 
         img {
-            height: 25px;
-            width: 24px;
+            height: 64px;
+            width: 64px;
             margin-right: 5px;
         }
     }
@@ -31,13 +33,14 @@
             float: right;
 
             a {
+                margin-top: 15px;
                 display: inline-block;
                 color: @navbar-text-color;
                 text-align: center;
                 padding: 8px 16px;
                 text-decoration: none;
                 transition: @navbar-hover-transition;
-                font-size: 17px;
+                font-size: xx-large;
 
                 &:hover {
                     background-color: @navbar-hover-color;
@@ -48,21 +51,15 @@
 }
 
 #SideNavBar {
-    width: 60px;
+    width: 100px;
     background-color: @background-navbar;
     position: fixed;
-    left: 0px;
-    top: 40px;
+    top: @navbar-top-height;
     bottom: 0px;
-
-    .popover-title {
-        background: @theme-ownapt-orange;
-        color: @theme-ownapt-white;
-        font-weight: bold;
-    }
 
     .sidenav {
         height: 100%;
+        margin-top: 40px;
 
         ul {
             list-style-type: none;
@@ -72,7 +69,6 @@
         .contact-pulled-buttom {
             position: absolute;
             bottom: 0px;
-            left: 14px;
         }
 
         .greyscale-hover {
@@ -97,34 +93,18 @@
                 margin: 8px auto;
             }
         }
-        /*
-        .sidenav-placeholder {
-            height: 20%;
-            display: block;
-
-            @media screen and (max-height: @navbar-media-max-height) {
-                height: 0%;
-            }
-        }
-            */
     }
 }
 
-.body-div {
+body {
     position: relative;
     display: block;
     background-color: @background-color;
     height: 100%;
-}
 
-
-footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 60px;
-    padding: 1rem;
-    background-color: @background-footer-color;
-    color: @footer-text-color;
-    text-align: center;
+    .popover-title {
+        background: @theme-ownapt-orange;
+        color: @theme-ownapt-white;
+        font-weight: bold;
+    }
 }
