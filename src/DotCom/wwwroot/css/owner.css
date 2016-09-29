@@ -66,18 +66,18 @@
 
 #TopNavBar {
   background-color: #333;
-  height: 100px;
+  height: 75px;
 }
 #TopNavBar .topnav-home {
-  margin-top: 10px;
   margin-left: 5px;
+  margin-bottom: 1px;
   float: left;
   display: inline-block;
   color: #fff;
   text-align: center;
   padding: 8px 16px 8px 0px;
   text-decoration: none;
-  font-size: xx-large;
+  font-size: x-large;
 }
 #TopNavBar .topnav-home img {
   height: 64px;
@@ -94,23 +94,22 @@
   float: right;
 }
 #TopNavBar .topnav li a {
-  margin-top: 15px;
+  margin-top: 10px;
   display: inline-block;
   color: #fff;
   text-align: center;
   padding: 8px 16px;
   text-decoration: none;
   transition: 0.2s;
-  font-size: xx-large;
+  font-size: x-large;
 }
 #TopNavBar .topnav li a:hover {
   background-color: #666;
 }
 #SideNavBar {
   width: 100px;
-  background-color: #333;
   position: fixed;
-  top: 100px;
+  top: 75px;
   bottom: 0px;
 }
 #SideNavBar .sidenav {
@@ -146,13 +145,13 @@
     margin: 8px auto;
   }
 }
-body {
+#LayoutBody {
   position: relative;
   display: block;
   background-color: #ddd;
   height: 100%;
 }
-body .popover-title {
+#LayoutBody .popover-title {
   background: #F05f40;
   color: #fff;
   font-weight: bold;

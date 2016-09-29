@@ -44,7 +44,7 @@ namespace OwnApt.DotCom.Controllers
             return View(model);
         }
 
-        public async Task<bool> SubmitFormAsync(ContactFormViewDto contactFormViewModel)
+        public async Task<bool> SubmitForm(ContactFormViewDto contactFormViewModel)
         {
             var meh = await this.emailSender.SendEmailAsync(contactFormViewModel.FullName, contactFormViewModel.ToString());
             return meh.StatusCode == HttpStatusCode.OK;

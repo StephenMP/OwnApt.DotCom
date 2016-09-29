@@ -5,15 +5,15 @@
     height: @navbar-top-height;
 
     .topnav-home {
-        margin-top: 10px;
         margin-left: 5px;
+        margin-bottom: 1px;
         float: left;
         display: inline-block;
         color: @navbar-text-color;
         text-align: center;
         padding: 8px 16px 8px 0px;
         text-decoration: none;
-        font-size: xx-large;
+        font-size: x-large;
 
         img {
             height: 64px;
@@ -33,14 +33,14 @@
             float: right;
 
             a {
-                margin-top: 15px;
+                margin-top: 10px;
                 display: inline-block;
                 color: @navbar-text-color;
                 text-align: center;
                 padding: 8px 16px;
                 text-decoration: none;
                 transition: @navbar-hover-transition;
-                font-size: xx-large;
+                font-size: x-large;
 
                 &:hover {
                     background-color: @navbar-hover-color;
@@ -52,7 +52,6 @@
 
 #SideNavBar {
     width: 100px;
-    background-color: @background-navbar;
     position: fixed;
     top: @navbar-top-height;
     bottom: 0px;
@@ -96,7 +95,7 @@
     }
 }
 
-body {
+#LayoutBody {
     position: relative;
     display: block;
     background-color: @background-color;
