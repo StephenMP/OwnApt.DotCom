@@ -20,7 +20,6 @@ namespace OwnApt.DotCom
                 hostBuilder.UseUrls(args[0]);
             }
 
-
             hostBuilder.Build().Run();
         }
 

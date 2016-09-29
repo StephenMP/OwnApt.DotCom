@@ -10,6 +10,5 @@
     "rimraf": "2.2.8",
     "gulp-livereload": "3.8.1",
     "gulp-rename": "1.2.2"
-
   }
 }

@@ -49,7 +49,7 @@ namespace OwnApt.DotCom.Extensions
                     HttpOnly = true,
                     Secure = httpContext.Request.IsHttps,
                     Expires = DateTime.UtcNow + options.ProtocolValidator.NonceLifetime
-            });
+                });
 
             lockContext.Nonce = nonce;
 

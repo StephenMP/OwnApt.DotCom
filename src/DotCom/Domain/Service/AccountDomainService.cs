@@ -8,29 +8,40 @@ using OwnApt.DotCom.Domain.Settings;
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.RestfulProxy.Interface;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Domain.Service
 {
     public interface IAccountDomainService
     {
-        Task<bool> ValidateSignUpTokenAsync(string token);
+        #region Public Methods
+
         Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail);
-        Task UpdateOwnerPropertyIds(string ownerId, string token);
-        Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds);
+
         Task RegisterSignUpTokenAsync(string token);
+
+        Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds);
+
+        Task UpdateOwnerPropertyIds(string ownerId, string token);
+
+        Task<bool> ValidateSignUpTokenAsync(string token);
+
+        #endregion Public Methods
     }
 
     public class AccountDomainService : IAccountDomainService
     {
+        #region Private Fields
+
         private readonly ILogger<AccountDomainService> logger;
-        private readonly ISignUpService signUpService;
+        private readonly IMapper mapper;
         private readonly IProxy proxy;
         private readonly ServiceUriSettings serviceUris;
-        private readonly IMapper mapper;
+        private readonly ISignUpService signUpService;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public AccountDomainService
         (
@@ -48,20 +59,9 @@ namespace OwnApt.DotCom.Domain.Service
             this.logger = loggerFactory.CreateLogger<AccountDomainService>();
         }
 
-        public async Task<bool> ValidateSignUpTokenAsync(string token)
-        {
-            var signUpToken = await this.signUpService.ParseTokenAsync(token);
-            var readRegisteredTokenRequest = new ReadRegisteredTokenProxyRequest(this.serviceUris, token);
-            var readRegisteredTokenResponse = await this.proxy.InvokeAsync(readRegisteredTokenRequest);
+        #endregion Public Constructors
 
-            if (readRegisteredTokenResponse.IsSuccessfulStatusCode)
-            {
-                var isValid = await this.signUpService.ValidateTokenAsync(token) && readRegisteredTokenResponse.ResponseDto == null;
-                return isValid;
-            }
-
-            throw ExceptionUtility.RaiseException(readRegisteredTokenResponse, this.logger);
-        }
+        #region Public Methods
 
         public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail)
         {
@@ -83,6 +83,26 @@ namespace OwnApt.DotCom.Domain.Service
             }
 
             throw ExceptionUtility.RaiseException(createOwnerResult, this.logger);
+        }
+
+        public async Task RegisterSignUpTokenAsync(string token)
+        {
+            var signUpToken = await this.signUpService.ParseTokenAsync(token);
+            var registeredToken = this.mapper.Map<RegisteredTokenModel>(signUpToken);
+            registeredToken.Token = token;
+
+            var request = new CreateRegisteredTokenProxyRequest(this.serviceUris, registeredToken);
+            var response = await this.proxy.InvokeAsync(request);
+
+            if (!response.IsSuccessfulStatusCode)
+            {
+                throw ExceptionUtility.RaiseException(response, this.logger);
+            }
+        }
+
+        public Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
+        {
+            return this.signUpService.SendSignUpEmailAsync(name, email, propertyIds);
         }
 
         public async Task UpdateOwnerPropertyIds(string ownerId, string token)
@@ -108,24 +128,21 @@ namespace OwnApt.DotCom.Domain.Service
             throw ExceptionUtility.RaiseException(readOwnerResponse, this.logger);
         }
 
-        public Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
-        {
-            return this.signUpService.SendSignUpEmailAsync(name, email, propertyIds);
-        }
-
-        public async Task RegisterSignUpTokenAsync(string token)
+        public async Task<bool> ValidateSignUpTokenAsync(string token)
         {
             var signUpToken = await this.signUpService.ParseTokenAsync(token);
-            var registeredToken = this.mapper.Map<RegisteredTokenModel>(signUpToken);
-            registeredToken.Token = token;
+            var readRegisteredTokenRequest = new ReadRegisteredTokenProxyRequest(this.serviceUris, token);
+            var readRegisteredTokenResponse = await this.proxy.InvokeAsync(readRegisteredTokenRequest);
 
-            var request = new CreateRegisteredTokenProxyRequest(this.serviceUris, registeredToken);
-            var response = await this.proxy.InvokeAsync(request);
-
-            if (!response.IsSuccessfulStatusCode)
+            if (readRegisteredTokenResponse.IsSuccessfulStatusCode)
             {
-                throw ExceptionUtility.RaiseException(response, this.logger);
+                var isValid = await this.signUpService.ValidateTokenAsync(token) && readRegisteredTokenResponse.ResponseDto == null;
+                return isValid;
             }
+
+            throw ExceptionUtility.RaiseException(readRegisteredTokenResponse, this.logger);
         }
+
+        #endregion Public Methods
     }
 }

@@ -7,9 +7,9 @@ namespace OwnApt.DotCom.Domain.Interface
     {
         #region Public Methods
 
-        Task<IRestResponse> SendEmailAsync(string name, string message);
-
         Task<IRestResponse> SendAddHomeEmailAsync(string userId, string userEmail, string message);
+
+        Task<IRestResponse> SendEmailAsync(string name, string message);
 
         #endregion Public Methods
     }

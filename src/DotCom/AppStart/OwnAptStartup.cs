@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,13 +10,13 @@ using Microsoft.Extensions.Options;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Domain.Settings;
+using OwnApt.DotCom.Mapping;
 using OwnApt.DotCom.Presentation.Service;
 using OwnApt.RestfulProxy.Client;
 using OwnApt.RestfulProxy.Interface;
 using RestSharp.Authenticators;
 using Serilog;
 using Serilog.Events;
-using OwnApt.DotCom.Mapping;
 
 namespace OwnApt.DotCom.AppStart
 {
@@ -76,11 +75,6 @@ namespace OwnApt.DotCom.AppStart
             AddMemoryCache(services);
         }
 
-        private static void AddMemoryCache(IServiceCollection services)
-        {
-            services.AddMemoryCache();
-        }
-
         #endregion Public Methods
 
         #region Private Methods
@@ -98,6 +92,11 @@ namespace OwnApt.DotCom.AppStart
         private static void AddCookieAuthentication(IServiceCollection services)
         {
             services.AddAuthentication(options => options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        private static void AddMemoryCache(IServiceCollection services)
+        {
+            services.AddMemoryCache();
         }
 
         private static void AddMvc(IServiceCollection services)

@@ -16,11 +16,17 @@ namespace OwnApt.DotCom.Presentation.Service
         #region Public Methods
 
         LockContextModel BuildLoginModel(HttpContext context, string returnUrl);
+
         LockContextModel BuildSignUpModel(HttpContext context, string returnUrl);
+
         Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail);
+
         Task RegisterSignUpTokenAsync(string token);
+
         Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds);
+
         Task UpdateOwnerPropertyIds(string ownerId, string token);
+
         Task<bool> ValidateSignUpTokenAsync(string token);
 
         #endregion Public Methods
@@ -54,11 +60,6 @@ namespace OwnApt.DotCom.Presentation.Service
         #endregion Public Constructors
 
         #region Public Methods
-
-        private async Task<LockContextModel> GenerateLockContextAsync(HttpContext context, string returnUrl)
-        {
-            return await Task.FromResult(context.GenerateLockContext(this.openIdConnectOptions, returnUrl));
-        }
 
         public LockContextModel BuildLoginModel(HttpContext context, string returnUrl)
         {
@@ -98,5 +99,14 @@ namespace OwnApt.DotCom.Presentation.Service
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private async Task<LockContextModel> GenerateLockContextAsync(HttpContext context, string returnUrl)
+        {
+            return await Task.FromResult(context.GenerateLockContext(this.openIdConnectOptions, returnUrl));
+        }
+
+        #endregion Private Methods
     }
 }

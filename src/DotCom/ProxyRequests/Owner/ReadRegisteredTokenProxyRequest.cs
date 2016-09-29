@@ -1,11 +1,9 @@
 ﻿using OwnApt.Api.Contract.Model;
-using OwnApt.Common.Security;
 using OwnApt.DotCom.Domain.Settings;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace OwnApt.DotCom.ProxyRequests.Owner
 {
