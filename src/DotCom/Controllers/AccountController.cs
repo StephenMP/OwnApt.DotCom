@@ -74,6 +74,19 @@ namespace OwnApt.DotCom.Controllers
             return RedirectToAction("Index", "Owner");
         }
 
+        public async Task<IActionResult> SignUp()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Owner");
+            }
+
+            var returnUrl = $"/Owner/Index";
+            var signUpModel = await Task.Run(() => this.accountPresentationService.BuildSignUpModel(HttpContext, returnUrl));
+
+            return View(signUpModel);
+        }
+
         // TODO : Update to signup using token to support ad hoc signups
         public async Task<IActionResult> SignUpFromToken(string token)
         {
@@ -93,19 +106,6 @@ namespace OwnApt.DotCom.Controllers
 
             var message = $"The sign up token has been altered, reused or has expired! Token recieved: {token}";
             throw ExceptionUtility.RaiseException(message, this.logger, LogLevel.Error);
-        }
-
-        public async Task<IActionResult> SignUp()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Owner");
-            }
-
-            var returnUrl = $"/Owner/Index";
-            var signUpModel = await Task.Run(() => this.accountPresentationService.BuildSignUpModel(HttpContext, returnUrl));
-
-            return View(signUpModel);
         }
 
         #endregion Public Methods

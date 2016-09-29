@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OwnApt.DotCom.Domain.Interface;
-using OwnApt.DotCom.Model.Owner;
 using OwnApt.DotCom.Presentation.Service;
 using System.Threading.Tasks;
 
@@ -13,9 +12,9 @@ namespace OwnApt.DotCom.Controllers
     {
         #region Private Fields
 
+        private readonly IClaimsService claimsService;
         private readonly ILogger<OwnerController> logger;
         private readonly IOwnerPresentationService ownerPresentationService;
-        private readonly IClaimsService claimsService;
 
         #endregion Private Fields
 

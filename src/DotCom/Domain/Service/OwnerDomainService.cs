@@ -7,26 +7,37 @@ using OwnApt.DotCom.ProxyRequests.Lease;
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.DotCom.ProxyRequests.Property;
 using OwnApt.RestfulProxy.Interface;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Domain.Service
 {
     public interface IOwnerDomainService
     {
+        #region Public Methods
+
         Task<LeaseTermModel> ReadLeaseTermByPropertyId(string propertyId);
+
         Task<OwnerModel> ReadOwnerAsync(string ownerId);
-        Task<PropertyModel> ReadPropertyAsync(string propertyId);
+
         Task<PropertyModel[]> ReadPropertiesAsync(IEnumerable<string> propertyIds);
+
+        Task<PropertyModel> ReadPropertyAsync(string propertyId);
+
+        #endregion Public Methods
     }
 
     public class OwnerDomainService : IOwnerDomainService
     {
+        #region Private Fields
+
         private readonly ILogger<OwnerDomainService> logger;
         private readonly IProxy proxy;
         private readonly ServiceUriSettings serviceUris;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public OwnerDomainService
         (
@@ -39,6 +50,10 @@ namespace OwnApt.DotCom.Domain.Service
             this.serviceUris = serviceUris.Value;
             this.logger = loggerFactory.CreateLogger<OwnerDomainService>();
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public async Task<LeaseTermModel> ReadLeaseTermByPropertyId(string propertyId)
         {
@@ -88,5 +103,7 @@ namespace OwnApt.DotCom.Domain.Service
 
             throw ExceptionUtility.RaiseException(readPropertyResponse, this.logger);
         }
+
+        #endregion Public Methods
     }
 }
