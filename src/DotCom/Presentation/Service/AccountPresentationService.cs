@@ -1,17 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
-using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.Domain.Interface;
-using OwnApt.DotCom.Domain.Settings;
-using OwnApt.DotCom.ProxyRequests.Owner;
-using OwnApt.RestfulProxy.Interface;
+using OwnApt.DotCom.Domain.Service;
+using OwnApt.DotCom.Extensions;
+using OwnApt.DotCom.Model.Account;
 using RestSharp;
-using System.Reflection;
 using System.Threading.Tasks;
-using System;
-using System.Text;
-using AutoMapper;
 
 namespace OwnApt.DotCom.Presentation.Service
 {
@@ -19,11 +15,13 @@ namespace OwnApt.DotCom.Presentation.Service
     {
         #region Public Methods
 
-        Task<IProxyResponse<OwnerModel>> CreateOwner(string ownerId);
-        Task<bool> ValidateSignUpTokenAsync(string token);
+        LockContextModel BuildLoginModel(HttpContext context, string returnUrl);
+        LockContextModel BuildSignUpModel(HttpContext context, string returnUrl);
+        Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail);
         Task RegisterSignUpTokenAsync(string token);
-        Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(string ownerId, string token);
         Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds);
+        Task UpdateOwnerPropertyIds(string ownerId, string token);
+        Task<bool> ValidateSignUpTokenAsync(string token);
 
         #endregion Public Methods
     }
@@ -32,28 +30,24 @@ namespace OwnApt.DotCom.Presentation.Service
     {
         #region Private Fields
 
+        private readonly IAccountDomainService accountDomainService;
+
         private readonly ILogger<AccountPresentationService> logger;
-        private readonly IProxy proxy;
-        private readonly ServiceUriSettings serviceUrisSettings;
-        private readonly ISignUpService signUpService;
-        readonly IMapper mapper;
+
+        private readonly OpenIdConnectOptions openIdConnectOptions;
 
         #endregion Private Fields
 
         #region Public Constructors
 
         public AccountPresentationService(
-            IProxy proxy,
-            IOptions<ServiceUriSettings> serviceUris,
-            ISignUpService signUpService,
-            IMapper mapper,
+            IAccountDomainService accountDomainService,
+            IOptions<OpenIdConnectOptions> openIdConnectOptions,
             ILoggerFactory loggerFatory
         )
         {
-            this.mapper = mapper;
-            this.proxy = proxy;
-            this.signUpService = signUpService;
-            this.serviceUrisSettings = serviceUris.Value;
+            this.accountDomainService = accountDomainService;
+            this.openIdConnectOptions = openIdConnectOptions.Value;
             this.logger = loggerFatory.CreateLogger<AccountPresentationService>();
         }
 
@@ -61,79 +55,46 @@ namespace OwnApt.DotCom.Presentation.Service
 
         #region Public Methods
 
-        public async Task<IProxyResponse<OwnerModel>> CreateOwner(string ownerId)
+        private async Task<LockContextModel> GenerateLockContextAsync(HttpContext context, string returnUrl)
         {
-            var ownerModel = new OwnerModel
-            {
-                Id = ownerId
-            };
-
-            var createOwnerRequest = new CreateOwnerProxyRequest(serviceUrisSettings.ApiBaseUri, ownerModel);
-            var createOwnerResult = await this.proxy.InvokeAsync(createOwnerRequest);
-
-            return createOwnerResult;
+            return await Task.FromResult(context.GenerateLockContext(this.openIdConnectOptions, returnUrl));
         }
 
-        public async Task<bool> ValidateSignUpTokenAsync(string token)
+        public LockContextModel BuildLoginModel(HttpContext context, string returnUrl)
         {
-            var signUpToken = await this.signUpService.ParseTokenAsync(token);
-            //var subToken = $"{signUpToken.Nonce}-{signUpToken.UtcDateIssued.ToFileTimeUtc()}";
-
-            var request = new ReadRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, token);
-            var response = await this.proxy.InvokeAsync(request);
-
-            if (response.IsSuccessfulStatusCode)
-            {
-                var isValid = await this.signUpService.ValidateTokenAsync(token) && response.ResponseDto == null;
-                return isValid;
-            }
-
-            throw ExceptionUtility.RaiseException(response, this.logger);
+            var lockContext = context.GenerateLockContext(openIdConnectOptions, returnUrl);
+            return lockContext;
         }
 
-        public async Task<IProxyResponse<Missing>> UpdateOwnerPropertyIds(string ownerId, string token)
+        public LockContextModel BuildSignUpModel(HttpContext context, string returnUrl)
         {
-            var readOwnerRequest = new ReadOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, ownerId);
-            var readOwnerResponse = await this.proxy.InvokeAsync(readOwnerRequest);
+            var lockContext = context.GenerateLockContext(openIdConnectOptions, returnUrl);
+            return lockContext;
+        }
 
-            if (readOwnerResponse.IsSuccessfulStatusCode)
-            {
-                var ownerModel = readOwnerResponse.ResponseDto;
-                var signUpToken = await this.signUpService.ParseTokenAsync(token);
+        public Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail)
+        {
+            return this.accountDomainService.CreateOwner(ownerId, ownerEmail);
+        }
 
-                /////////////////////////////////////////////////////////////////////////
-                // TODO REMOVE                                                         //
-                /////////////////////////////////////////////////////////////////////////
-                ownerModel.PropertyIds = new System.Collections.Generic.List<string>();
-                /////////////////////////////////////////////////////////////////////////
-
-                ownerModel.PropertyIds.AddRange(signUpToken.PropertyIds);
-
-                var updateOwnerRequest = new UpdateOwnerProxyRequest(this.serviceUrisSettings.ApiBaseUri, ownerModel);
-                var updateResponse = await this.proxy.InvokeAsync(updateOwnerRequest);
-                return updateResponse;
-            }
-
-            throw ExceptionUtility.RaiseException(readOwnerResponse, this.logger);
+        public Task RegisterSignUpTokenAsync(string token)
+        {
+            return this.accountDomainService.RegisterSignUpTokenAsync(token);
         }
 
         public Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
         {
-            return this.signUpService.SendSignUpEmailAsync(name, email, propertyIds);
+            return this.accountDomainService.SendSignUpEmailAsync(name, email, propertyIds);
         }
 
-        public async Task RegisterSignUpTokenAsync(string token)
+        public Task UpdateOwnerPropertyIds(string ownerId, string token)
         {
-            var signUpToken = await this.signUpService.ParseTokenAsync(token);
-            var registeredToken = this.mapper.Map<RegisteredTokenModel>(signUpToken);
-            registeredToken.Token = token;
-            var request = new CreateRegisteredTokenProxyRequest(this.serviceUrisSettings.ApiBaseUri, registeredToken);
-            var response = await this.proxy.InvokeAsync(request);
+            return this.accountDomainService.UpdateOwnerPropertyIds(ownerId, token);
+        }
 
-            if (!response.IsSuccessfulStatusCode)
-            {
-                throw ExceptionUtility.RaiseException(response, this.logger);
-            }
+        public Task<bool> ValidateSignUpTokenAsync(string token)
+        {
+            return this.accountDomainService.ValidateSignUpTokenAsync(token);
         }
 
         #endregion Public Methods

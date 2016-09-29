@@ -1,5 +1,6 @@
 ﻿using OwnApt.Api.Contract.Model;
 using OwnApt.Common.Security;
+using OwnApt.DotCom.Domain.Settings;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
 using System;
@@ -12,9 +13,9 @@ namespace OwnApt.DotCom.ProxyRequests.Owner
     {
         #region Public Constructors
 
-        public ReadRegisteredTokenProxyRequest(string baseUri, string token)
+        public ReadRegisteredTokenProxyRequest(ServiceUriSettings serviceUris, string token)
         {
-            this.RequestUri = new Uri($"{baseUri.TrimEnd('/')}/api/v1/owner/signup/token?token={token}");
+            this.RequestUri = new Uri($"{serviceUris.ApiBaseUri.TrimEnd('/')}/api/v1/owner/signup/token?token={token}");
             this.HttpRequestMethod = HttpRequestMethod.Get;
 
             //this.RequestUri = new Uri($"{baseUri.TrimEnd('/')}/api/v1/owner/signup/token");

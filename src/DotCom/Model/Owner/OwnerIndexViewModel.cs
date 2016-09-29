@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace OwnApt.DotCom.Model.Owner
 {
-    public class OwnerIndexModel
+    public class OwnerIndexViewModel
     {
+        public OwnerIndexViewModel()
+        {
+            this.Properties = new List<PropertyModel>();
+            this.LeaseTermsByPropertyId = new Dictionary<string, LeaseTermViewModel>();
+        }
+
         #region Public Properties
 
         public Dictionary<string, LeaseTermViewModel> LeaseTermsByPropertyId { get; set; }

@@ -14,10 +14,17 @@ namespace OwnApt.DotCom.Mapping
         public MainProfile()
         {
             ConfigureSignUp();
-            ConfigureLeaseTerm();
+            ConfigureLeaseTermViewModel();
+            ConfigureOwnerViewModel();
         }
 
-        private void ConfigureLeaseTerm()
+        private void ConfigureOwnerViewModel()
+        {
+            CreateMap<OwnerModel, OwnerProfileViewModel>();
+            CreateMap<OwnerProfileViewModel, OwnerModel>();
+        }
+
+        private void ConfigureLeaseTermViewModel()
         {
             CreateMap<LeaseTermModel, LeaseTermViewModel>();
             CreateMap<LeaseTermViewModel, LeaseTermModel>();

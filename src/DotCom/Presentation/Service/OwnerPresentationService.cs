@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
-using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.Domain.Settings;
+using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Model.Owner;
-using OwnApt.DotCom.ProxyRequests.Lease;
-using OwnApt.DotCom.ProxyRequests.Owner;
-using OwnApt.DotCom.ProxyRequests.Property;
 using OwnApt.RestfulProxy.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,13 +13,15 @@ namespace OwnApt.DotCom.Presentation.Service
     {
         #region Public Methods
 
-        Task<OwnerIndexModel> BuildIndexModelAsync(string ownerId);
+        Task<OwnerIndexViewModel> BuildIndexModelAsync(string ownerId);
+
+        Task<OwnerProfileViewModel> BuildProfileModelAsync(string ownerId);
 
         Task<LeaseTermModel> ReadLeaseTermByPropertyId(string propertyId);
 
         Task<OwnerModel> ReadOwnerAsync(string ownerId);
 
-        Task<PropertyModel> ReadProperty(string propertyId);
+        Task<PropertyModel> ReadPropertyAsync(string propertyId);
 
         #endregion Public Methods
     }
@@ -34,9 +31,9 @@ namespace OwnApt.DotCom.Presentation.Service
         #region Private Fields
 
         private readonly ILogger<OwnerPresentationService> logger;
-        private readonly IProxy proxy;
-        private readonly ServiceUriSettings serviceUris;
         private readonly IMapper mapper;
+        private readonly IOwnerDomainService ownerDomainService;
+        private readonly IProxy proxy;
 
         #endregion Private Fields
 
@@ -44,14 +41,14 @@ namespace OwnApt.DotCom.Presentation.Service
 
         public OwnerPresentationService
         (
+            IOwnerDomainService ownerDomainService,
             IProxy proxy,
-            IOptions<ServiceUriSettings> serviceUris,
             ILoggerFactory loggerFactory,
             IMapper mapper
         )
         {
+            this.ownerDomainService = ownerDomainService;
             this.proxy = proxy;
-            this.serviceUris = serviceUris.Value;
             this.logger = loggerFactory.CreateLogger<OwnerPresentationService>();
             this.mapper = mapper;
         }
@@ -60,19 +57,12 @@ namespace OwnApt.DotCom.Presentation.Service
 
         #region Public Methods
 
-        public async Task<OwnerIndexModel> BuildIndexModelAsync(string ownerId)
+        public async Task<OwnerIndexViewModel> BuildIndexModelAsync(string ownerId)
         {
-            var model = new OwnerIndexModel { OwnerId = ownerId };
-
-            var owner = await this.ReadOwnerAsync(ownerId);
-            var properties = new List<PropertyModel>();
+            var model = new OwnerIndexViewModel { OwnerId = ownerId };
+            var owner = await this.ownerDomainService.ReadOwnerAsync(ownerId);
+            var properties = await this.ownerDomainService.ReadPropertiesAsync(owner.PropertyIds);
             var leaseTermsByPropertyId = new Dictionary<string, LeaseTermViewModel>();
-
-            foreach (var ownerPropertyId in owner.PropertyIds)
-            {
-                var property = await this.ReadProperty(ownerPropertyId);
-                properties.Add(property);
-            }
 
             foreach (var property in properties)
             {
@@ -82,46 +72,31 @@ namespace OwnApt.DotCom.Presentation.Service
             }
 
             model.LeaseTermsByPropertyId = leaseTermsByPropertyId;
-            model.Properties = properties;
+            model.Properties.AddRange(properties);
 
             return model;
         }
 
+        public async Task<OwnerProfileViewModel> BuildProfileModelAsync(string ownerId)
+        {
+            var ownerModel = await this.ownerDomainService.ReadOwnerAsync(ownerId);
+            var ownerProfileViewModel = this.mapper.Map<OwnerProfileViewModel>(ownerModel);
+            return ownerProfileViewModel;
+        }
+
         public async Task<LeaseTermModel> ReadLeaseTermByPropertyId(string propertyId)
         {
-            var readLeaseTermByPropertyIdRequest = new ReadLeaseTermByPropertyIdProxyRequest(this.serviceUris.ApiBaseUri, propertyId);
-            var readLeaseTermByPropertyIdResponse = await this.proxy.InvokeAsync(readLeaseTermByPropertyIdRequest);
-
-            if (readLeaseTermByPropertyIdResponse.IsSuccessfulStatusCode)
-            {
-                return readLeaseTermByPropertyIdResponse.ResponseDto;
-            }
-
-            throw ExceptionUtility.RaiseException(readLeaseTermByPropertyIdResponse, this.logger);
+            return await this.ownerDomainService.ReadLeaseTermByPropertyId(propertyId);
         }
 
         public async Task<OwnerModel> ReadOwnerAsync(string ownerId)
         {
-            var readOwnerRequest = new ReadOwnerProxyRequest(this.serviceUris.ApiBaseUri, ownerId);
-            var readOwnerResponse = await this.proxy.InvokeAsync(readOwnerRequest);
-            if (readOwnerResponse.IsSuccessfulStatusCode)
-            {
-                return readOwnerResponse.ResponseDto;
-            }
-
-            throw ExceptionUtility.RaiseException(readOwnerResponse, this.logger);
+            return await this.ownerDomainService.ReadOwnerAsync(ownerId);
         }
 
-        public async Task<PropertyModel> ReadProperty(string propertyId)
+        public async Task<PropertyModel> ReadPropertyAsync(string propertyId)
         {
-            var readPropertyRequest = new ReadPropertyProxyRequest(serviceUris.ApiBaseUri, propertyId);
-            var readPropertyResponse = await this.proxy.InvokeAsync(readPropertyRequest);
-            if (readPropertyResponse.IsSuccessfulStatusCode)
-            {
-                return readPropertyResponse.ResponseDto;
-            }
-
-            throw ExceptionUtility.RaiseException(readPropertyResponse, this.logger);
+            return await this.ownerDomainService.ReadPropertyAsync(propertyId);
         }
 
         #endregion Public Methods

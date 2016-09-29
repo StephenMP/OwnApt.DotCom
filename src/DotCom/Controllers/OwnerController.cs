@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class OwnerController : Controller
     {
         #region Private Fields
@@ -40,6 +40,13 @@ namespace OwnApt.DotCom.Controllers
         {
             var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
             var model = await this.ownerPresentationService.BuildIndexModelAsync(ownerId);
+            return View(model);
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
+            var model = await this.ownerPresentationService.BuildProfileModelAsync(ownerId);
             return View(model);
         }
 

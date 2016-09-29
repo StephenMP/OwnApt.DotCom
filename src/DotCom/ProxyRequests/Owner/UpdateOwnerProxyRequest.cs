@@ -1,4 +1,5 @@
 ﻿using OwnApt.Api.Contract.Model;
+using OwnApt.DotCom.Domain.Settings;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
 using System;
@@ -11,9 +12,9 @@ namespace OwnApt.DotCom.ProxyRequests.Owner
     {
         #region Public Constructors
 
-        public UpdateOwnerProxyRequest(string apiBaseUri, OwnerModel ownerModel)
+        public UpdateOwnerProxyRequest(ServiceUriSettings serviceUris, OwnerModel ownerModel)
         {
-            this.RequestUri = new Uri($"{apiBaseUri.Trim('/')}/api/v1/owner");
+            this.RequestUri = new Uri($"{serviceUris.ApiBaseUri.Trim('/')}/api/v1/owner");
             this.HttpRequestMethod = HttpRequestMethod.Put;
             this.RequestDto = ownerModel;
             this.Headers = new Dictionary<string, IEnumerable<string>>

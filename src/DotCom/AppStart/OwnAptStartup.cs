@@ -143,6 +143,8 @@ namespace OwnApt.DotCom.AppStart
             services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IAccountPresentationService, AccountPresentationService>();
             services.AddTransient<IOwnerPresentationService, OwnerPresentationService>();
+            services.AddTransient<IAccountDomainService, AccountDomainService>();
+            services.AddTransient<IOwnerDomainService, OwnerDomainService>();
 
             services.AddSingleton<IMailGunRestClient>(BuildMailGunRestClient());
         }

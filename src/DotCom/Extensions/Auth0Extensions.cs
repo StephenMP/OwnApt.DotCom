@@ -40,7 +40,8 @@ namespace OwnApt.DotCom.Extensions
             lockContext.CallbackUrl = callbackUrl;
 
             var nonce = options.ProtocolValidator.GenerateNonce();
-            httpContext.Response.Cookies.Append(
+            httpContext.Response.Cookies.Append
+            (
                 OpenIdConnectDefaults.CookieNoncePrefix + options.StringDataFormat.Protect(nonce),
                 NonceProperty,
                 new CookieOptions
@@ -48,7 +49,8 @@ namespace OwnApt.DotCom.Extensions
                     HttpOnly = true,
                     Secure = httpContext.Request.IsHttps,
                     Expires = DateTime.UtcNow + options.ProtocolValidator.NonceLifetime
-                });
+            });
+
             lockContext.Nonce = nonce;
 
             var properties = new AuthenticationProperties
@@ -56,6 +58,7 @@ namespace OwnApt.DotCom.Extensions
                 ExpiresUtc = options.SystemClock.UtcNow.Add(options.RemoteAuthenticationTimeout),
                 RedirectUri = returnUrl ?? "/"
             };
+
             properties.Items[OpenIdConnectDefaults.RedirectUriForCodePropertiesKey] = callbackUrl;
             GenerateCorrelationId(httpContext, options, properties);
 
