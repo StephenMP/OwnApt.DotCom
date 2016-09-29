@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using OwnApt.DotCom.Domain.Interface;
+using OwnApt.DotCom.Model.Home;
+using OwnApt.DotCom.Settings;
 using OwnApt.DotCom.ViewModels.Dto;
 using System.Net;
 using System.Threading.Tasks;
@@ -12,14 +15,16 @@ namespace OwnApt.DotCom.Controllers
         #region Private Fields
 
         private readonly IContactFormService emailSender;
+        private readonly FeatureToggles featureToggles;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public HomeController(IContactFormService emailSender)
+        public HomeController(IContactFormService emailSender, IOptions<FeatureToggles> featureToggles)
         {
             this.emailSender = emailSender;
+            this.featureToggles = featureToggles.Value;
         }
 
         #endregion Public Constructors
@@ -35,7 +40,8 @@ namespace OwnApt.DotCom.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new HomeIndexViewModel { FeatureToggles = this.featureToggles };
+            return View(model);
         }
 
         public async Task<bool> SubmitFormAsync(ContactFormViewDto contactFormViewModel)

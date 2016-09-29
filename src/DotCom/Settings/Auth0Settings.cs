@@ -1,4 +1,4 @@
-﻿namespace OwnApt.DotCom.Domain.Settings
+﻿namespace OwnApt.DotCom.Settings
 {
     public class Auth0Settings
     {

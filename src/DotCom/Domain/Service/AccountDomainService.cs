@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
-using OwnApt.DotCom.Domain.Settings;
+using OwnApt.DotCom.Settings;
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.RestfulProxy.Interface;
 using RestSharp;
@@ -36,7 +36,7 @@ namespace OwnApt.DotCom.Domain.Service
         private readonly ILogger<AccountDomainService> logger;
         private readonly IMapper mapper;
         private readonly IProxy proxy;
-        private readonly ServiceUriSettings serviceUris;
+        private readonly ServiceUris serviceUris;
         private readonly ISignUpService signUpService;
 
         #endregion Private Fields
@@ -48,7 +48,7 @@ namespace OwnApt.DotCom.Domain.Service
             ISignUpService signUpService,
             IProxy proxy,
             IMapper mapper,
-            IOptions<ServiceUriSettings> serviceUriOptions,
+            IOptions<ServiceUris> serviceUriOptions,
             ILoggerFactory loggerFactory
         )
         {

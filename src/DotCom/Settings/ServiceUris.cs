@@ -1,6 +1,6 @@
-﻿namespace OwnApt.DotCom.Domain.Settings
+﻿namespace OwnApt.DotCom.Settings
 {
-    public class ServiceUriSettings
+    public class ServiceUris
     {
         #region Public Properties
 

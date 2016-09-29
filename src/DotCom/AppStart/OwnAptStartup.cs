@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Domain.Service;
-using OwnApt.DotCom.Domain.Settings;
 using OwnApt.DotCom.Mapping;
 using OwnApt.DotCom.Presentation.Service;
 using OwnApt.RestfulProxy.Client;
@@ -17,6 +17,7 @@ using OwnApt.RestfulProxy.Interface;
 using RestSharp.Authenticators;
 using Serilog;
 using Serilog.Events;
+using OwnApt.DotCom.Settings;
 
 namespace OwnApt.DotCom.AppStart
 {
@@ -73,6 +74,12 @@ namespace OwnApt.DotCom.AppStart
             AddServices(services);
             AddRestfulProxy(services);
             AddMemoryCache(services);
+            AddFeatureToggles(services);
+        }
+
+        private static void AddFeatureToggles(IServiceCollection services)
+        {
+            services.Configure<FeatureToggles>(Configuration.GetSection("FeatureToggles"));
         }
 
         #endregion Public Methods
@@ -150,7 +157,7 @@ namespace OwnApt.DotCom.AppStart
 
         private static void AddServiceUris(IServiceCollection services)
         {
-            services.Configure<ServiceUriSettings>(Configuration.GetSection("ServiceUris"));
+            services.Configure<ServiceUris>(Configuration.GetSection("ServiceUris"));
         }
 
         private static IMailGunRestClient BuildMailGunRestClient()

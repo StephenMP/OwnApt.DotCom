@@ -1,5 +1,5 @@
 ﻿using OwnApt.Api.Contract.Model;
-using OwnApt.DotCom.Domain.Settings;
+using OwnApt.DotCom.Settings;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
 using System;
@@ -13,7 +13,7 @@ namespace OwnApt.DotCom.ProxyRequests.Property
     {
         #region Public Constructors
 
-        public ReadPropertiesProxyRequest(ServiceUriSettings serviceUris, IEnumerable<string> propertyIds)
+        public ReadPropertiesProxyRequest(ServiceUris serviceUris, IEnumerable<string> propertyIds)
         {
             var queryParams = this.BuildQueryParams(propertyIds);
             this.RequestUri = new Uri($"{serviceUris.ApiBaseUri.TrimEnd('/')}/api/v1/property?{queryParams}");

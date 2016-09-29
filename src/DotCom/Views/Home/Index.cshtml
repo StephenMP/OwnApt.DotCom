@@ -1,8 +1,12 @@
-﻿@{
+﻿@model OwnApt.DotCom.Model.Home.HomeIndexViewModel
+
+@{
     Layout = "_HomeLayout";
     ViewData["Title"] = "OwnApt, LLC";
     ViewData["ShowListings"] = false;
+    ViewData["ShowLogin"] = Model.FeatureToggles.OwnerPortal;
 }
+
 
 <style>
     @@media (max-width: 768px) {

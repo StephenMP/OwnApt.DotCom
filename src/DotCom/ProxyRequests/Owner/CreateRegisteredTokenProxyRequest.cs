@@ -1,5 +1,5 @@
 ﻿using OwnApt.Api.Contract.Model;
-using OwnApt.DotCom.Domain.Settings;
+using OwnApt.DotCom.Settings;
 using OwnApt.RestfulProxy.Domain.Enum;
 using OwnApt.RestfulProxy.Interface;
 using System;
@@ -11,7 +11,7 @@ namespace OwnApt.DotCom.ProxyRequests.Owner
     {
         #region Public Constructors
 
-        public CreateRegisteredTokenProxyRequest(ServiceUriSettings serviceUris, RegisteredTokenModel requestDto)
+        public CreateRegisteredTokenProxyRequest(ServiceUris serviceUris, RegisteredTokenModel requestDto)
         {
             this.RequestUri = new Uri($"{serviceUris.ApiBaseUri.TrimEnd('/')}/api/v1/owner/signup/token/register");
             this.HttpRequestMethod = HttpRequestMethod.Post;

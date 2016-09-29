@@ -86,13 +86,16 @@
                         <li>
                             <a href="@Url.Action("Index", "Listings")">Listings</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if ((bool)ViewData["ShowLogin"])
                         {
-                            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                        }
-                        else
-                        {
-                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            }
                         }
                     </ul>
                 </div>
@@ -121,13 +124,16 @@
                         <li>
                             <a href="@Url.Action("Index", "Listings")">Listings</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if ((bool)ViewData["ShowLogin"])
                         {
-                            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                        }
-                        else
-                        {
-                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            }
                         }
                     </ul>
                 </div>

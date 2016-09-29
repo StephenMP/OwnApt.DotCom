@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.Domain.Settings;
+using OwnApt.DotCom.Settings;
 using OwnApt.DotCom.ProxyRequests.Lease;
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.DotCom.ProxyRequests.Property;
@@ -33,7 +33,7 @@ namespace OwnApt.DotCom.Domain.Service
 
         private readonly ILogger<OwnerDomainService> logger;
         private readonly IProxy proxy;
-        private readonly ServiceUriSettings serviceUris;
+        private readonly ServiceUris serviceUris;
 
         #endregion Private Fields
 
@@ -42,7 +42,7 @@ namespace OwnApt.DotCom.Domain.Service
         public OwnerDomainService
         (
             IProxy proxy,
-            IOptions<ServiceUriSettings> serviceUris,
+            IOptions<ServiceUris> serviceUris,
             ILoggerFactory loggerFactory
         )
         {
