@@ -60,6 +60,12 @@ namespace OwnApt.DotCom.AppStart
             UseCookieAuthentication(app);
             UseOpenIdConnectAuthentication(app, oidcOptions);
             UseMvc(app);
+            UseCore(app);
+        }
+
+        private static void UseCore(IApplicationBuilder app)
+        {
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         }
 
         public static void UseOwnAptServices(this IServiceCollection services)
@@ -70,11 +76,17 @@ namespace OwnApt.DotCom.AppStart
             AddOptions(services);
             AddServiceUris(services);
             AddAuth0(services);
+            AddCores(services);
             AddAutoMapper(services);
             AddServices(services);
             AddRestfulProxy(services);
             AddMemoryCache(services);
             AddFeatureToggles(services);
+        }
+
+        private static void AddCores(IServiceCollection services)
+        {
+            services.AddCors();
         }
 
         private static void AddFeatureToggles(IServiceCollection services)
