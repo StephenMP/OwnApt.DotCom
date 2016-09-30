@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,12 +11,12 @@ using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Mapping;
 using OwnApt.DotCom.Presentation.Service;
+using OwnApt.DotCom.Settings;
 using OwnApt.RestfulProxy.Client;
 using OwnApt.RestfulProxy.Interface;
 using RestSharp.Authenticators;
 using Serilog;
 using Serilog.Events;
-using OwnApt.DotCom.Settings;
 
 namespace OwnApt.DotCom.AppStart
 {
@@ -60,12 +59,7 @@ namespace OwnApt.DotCom.AppStart
             UseCookieAuthentication(app);
             UseOpenIdConnectAuthentication(app, oidcOptions);
             UseMvc(app);
-            UseCore(app);
-        }
-
-        private static void UseCore(IApplicationBuilder app)
-        {
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            UseCors(app);
         }
 
         public static void UseOwnAptServices(this IServiceCollection services)
@@ -82,16 +76,6 @@ namespace OwnApt.DotCom.AppStart
             AddRestfulProxy(services);
             AddMemoryCache(services);
             AddFeatureToggles(services);
-        }
-
-        private static void AddCores(IServiceCollection services)
-        {
-            services.AddCors();
-        }
-
-        private static void AddFeatureToggles(IServiceCollection services)
-        {
-            services.Configure<FeatureToggles>(Configuration.GetSection("FeatureToggles"));
         }
 
         #endregion Public Methods
@@ -111,6 +95,16 @@ namespace OwnApt.DotCom.AppStart
         private static void AddCookieAuthentication(IServiceCollection services)
         {
             services.AddAuthentication(options => options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        private static void AddCores(IServiceCollection services)
+        {
+            services.AddCors();
+        }
+
+        private static void AddFeatureToggles(IServiceCollection services)
+        {
+            services.Configure<FeatureToggles>(Configuration.GetSection("FeatureToggles"));
         }
 
         private static void AddMemoryCache(IServiceCollection services)
@@ -209,9 +203,12 @@ namespace OwnApt.DotCom.AppStart
             else
             {
                 loggerConfig
-                    .MinimumLevel.Information()
-                    .WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
-                    .WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
+                    .MinimumLevel.Warning()
+                    .WriteTo.Logentries(logentriesToken)
+                    .WriteTo.Console();
+                    //.MinimumLevel.Information()
+                    //.WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
+                    //.WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
             }
 
             Log.Logger = loggerConfig.CreateLogger();
@@ -227,6 +224,11 @@ namespace OwnApt.DotCom.AppStart
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             });
+        }
+
+        private static void UseCors(IApplicationBuilder app)
+        {
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         }
 
         private static void UseMvc(this IApplicationBuilder app)

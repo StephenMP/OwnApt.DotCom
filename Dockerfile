@@ -8,6 +8,7 @@ COPY NuGet.config /app
 RUN ["dotnet", "restore"]
 
 COPY src/DotCom /app
+RUN rm -rf ./appsettings.Development.json
 RUN ["dotnet", "build"]
 
 EXPOSE 5000/tcp
