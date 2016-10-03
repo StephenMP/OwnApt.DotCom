@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace OwnApt.DotCom.Settings
+﻿namespace OwnApt.DotCom.Settings
 {
     public class FeatureToggles
     {
+        #region Public Properties
+
         public bool OwnerPortal { get; set; }
+
+        #endregion Public Properties
     }
 }

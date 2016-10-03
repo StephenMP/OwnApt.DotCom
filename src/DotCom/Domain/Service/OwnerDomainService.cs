@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.Settings;
 using OwnApt.DotCom.ProxyRequests.Lease;
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.DotCom.ProxyRequests.Property;
+using OwnApt.DotCom.Settings;
 using OwnApt.RestfulProxy.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;

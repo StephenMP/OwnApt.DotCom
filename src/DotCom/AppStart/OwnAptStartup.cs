@@ -16,7 +16,6 @@ using OwnApt.RestfulProxy.Client;
 using OwnApt.RestfulProxy.Interface;
 using RestSharp.Authenticators;
 using Serilog;
-using Serilog.Events;
 
 namespace OwnApt.DotCom.AppStart
 {
@@ -206,9 +205,9 @@ namespace OwnApt.DotCom.AppStart
                     .MinimumLevel.Warning()
                     .WriteTo.Logentries(logentriesToken)
                     .WriteTo.Console();
-                    //.MinimumLevel.Information()
-                    //.WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
-                    //.WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
+                //.MinimumLevel.Information()
+                //.WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
+                //.WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
             }
 
             Log.Logger = loggerConfig.CreateLogger();
