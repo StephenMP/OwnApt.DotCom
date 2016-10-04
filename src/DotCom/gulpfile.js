@@ -89,7 +89,7 @@ gulp.task('concat:home:css', ['clean:home:css'], function () {
 });
 
 gulp.task('minify:css', ['concat:css', 'concat:home:css', 'concat:owner:css'], function(){
-    return gulp.src([paths.concatCssDest, home.css.destination, owner.css.destination])
+    return gulp.src([paths.concatCssDest, home.css.destination, owner.css.concat])
            .pipe(cssmin())
            .pipe(rename({ suffix: '.min' }))
            .pipe(gulp.dest("."));
