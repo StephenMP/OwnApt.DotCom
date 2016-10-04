@@ -3,9 +3,9 @@ FROM microsoft/dotnet:1.0.0-preview2-sdk
 
 # Install node
 RUN apt-get update
-RUN apt-get install curl
+RUN apt-get -y install curl
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
-RUN apt-get install nodejs
+RUN apt-get -y install nodejs
 RUN node -v
 RUN npm -v
 
