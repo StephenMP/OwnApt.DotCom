@@ -10,8 +10,8 @@ RUN node -v
 RUN npm -v
 
 # Install bower and gulp
-RUN npm install -g bower
-RUN npm install -g gulp
+RUN ["npm", "install", "-g", "bower"]
+RUN ["npm", "install", "-g", "gulp"]
 
 # Build out root dir
 RUN mkdir /app
@@ -24,10 +24,11 @@ RUN ["dotnet", "restore"]
 
 # Build the rest of the app
 COPY src/DotCom /app
-RUN dotnet build
-RUN npm install
-RUN bower install
-RUN gulp minify:css
+RUN ["dotnet", "build"]
+RUN ["dotnet", "bundle"]
+RUN ["npm", "install"]
+RUN ["bower", "install"]
+RUN ["gulp", "minify:css"]
 
 EXPOSE 5000/tcp
 ENTRYPOINT ["dotnet", "run", "http://0.0.0.0:5000"]
