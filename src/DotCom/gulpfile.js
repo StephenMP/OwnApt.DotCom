@@ -5,12 +5,13 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
 
 var gulp = require('gulp'),
-    rimraf = require('rimraf'),
+    clean = require('gulp-rimraf'),
     concat = require('gulp-concat'),
     less = require("gulp-less"),
     livereload = require('gulp-livereload'),
     rename = require('gulp-rename'),
-    cssmin = require('gulp-cssmin');
+    cssmin = require('gulp-cssmin'),
+    runSequence = require('run-sequence');
 
 var webroot = "./wwwroot/";
 var webrootlib = "./wwwroot/lib/";
@@ -47,24 +48,16 @@ var owner = {
 
 
 gulp.task('clean:css', function (cb) {
-    rimraf(paths.concatCssDest, cb);
+    return gulp.src(webroot + "/css/*").pipe(clean());
 });
 
-gulp.task('clean:home:css', function (cb) {
-    rimraf(home.css.destination, cb);
-});
-
-gulp.task('clean:owner:css', function (cb) {
-    rimraf(owner.css.destination, cb);
-});
-
-gulp.task('less', ['clean:css'], function () {
+gulp.task('less', [], function () {
     return gulp.src([paths.cssSource])
            .pipe(less())
            .pipe(gulp.dest(paths.cssDest));
 });
 
-gulp.task('less:owner', ['clean:owner:css'], function () {
+gulp.task('less:owner', [], function () {
     return gulp.src([owner.less.source])
            .pipe(less())
            .pipe(gulp.dest(owner.css.destination));
@@ -82,20 +75,26 @@ gulp.task('concat:owner:css', ['less:owner'], function () {
            .pipe(gulp.dest("."));
 });
 
-gulp.task('concat:home:css', ['clean:home:css'], function () {
+gulp.task('concat:home:css', [], function () {
     return gulp.src([home.css.animate, home.css.creative])
            .pipe(concat(home.css.destination))
            .pipe(gulp.dest("."));
 });
 
-gulp.task('minify:css', ['concat:css', 'concat:home:css', 'concat:owner:css'], function(){
+gulp.task('minify-css', ['concat:css', 'concat:home:css', 'concat:owner:css'], function(){
     return gulp.src([paths.concatCssDest, home.css.destination, owner.css.concat])
            .pipe(cssmin())
            .pipe(rename({ suffix: '.min' }))
-           .pipe(gulp.dest("."));
+           .pipe(gulp.dest(webroot + "css"));
+});
+
+gulp.task('build', function (done) {
+    runSequence('clean:css',
+                'minify-css',
+                 done);
 });
 
 gulp.task('watch', function () {
-    gulp.watch(paths.cssSource, ['concat:css']);
+    gulp.watch([paths.cssSource,owner.less.source] , ['concat:css']);
 });
 
