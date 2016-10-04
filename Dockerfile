@@ -27,7 +27,7 @@ COPY src/DotCom /app
 RUN ["dotnet", "build"]
 RUN ["dotnet", "bundle"]
 RUN ["npm", "install"]
-RUN ["bower", "install"]
+RUN ["bower", "install", "--allow-root"]
 RUN ["gulp", "minify:css"]
 
 EXPOSE 5000/tcp
