@@ -28,7 +28,7 @@ RUN ["dotnet", "build"]
 RUN ["dotnet", "bundle"]
 RUN ["npm", "install"]
 RUN ["bower", "install", "--allow-root"]
-RUN ["gulp", "minify:css"]
+RUN ["gulp", "build"]
 
 EXPOSE 5000/tcp
 ENTRYPOINT ["dotnet", "run", "http://0.0.0.0:5000"]
