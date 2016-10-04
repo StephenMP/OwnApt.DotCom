@@ -10,8 +10,8 @@ RUN node -v
 RUN npm -v
 
 # Install bower and gulp
-RUN node install -g bower
-RUN node install -g gulp
+RUN npm install -g bower
+RUN npm install -g gulp
 
 # Build out root dir
 RUN mkdir /app
