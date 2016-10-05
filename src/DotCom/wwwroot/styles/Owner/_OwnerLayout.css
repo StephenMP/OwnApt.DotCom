@@ -1,66 +1,25 @@
 #TopNavBar {
-  background-color: #333;
-  height: 75px;
+  background: #333;
 }
-#TopNavBar .topnav-home {
-  margin-left: 5px;
-  margin-bottom: 1px;
-  float: left;
-  display: inline-block;
-  color: #fff;
-  text-align: center;
-  padding: 8px 16px 8px 0px;
-  text-decoration: none;
-  font-size: x-large;
+#TopNavBar .navbar {
+  border: none;
+  margin-top: 0px;
 }
-#TopNavBar .topnav-home img {
-  height: 64px;
-  width: 64px;
-  margin-right: 5px;
+@media screen and (max-width: 768px) {
+  #TopNavBar #owner-navbar-logo {
+    display: none;
+  }
 }
-#TopNavBar .topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+#TopNavBar a {
+  color: antiquewhite;
 }
-#TopNavBar .topnav li {
-  float: right;
-}
-#TopNavBar .topnav li a {
-  margin-top: 10px;
-  display: inline-block;
-  color: #fff;
-  text-align: center;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: 0.2s;
-  font-size: x-large;
-}
-#TopNavBar .topnav li a:hover {
-  background-color: #666;
+#TopNavBar a:hover {
+  color: #F05f40;
 }
 #SideNavBar {
-  width: 100px;
-  position: fixed;
-  top: 75px;
-  bottom: 0px;
-}
-#SideNavBar .sidenav {
-  height: 100%;
-  margin-top: 40px;
-}
-#SideNavBar .sidenav ul {
-  list-style-type: none;
-  padding-left: 0px;
-}
-#SideNavBar .sidenav .contact-pulled-buttom {
   position: absolute;
-  bottom: 0px;
 }
 #SideNavBar .sidenav .greyscale-hover {
-  display: block;
-  margin: 18px auto;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
   -webkit-transition: 0.2s ease-in-out;
@@ -73,11 +32,6 @@
 #SideNavBar .sidenav .greyscale-hover:active {
   -webkit-filter: grayscale(0);
   filter: grayscale(0);
-}
-@media screen and (max-height: 415px) {
-  #SideNavBar .sidenav .greyscale-hover {
-    margin: 8px auto;
-  }
 }
 #LayoutBody {
   position: relative;

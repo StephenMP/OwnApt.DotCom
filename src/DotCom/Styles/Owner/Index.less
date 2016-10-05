@@ -1,80 +1,42 @@
 ﻿@import "../Shared/variables.less";
 
 .owner-container {
-    position: static;
     background-color: @background-color;
-    margin-left: 30px;
+    margin-left: @navbar-side-width;
 
-    .property-list {
-        margin-top: 40px;
-        margin-left: 40px;
-        padding-left: 7%;
-        padding-right: 7%;
-
-        div {
-            margin-bottom: 15px;
+    @media screen and (max-width: 768px) {
+        img {
+            margin-bottom: 25px;
         }
+    }
 
-        .property-sort {
-            background-color: burlywood;
-            height: 40px;
-        }
+    img {
+        width: 300px;
+        height: 225px;
+        -webkit-filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);
+        filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);
+    }
 
-        .property {
-            padding-top: 10px;
-            background-color: @background-white;
-            margin-bottom: 15px;
-            height: 300px;
-            font-size: 14px;
-            font-weight: bold;
-            -webkit-box-shadow: 3px 3px 15px 0px rgba(0,0,0,0.75);
-            -moz-box-shadow: 3px 3px 15px 0px rgba(0,0,0,0.75);
-            box-shadow: 3px 3px 15px 0px rgba(0,0,0,0.75);
+    .panel {
+        margin-right: 25px;
+    }
 
-            .popover-title {
+    .panel-heading {
+        background: @theme-ownapt-lightgrey;
+        color: #fff;
+    }
+
+    .nav-pills {
+        margin-bottom: 15px;
+    }
+
+    .nav-tabs {
+        a {
+            color: @theme-ownapt-darkgrey;
+
+            &:hover {
                 background: @theme-ownapt-orange;
-                color: @theme-ownapt-white;
-                font-weight: bold;
-            }
-
-
-            .property-left {
-                img {
-                    min-height: 200px;
-                    max-width: 320px;
-                    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-                    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-                    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-                    display: block;
-                    margin: 15px;
-                }
-            }
-
-            .overall-status {
-                text-align: right;
-                padding-right: 10px;
-                float: right;
-
-                img {
-                    height: 20px;
-                }
-            }
-
-            .property-health {
-                height: 20px;
-                width: 20px;
-                background-color: @health-green;
-                float: right;
-            }
-        }
-
-        .address {
-            display: block;
-            margin: auto;
-            padding-top: 10px;
-
-            p {
-                margin: 0px;
+                color: @offwhite;
             }
         }
     }

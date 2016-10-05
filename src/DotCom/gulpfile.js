@@ -95,6 +95,6 @@ gulp.task('build', function (done) {
 });
 
 gulp.task('watch', function () {
-    gulp.watch([paths.cssSource,owner.less.source] , ['concat:css']);
+    gulp.watch([paths.cssSource,owner.less.source] , ['build']);
 });
 

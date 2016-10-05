@@ -1,78 +1,33 @@
 ﻿@import "../Shared/variables.less";
 
 #TopNavBar {
-    background-color: @background-navbar;
-    height: @navbar-top-height;
+    background: @theme-ownapt-darkgrey;
 
-    .topnav-home {
-        margin-left: 5px;
-        margin-bottom: 1px;
-        float: left;
-        display: inline-block;
-        color: @navbar-text-color;
-        text-align: center;
-        padding: 8px 16px 8px 0px;
-        text-decoration: none;
-        font-size: x-large;
+    .navbar {
+        border: none;
+        margin-top: 0px;
+    }
 
-        img {
-            height: 64px;
-            width: 64px;
-            margin-right: 5px;
+    @media screen and (max-width: 768px) {
+        #owner-navbar-logo {
+            display: none;
         }
     }
 
+    a {
+        color: @offwhite;
+    }
 
-    .topnav {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-
-        li {
-            float: right;
-
-            a {
-                margin-top: 10px;
-                display: inline-block;
-                color: @navbar-text-color;
-                text-align: center;
-                padding: 8px 16px;
-                text-decoration: none;
-                transition: @navbar-hover-transition;
-                font-size: x-large;
-
-                &:hover {
-                    background-color: @navbar-hover-color;
-                }
-            }
-        }
+    a:hover {
+        color: @theme-ownapt-orange;
     }
 }
 
 #SideNavBar {
-    width: 100px;
-    position: fixed;
-    top: @navbar-top-height;
-    bottom: 0px;
+    position: absolute;
 
     .sidenav {
-        height: 100%;
-        margin-top: 40px;
-
-        ul {
-            list-style-type: none;
-            padding-left: 0px;
-        }
-
-        .contact-pulled-buttom {
-            position: absolute;
-            bottom: 0px;
-        }
-
         .greyscale-hover {
-            display: block;
-            margin: 18px auto;
             -webkit-filter: grayscale(100%);
             filter: grayscale(100%);
             -webkit-transition: @navbar-hover-transition ease-in-out;
@@ -86,10 +41,6 @@
             &:active {
                 -webkit-filter: grayscale(0);
                 filter: grayscale(0);
-            }
-
-            @media screen and (max-height: @navbar-media-max-height) {
-                margin: 8px auto;
             }
         }
     }
