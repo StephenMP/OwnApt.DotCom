@@ -4,10 +4,8 @@
     background-color: @background-color;
     margin-left: @navbar-side-width;
 
-    @media screen and (max-width: 768px) {
-        img {
-            margin-bottom: 25px;
-        }
+    img {
+        margin-bottom: 25px;
     }
 
     img {
@@ -30,13 +28,28 @@
         margin-bottom: 15px;
     }
 
-    .nav-tabs {
+    .nav-pills {
         a {
             color: @theme-ownapt-darkgrey;
 
             &:hover {
                 background: @theme-ownapt-orange;
                 color: @offwhite;
+            }
+        }
+
+        .active {
+            a {
+                background: #fff;
+                color: @theme-ownapt-darkgrey;
+                border: 1px solid @theme-ownapt-lightgrey;
+
+                &:hover,
+                &:focus {
+                    background: #fff;
+                    color: @theme-ownapt-darkgrey;
+                    border: 1px solid @theme-ownapt-lightgrey;
+                }
             }
         }
     }

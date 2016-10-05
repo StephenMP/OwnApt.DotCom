@@ -4,47 +4,51 @@
 }
 
 <div class="owner-container">
-    @foreach (var property in Model.Properties)
-    {
-        var lease = Model.LeaseTermsByPropertyId[property.Id];
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    @($"{property.Address.Address1} {property.Address.City}, {property.Address.State} {property.Address.Zip.Base}")
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4 col-md-5 col-sm-6">
-                        <img class="center-block" src="@property.ImageUri.AbsoluteUri" />
+    <div class="row">
+        @foreach (var property in Model.Properties)
+        {
+            var lease = Model.LeaseTermsByPropertyId[property.Id];
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            @($"{property.Address.Address1} {property.Address.City}, {property.Address.State} {property.Address.Zip.Base}")
+                        </h3>
                     </div>
-
-                    <div class="col-lg-8 col-md-7 col-sm-6">
-                        <ul class="nav nav-tabs nav-justified">
-                            <li class="active">
-                                <a data-toggle="tab" href="@($"#{property.Id}_overview")">Overview</a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="@($"#{property.Id}_lease")">Lease</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="@($"{property.Id}_overview")" class="tab-pane fade in active">
-                                <p><strong>Rooms:</strong> @property.Features.Rooms</p>
-                                <p><strong>Baths:</strong> @property.Features.Bathrooms</p>
-                                <p><strong>Sq. Ft:</strong> @property.Features.SqFootage</p>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <img class="center-block" src="@property.ImageUri.AbsoluteUri" />
                             </div>
-                            <div id="@($"{property.Id}_lease")" class="tab-pane fade in" hidden>
-                                <p><strong>Current Period:</strong> TODO: Get LEASE PERIOD DATA FOR CURRENT PERIOD</p>
-                                <p><strong>Lease Start Date:</strong> @lease.StartDate</p>
-                                <p><strong>Lease End Date:</strong> @lease.EndDate</p>
-                                <p><strong>Remaining Term:</strong> @(((lease.EndDate.Year - DateTime.Now.Year) * 12) + lease.EndDate.Month - DateTime.Now.Month) months</p>
+
+                            <div class="col-lg-12">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="@($"#{property.Id}_overview")">Overview</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="@($"#{property.Id}_lease")">Lease</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="@($"{property.Id}_overview")" class="tab-pane fade in active">
+                                        <p><strong>Rooms:</strong> @property.Features.Rooms</p>
+                                        <p><strong>Baths:</strong> @property.Features.Bathrooms</p>
+                                        <p><strong>Sq. Ft:</strong> @property.Features.SqFootage</p>
+                                    </div>
+                                    <div id="@($"{property.Id}_lease")" class="tab-pane fade in" hidden>
+                                        <p><strong>Current Period:</strong> TODO: Get LEASE PERIOD DATA FOR CURRENT PERIOD</p>
+                                        <p><strong>Lease Start Date:</strong> @lease.StartDate</p>
+                                        <p><strong>Lease End Date:</strong> @lease.EndDate</p>
+                                        <p><strong>Remaining Term:</strong> @(((lease.EndDate.Year - DateTime.Now.Year) * 12) + lease.EndDate.Month - DateTime.Now.Month) months</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div style="background: green; color: white;" class="panel-body text-center">Very Healthy</div>
                 </div>
             </div>
-            <div style="background: green; color: white;" class="panel-body text-center">Very Healthy</div>
-        </div>
-    }
+        }
+    </div>
 </div>

@@ -2,10 +2,8 @@
   background-color: #ddd;
   margin-left: 100px;
 }
-@media screen and (max-width: 768px) {
-  .owner-container img {
-    margin-bottom: 25px;
-  }
+.owner-container img {
+  margin-bottom: 25px;
 }
 .owner-container img {
   width: 300px;
@@ -23,12 +21,23 @@
 .owner-container .nav-pills {
   margin-bottom: 15px;
 }
-.owner-container .nav-tabs a {
+.owner-container .nav-pills a {
   color: #333;
 }
-.owner-container .nav-tabs a:hover {
+.owner-container .nav-pills a:hover {
   background: #F05f40;
   color: antiquewhite;
+}
+.owner-container .nav-pills .active a {
+  background: #fff;
+  color: #333;
+  border: 1px solid #666;
+}
+.owner-container .nav-pills .active a:hover,
+.owner-container .nav-pills .active a:focus {
+  background: #fff;
+  color: #333;
+  border: 1px solid #666;
 }
 
 #TopNavBar {
@@ -51,6 +60,10 @@
 }
 #SideNavBar {
   position: absolute;
+}
+#SideNavBar .sidenav .active img {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
 }
 #SideNavBar .sidenav .greyscale-hover {
   -webkit-filter: grayscale(100%);
