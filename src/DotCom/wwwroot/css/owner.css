@@ -8,12 +8,28 @@
     margin-bottom: 25px;
   }
 }
+.owner-container margin-topbottom {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .owner-container img {
   width: 300px;
   height: 225px;
   box-shadow: 0px 0px 0px 3px #666;
   /*-webkit-filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);*/
   /*filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);*/
+}
+.owner-container .panel .health-green {
+  background: green;
+  color: white;
+}
+.owner-container .panel .health-yellow {
+  background: yellow;
+  color: black;
+}
+.owner-container .panel .health-red {
+  background: red;
+  color: white;
 }
 .owner-container .panel-heading {
   background: #666;

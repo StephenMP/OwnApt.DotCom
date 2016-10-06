@@ -2,6 +2,7 @@
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Dto.Account;
 using OwnApt.DotCom.Model.Owner;
+using System.Linq;
 
 namespace OwnApt.DotCom.Mapping
 {
@@ -22,7 +23,9 @@ namespace OwnApt.DotCom.Mapping
 
         private void ConfigureLeaseTermViewModel()
         {
-            CreateMap<LeaseTermModel, LeaseTermViewModel>();
+            CreateMap<LeaseTermModel, LeaseTermViewModel>()
+                .ForMember(src => src.CurrentPeriod, options => options.MapFrom(dest => dest.LeasePeriods.FirstOrDefault(lp => lp.Period == dest.LeasePeriods.Max(p => p.Period))));
+
             CreateMap<LeaseTermViewModel, LeaseTermModel>();
         }
 

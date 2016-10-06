@@ -1,4 +1,5 @@
-﻿@model OwnApt.DotCom.Model.Owner.OwnerIndexViewModel
+﻿@using OwnApt.Common.Enum;
+@model OwnApt.DotCom.Model.Owner.OwnerIndexViewModel
 @{
     Layout = "_OwnerLayout";
 }
@@ -42,24 +43,42 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="center-block">
+                                    <div class="col-xs-2 col-xs-offset-5">
+                                        <div class="margin-topbottom center-block">
                                             <label>Amenities</label>
                                         </div>
                                     </div>
                                 </div>
+                                @foreach (var amenity in property.Features.Amenities)
+                                {
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        @amenity.Type
+                                    </div>
+                                }
                             </div>
                             <div id="@($"{property.Id}_lease")" class="tab-pane fade in" hidden>
-                                <p><strong>Current Period:</strong> TODO: Get LEASE PERIOD DATA FOR CURRENT PERIOD</p>
-                                <p><strong>Lease Start Date:</strong> @lease.StartDate</p>
-                                <p><strong>Lease End Date:</strong> @lease.EndDate</p>
-                                <p><strong>Remaining Term:</strong> @(((lease.EndDate.Year - DateTime.Now.Year) * 12) + lease.EndDate.Month - DateTime.Now.Month) months</p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Current Period:</label> @($"{lease.CurrentPeriodDate.ToString("MMMM, yyyy")} ({lease.CurrentPeriod.LeasePeriodStatus})")
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Lease Start Date:</label> @lease.StartDate.ToString("MMMM dd, yyyy")
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Lease End Date:</label> @lease.EndDate.ToString("MMMM dd, yyyy")
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Remaining Term:</label> @lease.TermRemaining months
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div style="background: green; color: white;" class="panel-body text-center">Very Healthy</div>
+            <div class="panel-body text-center @lease.Health">@lease.HealthDescription</div>
         </div>
     }
 </div>
