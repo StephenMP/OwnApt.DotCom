@@ -5,12 +5,18 @@
     margin-left: @navbar-side-width;
     margin-right: 25px;
 
+    @media screen and (max-width: 796px) {
+        img {
+            margin-bottom: 25px;
+        }
+    }
+
     img {
-        margin-bottom: 25px;
         width: 300px;
         height: 225px;
-        -webkit-filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);
-        filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);
+        box-shadow: 0px 0px 0px 3px @theme-ownapt-lightgrey;
+        /*-webkit-filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);*/
+        /*filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);*/
     }
 
     .panel-heading {
