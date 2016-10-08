@@ -1,17 +1,18 @@
 ﻿using OwnApt.Api.Contract.Model;
 using OwnApt.Common.Enums;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace OwnApt.DotCom.Model.Owner
 {
     public class LeaseTermViewModel
     {
+        #region Public Fields
+
         public const string green = "health-green";
-        public const string yellow = "health-yellow";
         public const string red = "health-red";
+        public const string yellow = "health-yellow";
+
+        #endregion Public Fields
 
         #region Public Properties
 
@@ -27,7 +28,7 @@ namespace OwnApt.DotCom.Model.Owner
             }
         }
 
-        public string HealthDescription { get; set; }
+        public DateTime EndDate { get; set; }
 
         public string Health
         {
@@ -82,8 +83,7 @@ namespace OwnApt.DotCom.Model.Owner
             }
         }
 
-        public DateTime EndDate { get; set; }
-
+        public string HealthDescription { get; set; }
         public bool IsActive => (DateTime.Now > this.StartDate && DateTime.Now < this.EndDate);
 
         public string LeaseTermId { get; set; }

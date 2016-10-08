@@ -1,5 +1,4 @@
-﻿using OwnApt.Api.Contract.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OwnApt.DotCom.Model.Owner
 {
@@ -9,7 +8,7 @@ namespace OwnApt.DotCom.Model.Owner
 
         public OwnerIndexViewModel()
         {
-            this.Properties = new List<PropertyModel>();
+            this.Properties = new List<PropertyViewModel>();
             this.LeaseTermsByPropertyId = new Dictionary<string, LeaseTermViewModel>();
         }
 
@@ -19,7 +18,7 @@ namespace OwnApt.DotCom.Model.Owner
 
         public Dictionary<string, LeaseTermViewModel> LeaseTermsByPropertyId { get; set; }
         public string OwnerId { get; set; }
-        public List<PropertyModel> Properties { get; set; }
+        public List<PropertyViewModel> Properties { get; set; }
 
         #endregion Public Properties
     }

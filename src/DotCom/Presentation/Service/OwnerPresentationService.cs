@@ -5,6 +5,7 @@ using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Model.Owner;
 using OwnApt.RestfulProxy.Interface;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Presentation.Service
@@ -61,7 +62,8 @@ namespace OwnApt.DotCom.Presentation.Service
         {
             var model = new OwnerIndexViewModel { OwnerId = ownerId };
             var owner = await this.ownerDomainService.ReadOwnerAsync(ownerId);
-            var properties = await this.ownerDomainService.ReadPropertiesAsync(owner.PropertyIds);
+            var propertyModels = await this.ownerDomainService.ReadPropertiesAsync(owner.PropertyIds);
+            var properties = this.mapper.Map<PropertyViewModel[]>(propertyModels);
             var leaseTermsByPropertyId = new Dictionary<string, LeaseTermViewModel>();
 
             foreach (var property in properties)
@@ -72,7 +74,7 @@ namespace OwnApt.DotCom.Presentation.Service
             }
 
             model.LeaseTermsByPropertyId = leaseTermsByPropertyId;
-            model.Properties.AddRange(properties);
+            model.Properties.AddRange(properties.OrderBy(p => p.Address.Address1));
 
             return model;
         }

@@ -39,7 +39,8 @@ namespace OwnApt.DotCom.AppStart
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<MainProfile>();
+                cfg.AddProfile<AccountProfile>();
+                cfg.AddProfile<OwnerProfile>();
             }).CreateMapper();
         }
 
