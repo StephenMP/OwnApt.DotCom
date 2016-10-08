@@ -18,6 +18,12 @@
 #SideNavBar {
   position: absolute;
 }
+@media screen and (max-width: 384px) {
+  #SideNavBar .sidenav img {
+    max-width: 48px;
+    max-height: 48px;
+  }
+}
 #SideNavBar .sidenav .active img {
   -webkit-filter: grayscale(0);
   filter: grayscale(0);

@@ -1,5 +1,5 @@
 ﻿using OwnApt.Api.Contract.Model;
-using OwnApt.Common.Enum;
+using OwnApt.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,11 +39,11 @@ namespace OwnApt.DotCom.Model.Owner
                 {
                     if (paymentDueDays < 5)
                     {
-                        this.HealthDescription = "Very Healthy";
+                        this.HealthDescription = "Rent Payment is Due";
                         return green;
                     }
 
-                    if (paymentDueDays < 14)
+                    if (paymentDueDays < 10)
                     {
                         this.HealthDescription = "Rent Payment is Late";
                         return yellow;
@@ -55,23 +55,29 @@ namespace OwnApt.DotCom.Model.Owner
 
                 if (CurrentPeriod.LeasePeriodStatus == LeasePeriodStatus.PaymentReceived)
                 {
-                    if (paymentDueDays < 14)
+                    if (paymentDueDays < 10)
                     {
-                        this.HealthDescription = "Very Healthy";
+                        this.HealthDescription = "Rent Payment Has Been Received and is Processing";
                         return green;
                     }
 
-                    this.HealthDescription = "We Haven't Distributed Payment";
+                    if (paymentDueDays < 10)
+                    {
+                        this.HealthDescription = "Payment Distribution is Taking Longer Than Normal";
+                        return yellow;
+                    }
+
+                    this.HealthDescription = "We Haven't Distributed Rent Payment";
                     return red;
                 }
 
                 if (this.IsActive)
                 {
-                    this.HealthDescription = "Very Healthy";
+                    this.HealthDescription = "Rent is Current and Has Been Distributed";
                     return green;
                 }
 
-                this.HealthDescription = "The is No Occupant";
+                this.HealthDescription = "The Property is Vacant";
                 return red;
             }
         }

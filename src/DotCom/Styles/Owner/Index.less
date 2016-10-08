@@ -5,13 +5,27 @@
     margin-left: @navbar-side-width;
     margin-right: 25px;
 
-    @media screen and (max-width: 796px) {
+    @media screen and (max-width: 768px) {
         img {
+            max-width: 200px;
+            max-height: 150px;
             margin-bottom: 25px;
         }
     }
 
-    margin-topbottom{
+    @media screen and (max-width: 384px) {
+        .panel {
+            margin-left: -25px;
+        }
+
+        img {
+            max-width: 150px;
+            max-height: 113px;
+            margin-bottom: 25px;
+        }
+    }
+
+    margin-topbottom {
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -20,21 +34,22 @@
         width: 300px;
         height: 225px;
         box-shadow: 0px 0px 0px 3px @theme-ownapt-lightgrey;
-        /*-webkit-filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);*/
-        /*filter: drop-shadow(4px 4px 5px @theme-ownapt-lightgrey);*/
     }
 
-    .panel{
-        .health-green{
-            background: green; color: white;
+    .panel {
+        .health-green {
+            background: green;
+            color: white;
         }
 
-        .health-yellow{
-            background: yellow; color: black;
+        .health-yellow {
+            background: yellow;
+            color: black;
         }
 
-        .health-red{
-            background: red; color: white;
+        .health-red {
+            background: red;
+            color: white;
         }
     }
 

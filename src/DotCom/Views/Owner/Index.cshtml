@@ -1,4 +1,5 @@
-﻿@using OwnApt.Common.Enum;
+﻿@using OwnApt.Common.Enums;
+@using OwnApt.Common.Extension;
 @model OwnApt.DotCom.Model.Owner.OwnerIndexViewModel
 @{
     Layout = "_OwnerLayout";
@@ -23,14 +24,49 @@
                     <div class="col-lg-8 col-md-7 col-sm-6">
                         <ul class="nav nav-pills nav-justified">
                             <li class="active">
-                                <a data-toggle="tab" href="@($"#{property.Id}_overview")">Overview</a>
+                                <a data-toggle="tab" href="@($"#{property.Id}_lease")">Lease</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="@($"#{property.Id}_lease")">Lease</a>
+                                <a data-toggle="tab" href="@($"#{property.Id}_overview")">Overview</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="@($"{property.Id}_overview")" class="tab-pane fade in active">
+                            <div id="@($"{property.Id}_lease")" class="tab-pane fade in active" hidden>
+                                <div class="row">
+                                    <div class="col-xs-1 col-xs-offset-4">
+                                        <div class="margin-topbottom center-block">
+                                            <h4>Details</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Current Period:</label> @lease.CurrentPeriodDate.ToString("MMMM, yyyy")
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Period Status:</label> @lease.CurrentPeriod.LeasePeriodStatus.GetEnumPropertiesShortDescription()
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Lease Start Date:</label> @lease.StartDate.ToString("MMMM dd, yyyy")
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Lease End Date:</label> @lease.EndDate.ToString("MMMM dd, yyyy")
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <label>Remaining Term:</label> @lease.TermRemaining months
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="@($"{property.Id}_overview")" class="tab-pane fade in">
+                                <div class="row">
+                                    <div class="col-xs-1 col-xs-offset-4">
+                                        <div class="margin-topbottom center-block">
+                                            <h4>Details</h4>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <label>Rooms:</label> @property.Features.Rooms
@@ -43,35 +79,19 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-2 col-xs-offset-5">
+                                    <div class="col-xs-1 col-xs-offset-4">
                                         <div class="margin-topbottom center-block">
-                                            <label>Amenities</label>
+                                            <h4>Amenities</h4>
                                         </div>
                                     </div>
                                 </div>
-                                @foreach (var amenity in property.Features.Amenities)
-                                {
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                        @amenity.Type
-                                    </div>
-                                }
-                            </div>
-                            <div id="@($"{property.Id}_lease")" class="tab-pane fade in" hidden>
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Current Period:</label> @($"{lease.CurrentPeriodDate.ToString("MMMM, yyyy")} ({lease.CurrentPeriod.LeasePeriodStatus})")
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Lease Start Date:</label> @lease.StartDate.ToString("MMMM dd, yyyy")
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Lease End Date:</label> @lease.EndDate.ToString("MMMM dd, yyyy")
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Remaining Term:</label> @lease.TermRemaining months
-                                    </div>
+                                    @foreach (var amenity in property.Features.Amenities)
+                                    {
+                                        <div class="col-xs-6 col-md-4">
+                                            @amenity.Type
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>

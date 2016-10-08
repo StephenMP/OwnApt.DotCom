@@ -26,6 +26,13 @@
     position: absolute;
 
     .sidenav {
+        @media screen and (max-width: 384px) {
+            img {
+                max-width: 48px;
+                max-height: 48px;
+            }
+        }
+
         .active {
             img {
                 -webkit-filter: grayscale(0);

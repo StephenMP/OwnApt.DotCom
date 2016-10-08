@@ -1,5 +1,5 @@
 ﻿using OwnApt.Api.Contract.Model;
-using OwnApt.Common.Enum;
+using OwnApt.Common.Enums;
 using System;
 using System.Collections.Generic;
 
