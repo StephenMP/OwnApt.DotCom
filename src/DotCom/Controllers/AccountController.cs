@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Presentation.Service;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Controllers
 {
@@ -42,8 +42,14 @@ namespace OwnApt.DotCom.Controllers
         [Authorize]
         public string Email()
         {
-            const string propId = "6395bfba2bd543e9bf2dd2b7618baf7a";
-            this.accountPresentationService.SendSignUpEmailAsync("Stephen Porter", "1.stephen.porter@gmail.com", new string[] { propId });
+            /* Jason Email */
+            var propId = "f45cf61f92c448ebbeb4f63ff8d7e0f3";
+            this.accountPresentationService.SendSignUpEmailAsync("Jason", "1.stephen.porter@gmail.com", new string[] { propId });
+
+            /* Shuwun Email */
+            propId = "ed43c2981469482c926d3c4bdead53a8";
+            this.accountPresentationService.SendSignUpEmailAsync("Shuwun", "1.stephen.porter@gmail.com", new string[] { propId });
+
             return "Yo! That email was sent dawg!";
         }
 
@@ -68,7 +74,7 @@ namespace OwnApt.DotCom.Controllers
             var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
             var ownerEmail = await this.claimsService.GetUserEmailAsync(User.Claims);
 
-            await this.accountPresentationService.CreateOwner(ownerId, ownerEmail);
+            await this.accountPresentationService.CreateOwner(ownerId, ownerEmail, token);
             await this.accountPresentationService.RegisterSignUpTokenAsync(token);
 
             return RedirectToAction("Index", "Owner");

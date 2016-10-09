@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Model.Owner;
 using OwnApt.RestfulProxy.Interface;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Presentation.Service
 {

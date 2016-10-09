@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -7,7 +8,6 @@ using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Extensions;
 using OwnApt.DotCom.Model.Account;
 using RestSharp;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Presentation.Service
 {
@@ -20,6 +20,8 @@ namespace OwnApt.DotCom.Presentation.Service
         LockContextModel BuildSignUpModel(HttpContext context, string returnUrl);
 
         Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail);
+
+        Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token);
 
         Task RegisterSignUpTokenAsync(string token);
 
@@ -76,6 +78,11 @@ namespace OwnApt.DotCom.Presentation.Service
         public Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail)
         {
             return this.accountDomainService.CreateOwner(ownerId, ownerEmail);
+        }
+
+        public Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token)
+        {
+            return this.accountDomainService.CreateOwner(ownerId, ownerEmail, token);
         }
 
         public Task RegisterSignUpTokenAsync(string token)

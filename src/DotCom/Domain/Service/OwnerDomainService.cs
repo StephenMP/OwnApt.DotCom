@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Exceptions;
@@ -7,8 +9,6 @@ using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.DotCom.ProxyRequests.Property;
 using OwnApt.DotCom.Settings;
 using OwnApt.RestfulProxy.Interface;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Domain.Service
 {

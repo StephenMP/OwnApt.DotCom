@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ApiContract": "14.7585.2052",
+    "ApiContract": "14.7603.8595",
     "AutoMapper": "5.1.1",
     "Microsoft.AspNetCore.Authentication": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",

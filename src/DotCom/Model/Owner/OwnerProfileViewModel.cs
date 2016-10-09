@@ -1,7 +1,7 @@
-﻿using OwnApt.Api.Contract.Model;
-using OwnApt.Common.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using OwnApt.Api.Contract.Model;
+using OwnApt.Common.Enums;
 
 namespace OwnApt.DotCom.Model.Owner
 {

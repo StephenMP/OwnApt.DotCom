@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using OwnApt.RestfulProxy.Interface;
-using System;
+﻿using System;
 using System.Text;
+using Microsoft.Extensions.Logging;
+using OwnApt.RestfulProxy.Interface;
 
 namespace OwnApt.DotCom.Domain.Exceptions
 {

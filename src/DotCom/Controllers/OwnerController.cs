@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Presentation.Service;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Controllers
 {

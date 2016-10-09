@@ -1,5 +1,5 @@
-﻿using RestSharp;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using RestSharp;
 
 namespace OwnApt.DotCom.Domain.Interface
 {

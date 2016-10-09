@@ -25,17 +25,13 @@ namespace OwnApt.DotCom.AppStart
 
         private static IConfigurationRoot Configuration;
 
+        private static IHostingEnvironment HostEnvironment;
+
         #endregion Private Fields
-
-        #region Public Properties
-
-        public static IHostingEnvironment HostEnvironment { get; private set; }
-
-        #endregion Public Properties
 
         #region Public Methods
 
-        public static IMapper BuildMapper()
+        public static IMapper BuildAutoMapper()
         {
             return new MapperConfiguration(cfg =>
             {
@@ -74,7 +70,6 @@ namespace OwnApt.DotCom.AppStart
             AddAutoMapper(services);
             AddServices(services);
             AddRestfulProxy(services);
-            AddMemoryCache(services);
             AddFeatureToggles(services);
         }
 
@@ -89,7 +84,7 @@ namespace OwnApt.DotCom.AppStart
 
         private static void AddAutoMapper(IServiceCollection services)
         {
-            services.AddSingleton<IMapper>(BuildMapper());
+            services.AddSingleton(BuildAutoMapper());
         }
 
         private static void AddCookieAuthentication(IServiceCollection services)
@@ -105,11 +100,6 @@ namespace OwnApt.DotCom.AppStart
         private static void AddFeatureToggles(IServiceCollection services)
         {
             services.Configure<FeatureToggles>(Configuration.GetSection("FeatureToggles"));
-        }
-
-        private static void AddMemoryCache(IServiceCollection services)
-        {
-            services.AddMemoryCache();
         }
 
         private static void AddMvc(IServiceCollection services)
@@ -158,7 +148,7 @@ namespace OwnApt.DotCom.AppStart
             services.AddTransient<IAccountDomainService, AccountDomainService>();
             services.AddTransient<IOwnerDomainService, OwnerDomainService>();
 
-            services.AddSingleton<IMailGunRestClient>(BuildMailGunRestClient());
+            services.AddSingleton(BuildMailGunRestClient());
         }
 
         private static void AddServiceUris(IServiceCollection services)
@@ -189,7 +179,6 @@ namespace OwnApt.DotCom.AppStart
 
         private static void ConfigureLogging(ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
-            /* Serilog Configuration */
             var logentriesToken = Configuration["Logging:LogentriesToken"];
             var loggerConfig = new LoggerConfiguration()
                 .Enrich.FromLogContext();

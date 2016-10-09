@@ -1,6 +1,6 @@
-﻿using OwnApt.DotCom.Dto.Account;
+﻿using System.Threading.Tasks;
+using OwnApt.DotCom.Dto.Account;
 using RestSharp;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Domain.Interface
 {

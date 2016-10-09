@@ -1,8 +1,8 @@
-﻿using OwnApt.DotCom.Domain.Interface;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using OwnApt.DotCom.Domain.Interface;
 
 namespace OwnApt.DotCom.Domain.Service
 {

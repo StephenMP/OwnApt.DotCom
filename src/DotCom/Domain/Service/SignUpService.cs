@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OwnApt.Common.Security;
@@ -6,9 +9,6 @@ using OwnApt.DotCom.Domain.Exceptions;
 using OwnApt.DotCom.Domain.Interface;
 using OwnApt.DotCom.Dto.Account;
 using RestSharp;
-using System;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Domain.Service
 {

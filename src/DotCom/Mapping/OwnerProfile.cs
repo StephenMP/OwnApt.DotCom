@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Model.Owner;
-using System.Linq;
 
 namespace OwnApt.DotCom.Mapping
 {

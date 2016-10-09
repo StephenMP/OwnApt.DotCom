@@ -44,7 +44,7 @@ var owner = {
         files: webroot + "styles/owner/*.css",
         concat: webroot + "css/owner.css"
     }
-}
+};
 
 
 gulp.task('clean:css', function (cb) {

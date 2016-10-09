@@ -1,6 +1,6 @@
-﻿using OwnApt.Api.Contract.Model;
+﻿using System;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Common.Enums;
-using System;
 
 namespace OwnApt.DotCom.Model.Owner
 {

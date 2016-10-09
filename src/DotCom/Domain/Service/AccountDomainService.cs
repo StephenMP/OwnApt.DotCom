@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
@@ -8,7 +9,6 @@ using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.DotCom.Settings;
 using OwnApt.RestfulProxy.Interface;
 using RestSharp;
-using System.Threading.Tasks;
 
 namespace OwnApt.DotCom.Domain.Service
 {
@@ -17,6 +17,8 @@ namespace OwnApt.DotCom.Domain.Service
         #region Public Methods
 
         Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail);
+
+        Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token);
 
         Task RegisterSignUpTokenAsync(string token);
 
@@ -73,6 +75,31 @@ namespace OwnApt.DotCom.Domain.Service
                     Email = ownerEmail
                 }
             };
+
+            var createOwnerRequest = new CreateOwnerProxyRequest(this.serviceUris, ownerModel);
+            var createOwnerResult = await this.proxy.InvokeAsync(createOwnerRequest);
+
+            if (createOwnerResult.IsSuccessfulStatusCode)
+            {
+                return createOwnerResult.ResponseDto;
+            }
+
+            throw ExceptionUtility.RaiseException(createOwnerResult, this.logger);
+        }
+
+        public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token)
+        {
+            var signUpToken = await this.signUpService.ParseTokenAsync(token);
+            var ownerModel = new OwnerModel
+            {
+                Id = ownerId,
+                Contact = new ContactModel
+                {
+                    Email = ownerEmail
+                }
+            };
+
+            ownerModel.PropertyIds.AddRange(signUpToken.PropertyIds);
 
             var createOwnerRequest = new CreateOwnerProxyRequest(this.serviceUris, ownerModel);
             var createOwnerResult = await this.proxy.InvokeAsync(createOwnerRequest);

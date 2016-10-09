@@ -1,6 +1,6 @@
-﻿using OwnApt.DotCom.Domain.Interface;
+﻿using System;
+using OwnApt.DotCom.Domain.Interface;
 using RestSharp;
-using System;
 
 namespace OwnApt.DotCom.Domain.Service
 {

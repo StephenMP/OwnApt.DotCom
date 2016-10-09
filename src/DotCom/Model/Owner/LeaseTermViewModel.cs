@@ -1,6 +1,6 @@
-﻿using OwnApt.Api.Contract.Model;
+﻿using System;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Common.Enums;
-using System;
 
 namespace OwnApt.DotCom.Model.Owner
 {
@@ -8,9 +8,9 @@ namespace OwnApt.DotCom.Model.Owner
     {
         #region Public Fields
 
-        public const string green = "health-green";
-        public const string red = "health-red";
-        public const string yellow = "health-yellow";
+        public const string Green = "health-green";
+        public const string Red = "health-red";
+        public const string Yellow = "health-yellow";
 
         #endregion Public Fields
 
@@ -41,17 +41,17 @@ namespace OwnApt.DotCom.Model.Owner
                     if (paymentDueDays < 5)
                     {
                         this.HealthDescription = "Rent Payment is Due";
-                        return green;
+                        return Green;
                     }
 
                     if (paymentDueDays < 10)
                     {
                         this.HealthDescription = "Rent Payment is Late";
-                        return yellow;
+                        return Yellow;
                     }
 
                     this.HealthDescription = "Rent Payment is Delinquent";
-                    return red;
+                    return Red;
                 }
 
                 if (CurrentPeriod.LeasePeriodStatus == LeasePeriodStatus.PaymentReceived)
@@ -59,27 +59,27 @@ namespace OwnApt.DotCom.Model.Owner
                     if (paymentDueDays < 10)
                     {
                         this.HealthDescription = "Rent Payment Has Been Received and is Processing";
-                        return green;
+                        return Green;
                     }
 
                     if (paymentDueDays < 10)
                     {
                         this.HealthDescription = "Payment Distribution is Taking Longer Than Normal";
-                        return yellow;
+                        return Yellow;
                     }
 
                     this.HealthDescription = "We Haven't Distributed Rent Payment";
-                    return red;
+                    return Red;
                 }
 
                 if (this.IsActive)
                 {
                     this.HealthDescription = "Rent is Current and Has Been Distributed";
-                    return green;
+                    return Green;
                 }
 
                 this.HealthDescription = "The Property is Vacant";
-                return red;
+                return Red;
             }
         }
 
