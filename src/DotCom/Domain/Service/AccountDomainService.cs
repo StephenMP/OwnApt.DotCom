@@ -123,13 +123,16 @@ namespace OwnApt.DotCom.Domain.Service
 
             if (!response.IsSuccessfulStatusCode)
             {
-                throw ExceptionUtility.RaiseException(response, this.logger);
+                // Purposfully not throwing here. We want the exception logging, but
+                // don't want to prevent the user from using the app if we fail
+                // to register their signup token.
+                ExceptionUtility.RaiseException(response, this.logger);
             }
         }
 
-        public Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
+        public async Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
         {
-            return this.signUpService.SendSignUpEmailAsync(name, email, propertyIds);
+            return await this.signUpService.SendSignUpEmailAsync(name, email, propertyIds);
         }
 
         public async Task UpdateOwnerPropertyIds(string ownerId, string token)

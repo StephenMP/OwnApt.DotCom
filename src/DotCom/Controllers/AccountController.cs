@@ -43,12 +43,20 @@ namespace OwnApt.DotCom.Controllers
         public string Email()
         {
             /* Jason Email */
-            var propId = "f45cf61f92c448ebbeb4f63ff8d7e0f3";
-            this.accountPresentationService.SendSignUpEmailAsync("Jason", "1.stephen.porter@gmail.com", new string[] { propId });
+            //var propId = "f45cf61f92c448ebbeb4f63ff8d7e0f3";
+            //this.accountPresentationService.SendSignUpEmailAsync("Jason", "realjforge@gmail.com", new string[] { propId });
 
-            /* Shuwun Email */
+            ///* Shuwun Email */
             //propId = "ed43c2981469482c926d3c4bdead53a8";
-            //this.accountPresentationService.SendSignUpEmailAsync("Shuwun", "1.stephen.porter@gmail.com", new string[] { propId });
+            //this.accountPresentationService.SendSignUpEmailAsync("Shuwun", "shuwunma@gmail.com", new string[] { propId });
+
+            ///* Leon Email */
+            //propId = "9a3d5ed1adc84ff0825be5ae9ecebb01";
+            //this.accountPresentationService.SendSignUpEmailAsync("Leon", "leonrubalcava@gmail.com", new string[] { propId });
+
+            /* Stephen Email */
+            var propIds = new[] { "9a3d5ed1adc84ff0825be5ae9ecebb01", "f45cf61f92c448ebbeb4f63ff8d7e0f3", "ed43c2981469482c926d3c4bdead53a8" };
+            this.accountPresentationService.SendSignUpEmailAsync("Stephen", "1.stephen.porter@gmail.com", propIds);
 
             return "Yo! That email was sent dawg!";
         }

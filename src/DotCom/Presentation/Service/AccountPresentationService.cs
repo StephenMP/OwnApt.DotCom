@@ -27,8 +27,6 @@ namespace OwnApt.DotCom.Presentation.Service
 
         Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds);
 
-        Task UpdateOwnerPropertyIds(string ownerId, string token);
-
         Task<bool> ValidateSignUpTokenAsync(string token);
 
         #endregion Public Methods
@@ -75,34 +73,29 @@ namespace OwnApt.DotCom.Presentation.Service
             return lockContext;
         }
 
-        public Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail)
+        public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail)
         {
-            return this.accountDomainService.CreateOwner(ownerId, ownerEmail);
+            return await this.accountDomainService.CreateOwner(ownerId, ownerEmail);
         }
 
-        public Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token)
+        public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token)
         {
-            return this.accountDomainService.CreateOwner(ownerId, ownerEmail, token);
+            return await this.accountDomainService.CreateOwner(ownerId, ownerEmail, token);
         }
 
-        public Task RegisterSignUpTokenAsync(string token)
+        public async Task RegisterSignUpTokenAsync(string token)
         {
-            return this.accountDomainService.RegisterSignUpTokenAsync(token);
+            await this.accountDomainService.RegisterSignUpTokenAsync(token);
         }
 
-        public Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
+        public async Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds)
         {
-            return this.accountDomainService.SendSignUpEmailAsync(name, email, propertyIds);
+            return await this.accountDomainService.SendSignUpEmailAsync(name, email, propertyIds);
         }
 
-        public Task UpdateOwnerPropertyIds(string ownerId, string token)
+        public async Task<bool> ValidateSignUpTokenAsync(string token)
         {
-            return this.accountDomainService.UpdateOwnerPropertyIds(ownerId, token);
-        }
-
-        public Task<bool> ValidateSignUpTokenAsync(string token)
-        {
-            return this.accountDomainService.ValidateSignUpTokenAsync(token);
+            return await this.accountDomainService.ValidateSignUpTokenAsync(token);
         }
 
         #endregion Public Methods
