@@ -1,3 +1,17 @@
+footer {
+  background: #333;
+  color: antiquewhite;
+  padding: 15px 15px 15px 15px;
+}
+footer a {
+  color: #F05f40;
+}
+footer a:hover {
+  color: #F05f40;
+}
+footer a:focus {
+  color: #F05f40;
+}
 
 html,
 body {
