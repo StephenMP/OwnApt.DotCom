@@ -47,8 +47,8 @@ namespace OwnApt.DotCom.Controllers
             this.accountPresentationService.SendSignUpEmailAsync("Jason", "1.stephen.porter@gmail.com", new string[] { propId });
 
             /* Shuwun Email */
-            propId = "ed43c2981469482c926d3c4bdead53a8";
-            this.accountPresentationService.SendSignUpEmailAsync("Shuwun", "1.stephen.porter@gmail.com", new string[] { propId });
+            //propId = "ed43c2981469482c926d3c4bdead53a8";
+            //this.accountPresentationService.SendSignUpEmailAsync("Shuwun", "1.stephen.porter@gmail.com", new string[] { propId });
 
             return "Yo! That email was sent dawg!";
         }
