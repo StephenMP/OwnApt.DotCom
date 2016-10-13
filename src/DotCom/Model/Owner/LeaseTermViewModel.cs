@@ -8,6 +8,7 @@ namespace OwnApt.DotCom.Model.Owner
     {
         #region Public Fields
 
+        public const string Lightgrey = "health-lightgrey";
         public const string Green = "health-green";
         public const string Red = "health-red";
         public const string Yellow = "health-yellow";
@@ -38,13 +39,13 @@ namespace OwnApt.DotCom.Model.Owner
 
                 if (CurrentPeriod.LeasePeriodStatus == LeasePeriodStatus.PaymentDue)
                 {
-                    if (paymentDueDays < 5)
+                    if (paymentDueDays <= 5)
                     {
                         this.HealthDescription = "Rent Payment is Due";
-                        return Green;
+                        return Lightgrey;
                     }
 
-                    if (paymentDueDays < 10)
+                    if (paymentDueDays <= 10)
                     {
                         this.HealthDescription = "Rent Payment is Late";
                         return Yellow;
@@ -56,25 +57,13 @@ namespace OwnApt.DotCom.Model.Owner
 
                 if (CurrentPeriod.LeasePeriodStatus == LeasePeriodStatus.PaymentReceived)
                 {
-                    if (paymentDueDays < 10)
-                    {
-                        this.HealthDescription = "Rent Payment Has Been Received and is Processing";
-                        return Green;
-                    }
-
-                    if (paymentDueDays < 10)
-                    {
-                        this.HealthDescription = "Payment Distribution is Taking Longer Than Normal";
-                        return Yellow;
-                    }
-
-                    this.HealthDescription = "We Haven't Distributed Rent Payment";
-                    return Red;
+                    this.HealthDescription = "Rent Payment Has Been Received and is Processing";
+                    return Green;
                 }
 
                 if (this.IsActive)
                 {
-                    this.HealthDescription = "Rent is Current and Has Been Distributed";
+                    this.HealthDescription = "Rent is Current";
                     return Green;
                 }
 
