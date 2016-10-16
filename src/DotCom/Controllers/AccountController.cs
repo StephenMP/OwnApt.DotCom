@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.Domain.Interface;
+
+using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Presentation.Service;
 
 namespace OwnApt.DotCom.Controllers
@@ -83,8 +84,8 @@ namespace OwnApt.DotCom.Controllers
         [Authorize]
         public async Task<IActionResult> MapUserToProperties(string token)
         {
-            var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
-            var ownerEmail = await this.claimsService.GetUserEmailAsync(User.Claims);
+            var ownerId = this.claimsService.GetUserId(User);
+            var ownerEmail = this.claimsService.GetUserEmail(User);
 
             await this.accountPresentationService.CreateOwner(ownerId, ownerEmail, token);
             await this.accountPresentationService.RegisterSignUpTokenAsync(token);

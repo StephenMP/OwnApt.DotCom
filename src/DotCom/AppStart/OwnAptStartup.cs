@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using OwnApt.DotCom.Domain.Interface;
+
 using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Mapping;
 using OwnApt.DotCom.Presentation.Service;

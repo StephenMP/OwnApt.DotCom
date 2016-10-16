@@ -1,9 +1,13 @@
 ﻿using System;
-using OwnApt.DotCom.Domain.Interface;
+
 using RestSharp;
 
 namespace OwnApt.DotCom.Domain.Service
 {
+    public interface IMailGunRestClient : IRestClient
+    {
+    }
+
     public class MailGunRestClient : RestClient, IMailGunRestClient
     {
         #region Public Constructors

@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OwnApt.DotCom.Domain.Interface;
+
+using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Presentation.Service;
 
 namespace OwnApt.DotCom.Controllers
@@ -37,14 +38,14 @@ namespace OwnApt.DotCom.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
+            var ownerId = this.claimsService.GetUserId(User);
             var model = await this.ownerPresentationService.BuildIndexModelAsync(ownerId);
             return View(model);
         }
 
         public async Task<IActionResult> Profile()
         {
-            var ownerId = await this.claimsService.GetUserIdAsync(User.Claims);
+            var ownerId = this.claimsService.GetUserId(User);
             var model = await this.ownerPresentationService.BuildProfileModelAsync(ownerId);
             return View(model);
         }

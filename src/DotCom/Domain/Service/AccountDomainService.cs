@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Exceptions;
-using OwnApt.DotCom.Domain.Interface;
+
 using OwnApt.DotCom.ProxyRequests.Owner;
 using OwnApt.DotCom.Settings;
 using OwnApt.RestfulProxy.Interface;

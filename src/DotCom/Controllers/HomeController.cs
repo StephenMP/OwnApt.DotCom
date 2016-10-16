@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using OwnApt.DotCom.Domain.Interface;
+using OwnApt.DotCom.Domain.Service;
 using OwnApt.DotCom.Model.Home;
 using OwnApt.DotCom.ViewModels.Dto;
 

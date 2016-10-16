@@ -1,9 +1,20 @@
 ﻿using System.Threading.Tasks;
-using OwnApt.DotCom.Domain.Interface;
+
 using RestSharp;
 
 namespace OwnApt.DotCom.Domain.Service
 {
+    public interface IContactFormService
+    {
+        #region Public Methods
+
+        Task<IRestResponse> SendAddHomeEmailAsync(string userId, string userEmail, string message);
+
+        Task<IRestResponse> SendEmailAsync(string name, string message);
+
+        #endregion Public Methods
+    }
+
     public class ContactFormService : IContactFormService
     {
         #region Private Fields
