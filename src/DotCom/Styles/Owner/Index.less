@@ -1,93 +1,60 @@
 ﻿@import "../Shared/variables.less";
 
-.owner-container {
-    background-color: @background-color;
-    margin-left: @navbar-side-width;
-    margin-right: 25px;
+#owner-container {
+    background: @background-color;
 
-    @media screen and (max-width: 768px) {
-        img {
-            max-width: 200px;
-            max-height: 150px;
-            margin-bottom: 25px;
-        }
-    }
+    .property-card {
+        margin: 5px 5px 5px 5px;
 
-    @media screen and (max-width: 384px) {
-        .panel {
-            margin-left: -25px;
+        @media only screen and (max-width: 375px) {
+            .mdl-card {
+                width: 300px;
+            }
         }
 
-        img {
-            max-width: 150px;
-            max-height: 113px;
-            margin-bottom: 25px;
+        @media only screen and (min-width: 375px) {
+            .mdl-card {
+                width: 350px;
+            }
         }
-    }
+        .mdl-card {
+            .mdl-card__title {
+                width: 100%;
+                height: 263px;
+                background-repeat: no-repeat;
+                background-position: center;
 
-    margin-topbottom {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+                .mdl-card__title-text {
+                    background: rgba(0, 0, 0, 0.75);
+                    color: #fff;
+                }
+            }
 
-    img {
-        width: 300px;
-        height: 225px;
-        box-shadow: 0px 0px 0px 3px @theme-ownapt-lightgrey;
-    }
+            .health-lightgrey {
+                background: @theme-ownapt-lightgrey;
+                color: @theme-ownapt-darkgrey;
+            }
 
-    .panel {
-        .health-lightgrey{
-            background: @theme-ownapt-lightgrey;
-            color: @theme-ownapt-darkgrey;
-        }
+            .health-green {
+                background: green;
+                color: @offwhite;
+            }
 
-        .health-green {
-            background: green;
-            color: @offwhite;
-        }
+            .health-yellow {
+                background: yellow;
+                color: @theme-ownapt-darkgrey;
+            }
 
-        .health-yellow {
-            background: yellow;
-            color: @theme-ownapt-darkgrey;
-        }
-
-        .health-red {
-            background: red;
-            color: @offwhite;
-        }
-    }
-
-    .panel-heading {
-        background: @theme-ownapt-lightgrey;
-        color: #fff;
-    }
-
-    .nav-pills {
-        margin-bottom: 15px;
-    }
-
-    .nav-pills {
-        a {
-            color: @theme-ownapt-darkgrey;
-
-            &:hover {
-                background: @theme-ownapt-orange;
+            .health-red {
+                background: red;
                 color: @offwhite;
             }
         }
 
-        .active {
-            a {
-                background: #fff;
-                color: @theme-ownapt-darkgrey;
-                border: 1px solid @theme-ownapt-lightgrey;
-
-                &:hover,
-                &:focus {
-                    background: #fff;
-                    color: @theme-ownapt-darkgrey;
-                    border: 1px solid @theme-ownapt-lightgrey;
+        .mdl-tabs__tab-bar {
+            .mdl-tabs__tab {
+                &::after {
+                    background: @theme-ownapt-orange;
                 }
             }
         }

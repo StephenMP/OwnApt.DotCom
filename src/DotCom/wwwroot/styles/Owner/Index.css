@@ -1,68 +1,45 @@
-.owner-container {
-  background-color: #ddd;
-  margin-left: 100px;
-  margin-right: 25px;
+#owner-container {
+  background: #ddd;
 }
-@media screen and (max-width: 768px) {
-  .owner-container img {
-    max-width: 200px;
-    max-height: 150px;
-    margin-bottom: 25px;
+#owner-container .property-card {
+  margin: 5px 5px 5px 5px;
+}
+@media only screen and (max-width: 375px) {
+  #owner-container .property-card .mdl-card {
+    width: 300px;
   }
 }
-@media screen and (max-width: 384px) {
-  .owner-container .panel {
-    margin-left: -25px;
-  }
-  .owner-container img {
-    max-width: 150px;
-    max-height: 113px;
-    margin-bottom: 25px;
+@media only screen and (min-width: 375px) {
+  #owner-container .property-card .mdl-card {
+    width: 350px;
   }
 }
-.owner-container margin-topbottom {
-  margin-top: 10px;
-  margin-bottom: 10px;
+#owner-container .property-card .mdl-card .mdl-card__title {
+  width: 100%;
+  height: 263px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-.owner-container img {
-  width: 300px;
-  height: 225px;
-  box-shadow: 0px 0px 0px 3px #666;
-}
-.owner-container .panel .health-green {
-  background: green;
-  color: white;
-}
-.owner-container .panel .health-yellow {
-  background: yellow;
-  color: black;
-}
-.owner-container .panel .health-red {
-  background: red;
-  color: white;
-}
-.owner-container .panel-heading {
-  background: #666;
+#owner-container .property-card .mdl-card .mdl-card__title .mdl-card__title-text {
+  background: rgba(0, 0, 0, 0.75);
   color: #fff;
 }
-.owner-container .nav-pills {
-  margin-bottom: 15px;
-}
-.owner-container .nav-pills a {
+#owner-container .property-card .mdl-card .health-lightgrey {
+  background: #666;
   color: #333;
 }
-.owner-container .nav-pills a:hover {
-  background: #F05f40;
+#owner-container .property-card .mdl-card .health-green {
+  background: green;
   color: antiquewhite;
 }
-.owner-container .nav-pills .active a {
-  background: #fff;
+#owner-container .property-card .mdl-card .health-yellow {
+  background: yellow;
   color: #333;
-  border: 1px solid #666;
 }
-.owner-container .nav-pills .active a:hover,
-.owner-container .nav-pills .active a:focus {
-  background: #fff;
-  color: #333;
-  border: 1px solid #666;
+#owner-container .property-card .mdl-card .health-red {
+  background: red;
+  color: antiquewhite;
+}
+#owner-container .property-card .mdl-tabs__tab-bar .mdl-tabs__tab::after {
+  background: #F05f40;
 }

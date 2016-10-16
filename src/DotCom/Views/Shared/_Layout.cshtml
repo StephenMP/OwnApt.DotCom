@@ -1,40 +1,58 @@
-﻿<environment names="Development">
-    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
-    <script src="~/js/site.js"></script>
-</environment>
-<environment names="Staging,Production">
-    <link rel="stylesheet" type="text/css" href="~/css/site.min.css" />
-    <script src="~/js/site.min.js"></script>
-</environment>
-
-@*Favicon*@
-<link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
-
-@RenderSection("Styles", false)
-
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @*Favicon*@
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
+    
+    @*Material Design Lite*@
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/lib/material-design-lite/material.min.css">
+    <script defer src="~/lib/material-design-lite/material.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/styles/Shared/_layout.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+    @RenderSection("Styles", false)
 </head>
 
-<body id="LayoutBody">
-    <div id="TopNavBar">
-        @RenderSection("TopNavBar", true)
-    </div>
-    <div id="SideNavBar">
-        @RenderSection("SideNavBar", true)
-    </div>
-
-    @RenderBody()
-
-    <footer>
-        <div class="container-fluid">
-            <div class="text-center">
-                <p class="media-heading">&copy; OwnApt, LLC | All Rights Reserved</p>
-                <i class="fa fa-facebook-official fa-2x"></i>&nbsp;<a href="https://www.facebook.com/ownapt" target="_blank">Follow us on Facebook</a>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title"><img src="~/images/Logo/Logo_50x48.png" /> OwnApt</span>
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                    @RenderSection("HeaderLinks", true)
+                </nav>
             </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">@ViewData["DrawerTitle"]</span>
+            <nav class="mdl-navigation">
+                @RenderSection("DrawerLinks", true)
+            </nav>
         </div>
-    </footer>
+        <main class="mdl-layout__content">
+            @RenderBody()
+            <footer class="mdl-mini-footer">
+                <div class="mdl-mini-footer__left-section">
+                    <div class="mdl-logo">&copy; OwnApt, LLC | All Rights Reserved</div>
+                </div>
+                <div class="mdl-mini-footer__right-section">
+                    <ul class="mdl-mini-footer--link-list">
+                        <li>
+                            <a href="#"><i class="fa fa-2x fa-facebook-f"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </main>
+    </div>
+
 </body>
 </html>
 

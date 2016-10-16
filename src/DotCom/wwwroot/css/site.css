@@ -1,10 +1,32 @@
-footer {
+.mdl-layout__header {
   background: #333;
-  color: antiquewhite;
-  padding: 15px 15px 15px 15px;
+  color: #fff;
 }
-footer a {
+@media only screen and (max-width: 480px) {
+  .mdl-layout__header img {
+    display: none;
+  }
+}
+.mdl-layout__header .mdl-layout__drawer-button:hover {
   color: #F05f40;
+}
+.mdl-layout__header .mdl-navigation__link:hover {
+  color: #F05f40;
+}
+.mdl-layout__drawer .mdl-navigation__link {
+  -webkit-filter: grayscale(100);
+  filter: grayscale(100);
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.mdl-layout__drawer .mdl-navigation__link:hover {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+  color: #F05f40;
+}
+footer {
+  color: #fff;
+  padding: 15px 15px 15px 15px;
 }
 footer a:hover {
   color: #F05f40;

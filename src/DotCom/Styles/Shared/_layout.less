@@ -1,13 +1,48 @@
 ﻿@import "variables.less";
 
-footer {
+.mdl-layout__header {
     background: @theme-ownapt-darkgrey;
-    color: @offwhite;
+    color: #fff;
+
+    @media only screen and (max-width: 480px) {
+        img {
+            display: none;
+        }
+    }
+
+    .mdl-layout__drawer-button {
+        &:hover {
+            color: @theme-ownapt-orange;
+        }
+    }
+
+    .mdl-navigation__link {
+        &:hover {
+            color: @theme-ownapt-orange;
+        }
+    }
+}
+
+.mdl-layout__drawer {
+    .mdl-navigation__link {
+        -webkit-filter: grayscale(100);
+        filter: grayscale(100);
+        -webkit-transition: @navbar-hover-transition ease-in-out;
+        transition: @navbar-hover-transition ease-in-out;
+
+        &:hover {
+            -webkit-filter: grayscale(0);
+            filter: grayscale(0);
+            color: @theme-ownapt-orange;
+        }
+    }
+}
+
+footer {
+    color: #fff;
     padding: 15px 15px 15px 15px;
 
     a {
-        color: @theme-ownapt-orange;
-
         &:hover {
             color: @theme-ownapt-orange;
         }

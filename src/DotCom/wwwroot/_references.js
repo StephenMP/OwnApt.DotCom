@@ -9,6 +9,7 @@
 /// <reference path="lib/jquery/dist/jquery.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+/// <reference path="lib/material-design-lite/material.min.js" />
 /// <reference path="lib/riot/riot.js" />
 /// <reference path="lib/toastr/toastr.js" />
 /// <reference path="lib/wow/dist/wow.js" />

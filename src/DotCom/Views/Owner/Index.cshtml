@@ -4,101 +4,111 @@
 @{
     Layout = "_OwnerLayout";
 }
-
-<div class="owner-container">
+<div id="owner-container">
     @foreach (var property in Model.Properties)
     {
         var lease = Model.LeaseTermsByPropertyId[property.Id];
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    @property.Address.ToString()
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4 col-md-5 col-sm-6">
-                        <img class="center-block" src="@property.ImageUri.AbsoluteUri" />
+        <div class="property-card">
+            <div class="mdl-card mdl-shadow--3dp">
+                <div class="mdl-card__title" style="background: url('@property.ImageUri') center / cover;">
+                    <h2 class="mdl-card__title-text">@property.Address.ToString()</h2>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                        <div class="mdl-tabs__tab-bar">
+                            <a href="#lease-panel" class="mdl-tabs__tab is-active">Lease</a>
+                            <a href="#overview-panel" class="mdl-tabs__tab mdl-js-ripple-effect">Overview</a>
+                        </div>
 
-                    </div>
-                    <div class="col-lg-8 col-md-7 col-sm-6">
-                        <ul class="nav nav-pills nav-justified">
-                            <li class="active">
-                                <a data-toggle="tab" href="@($"#{property.Id}_lease")">Lease</a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="@($"#{property.Id}_overview")">Overview</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="@($"{property.Id}_lease")" class="tab-pane fade in active" hidden>
-                                <div class="row">
-                                    <div class="col-xs-1 col-xs-offset-4">
-                                        <div class="margin-topbottom center-block">
-                                            <h4>Details</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Current Period:</label> @lease.CurrentPeriodDate.ToString("MMMM, yyyy")
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Period Status:</label> @lease.CurrentPeriod.LeasePeriodStatus.GetEnumPropertiesShortDescription()
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Lease Start Date:</label> @lease.StartDate.ToString("MMMM dd, yyyy")
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Lease End Date:</label> @lease.EndDate.ToString("MMMM dd, yyyy")
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <label>Remaining Term:</label> @lease.TermRemaining months
-                                    </div>
+                        <div class="mdl-tabs__panel is-active" id="lease-panel">
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--12-col">
+                                    <h4>Details</h4>
                                 </div>
                             </div>
-                            <div id="@($"{property.Id}_overview")" class="tab-pane fade in">
-                                <div class="row">
-                                    <div class="col-xs-1 col-xs-offset-4">
-                                        <div class="margin-topbottom center-block">
-                                            <h4>Details</h4>
-                                        </div>
-                                    </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--6-col">
+                                    <strong>Current Period:</strong><br /> @lease.CurrentPeriodDate.ToString("MMM, yyyy")
                                 </div>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <label>Rooms:</label> @property.Features.Rooms
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <label>Baths:</label> @property.Features.Bathrooms
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <label>Sq Ft:</label> @property.Features.SqFootage
-                                    </div>
+                                <div class="mdl-cell mdl-cell--6-col">
+                                    <strong>Period Status:</strong><br /> @lease.CurrentPeriod.LeasePeriodStatus.GetEnumPropertiesShortDescription()
                                 </div>
-                                <div class="row">
-                                    <div class="col-xs-1 col-xs-offset-4">
-                                        <div class="margin-topbottom center-block">
-                                            <h4>Amenities</h4>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--6-col">
+                                    <strong>Lease Start Date:</strong><br /> @lease.StartDate.ToString("MMM dd, yyyy")
                                 </div>
-                                <div class="row">
-                                    @foreach (var amenity in property.Features.Amenities)
-                                    {
-                                        <div class="col-xs-6 col-md-4">
-                                            @amenity.Type
-                                        </div>
-                                    }
+                                <div class="mdl-cell mdl-cell--6-col">
+                                    <strong>Lease End Date:</strong><br /> @lease.EndDate.ToString("MMM dd, yyyy")
+                                </div>
+                                <div class="mdl-cell mdl-cell--6-col">
+                                    <strong>Remaining Term:</strong><br /> @lease.TermRemaining months
                                 </div>
                             </div>
                         </div>
+                        <div class="mdl-tabs__panel" id="overview-panel">
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--12-col">
+                                    <h4>Details</h4>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--4-col">
+                                    <strong>Rooms:</strong> @property.Features.Rooms
+                                </div>
+                                <div class="mdl-cell mdl-cell--4-col">
+                                    <strong>Baths:</strong> @property.Features.Bathrooms
+                                </div>
+                                <div class="mdl-cell mdl-cell--4-col">
+                                    <strong>Sq Ft:</strong> @property.Features.SqFootage
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--12-col">
+                                    <h4>Amenities</h4>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                @foreach (var amenity in property.Features.Amenities)
+                                {
+                                    <div class="mdl-cell mdl-cell--6-col">
+                                        @amenity.Type
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+            <div class="@lease.Health">@lease.HealthDescription</div>
             </div>
-            <div class="panel-body text-center @lease.Health">@lease.HealthDescription</div>
         </div>
     }
 </div>
+
+@section Scripts{
+    <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+    <script>
+        $(function () {
+            var grid = $('#owner-container').imagesLoaded(function () {
+                grid.masonry({
+                    itemSelector: '.property-card'
+                });
+            });
+
+            setTimeout(function () {
+                grid.masonry('layout');
+            }, 100);
+        });
+
+        var masonryUpdate = function () {
+            setTimeout(function () {
+                $('#owner-container').masonry();
+            }, 0);
+        }
+
+        $(document).on('click', masonryUpdate);
+        $(document).ajaxComplete(masonryUpdate);
+    </script>
+}
