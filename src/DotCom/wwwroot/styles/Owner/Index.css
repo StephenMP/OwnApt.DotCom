@@ -1,48 +1,51 @@
 #owner-container {
   background: #ddd;
 }
-#owner-container .property-card {
+#owner-container #card-container {
+  margin: auto;
+}
+#owner-container #card-container .property-card {
   margin: 5px 5px 5px 5px;
 }
 @media only screen and (max-width: 375px) {
-  #owner-container .property-card .mdl-card {
+  #owner-container #card-container .property-card .mdl-card {
     width: 300px;
   }
 }
 @media only screen and (min-width: 375px) {
-  #owner-container .property-card .mdl-card {
+  #owner-container #card-container .property-card .mdl-card {
     width: 350px;
   }
 }
-#owner-container .property-card .mdl-card .mdl-card__title {
+#owner-container #card-container .property-card .mdl-card .mdl-card__title {
   width: 100%;
   height: 263px;
   background-repeat: no-repeat;
   background-position: center;
 }
-#owner-container .property-card .mdl-card .mdl-card__title .mdl-card__title-text {
+#owner-container #card-container .property-card .mdl-card .mdl-card__title .mdl-card__title-text {
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
 }
-#owner-container .property-card .mdl-card .status-indicator {
+#owner-container #card-container .property-card .mdl-card .status-indicator {
   text-align: center;
 }
-#owner-container .property-card .mdl-card .health-lightgrey {
+#owner-container #card-container .property-card .mdl-card .health-lightgrey {
   background: #666;
   color: #333;
 }
-#owner-container .property-card .mdl-card .health-green {
+#owner-container #card-container .property-card .mdl-card .health-green {
   background: green;
   color: antiquewhite;
 }
-#owner-container .property-card .mdl-card .health-yellow {
+#owner-container #card-container .property-card .mdl-card .health-yellow {
   background: yellow;
   color: #333;
 }
-#owner-container .property-card .mdl-card .health-red {
+#owner-container #card-container .property-card .mdl-card .health-red {
   background: red;
   color: antiquewhite;
 }
-#owner-container .property-card .mdl-tabs__tab-bar .mdl-tabs__tab::after {
+#owner-container #card-container .property-card .mdl-tabs__tab-bar .mdl-tabs__tab::after {
   background: #F05f40;
 }
