@@ -5,7 +5,7 @@
 
     @*Favicon*@
     <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
-    
+
     @*Material Design Lite*@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="~/lib/material-design-lite/material.min.css">
@@ -29,6 +29,12 @@
                     @RenderSection("HeaderLinks", true)
                 </nav>
             </div>
+            @if (!Convert.ToBoolean(User.Claims.FirstOrDefault(c => c.Type == "email_verified").Value))
+            {
+                <div class="mdl-layout__header-row">
+                    <span>Pease Verify Your Email Address</span>
+                </div>
+            }
         </header>
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">@ViewData["DrawerTitle"]</span>

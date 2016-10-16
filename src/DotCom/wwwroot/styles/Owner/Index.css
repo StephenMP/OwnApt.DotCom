@@ -24,6 +24,9 @@
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
 }
+#owner-container .property-card .mdl-card .status-indicator {
+  text-align: center;
+}
 #owner-container .property-card .mdl-card .health-lightgrey {
   background: #666;
   color: #333;
