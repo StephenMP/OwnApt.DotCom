@@ -4,15 +4,23 @@
 @{
     Layout = "_OwnerLayout";
 }
+
+@section DrawerOptions{
+    <h5>Filters</h5>
+    <a id="resetFilter" class="mdl-navigation__link" href="javascript:void(0);"><i class="material-icons">compare_arrows</i> None</a>
+    <a id="filterByGreen" class="mdl-navigation__link" href="javascript:void(0);"><i class="material-icons">compare_arrows</i> Healthy</a>
+    <a id="filterByRed" class="mdl-navigation__link" href="javascript:void(0);"><i class="material-icons">compare_arrows</i> Unhealthy</a>
+}
+
 <div id="owner-container">
     <div id="card-container">
         @foreach (var property in Model.Properties)
         {
             var lease = Model.LeaseTermsByPropertyId[property.Id];
-            <div class="property-card">
-                <div class="mdl-card mdl-shadow--3dp">
+            <div class="property-card @lease.Health">
+                <div class="mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title" style="background: url('@property.ImageUri') center / cover;">
-                        <h2 class="mdl-card__title-text">@property.Address.ToString()</h2>
+                        <h2 class="address mdl-card__title-text">@property.Address.ToString()</h2>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
@@ -36,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--6-col">
+                                    <div class="lease-start mdl-cell mdl-cell--6-col">
                                         <strong>Lease Start Date:</strong><br /> @lease.StartDate.ToString("MMM dd, yyyy")
                                     </div>
                                     <div class="mdl-cell mdl-cell--6-col">
@@ -81,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="status-indicator @lease.Health">@lease.HealthDescription</div>
+                    <div class="status-indicator @lease.Health" data>@lease.HealthDescription</div>
                 </div>
             </div>
         }
@@ -89,25 +97,36 @@
 </div>
 
 @section Scripts{
-    <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
     <script>
         $(function () {
-            var grid = $('#card-container').imagesLoaded(function () {
-                grid.masonry({
-                    itemSelector: '.property-card',
+            $('#card-container').isotope({
+                itemSelector: '.property-card',
+                masonry: {
                     isFitWidth: true
-                });
+                }
             });
 
             setTimeout(function () {
-                grid.masonry('layout');
+                $('#card-container').isotope('layout');
             }, 100);
+
+            $("#resetFilter").click(function () {
+                $('#card-container').isotope({ filter: '*' });
+            });
+
+            $("#filterByGreen").click(function () {
+                $('#card-container').isotope({ filter: '.health-green' });
+            });
+
+            $("#filterByRed").click(function () {
+                $('#card-container').isotope({ filter: '.health-red' });
+            });
         });
 
         var masonryUpdate = function () {
             setTimeout(function () {
-                $('#card-container').masonry();
+                $('#card-container').isotope('layout')
             }, 0);
         }
 

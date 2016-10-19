@@ -41,23 +41,23 @@ namespace OwnApt.DotCom.Model.Owner
                 {
                     if (paymentDueDays <= 5)
                     {
-                        this.HealthDescription = "Rent Payment is Due";
+                        this.HealthDescription = "Rent is Due";
                         return Lightgrey;
                     }
 
                     if (paymentDueDays <= 10)
                     {
-                        this.HealthDescription = "Rent Payment is Late";
+                        this.HealthDescription = "Rent is Late";
                         return Yellow;
                     }
 
-                    this.HealthDescription = "Rent Payment is Delinquent";
+                    this.HealthDescription = "Rent is Delinquent";
                     return Red;
                 }
 
                 if (CurrentPeriod.LeasePeriodStatus == LeasePeriodStatus.PaymentReceived)
                 {
-                    this.HealthDescription = "Rent Payment Has Been Received and is Processing";
+                    this.HealthDescription = "Rent Has Been Received and is Processing";
                     return Green;
                 }
 

@@ -19,7 +19,7 @@
     @RenderSection("Styles", false)
 </head>
 
-<body>
+<body id="Body">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -37,25 +37,14 @@
             }
         </header>
         <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">@ViewData["DrawerTitle"]</span>
             <nav class="mdl-navigation">
+                <h5>Pages</h5>
                 @RenderSection("DrawerLinks", true)
             </nav>
         </div>
         <main class="mdl-layout__content">
             @RenderBody()
-            <footer class="mdl-mini-footer">
-                <div class="mdl-mini-footer__left-section">
-                    <div class="mdl-logo">&copy; OwnApt, LLC | All Rights Reserved</div>
-                </div>
-                <div class="mdl-mini-footer__right-section">
-                    <ul class="mdl-mini-footer--link-list">
-                        <li>
-                            <a href="#"><i class="fa fa-2x fa-facebook-f"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
+            <div class="mdl-layout-spacer"></div>
         </main>
     </div>
 

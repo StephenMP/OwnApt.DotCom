@@ -1,3 +1,6 @@
+#Body {
+  background: #ddd;
+}
 .mdl-layout__header {
   background: #333;
   color: #fff;
@@ -22,16 +25,6 @@
 .mdl-layout__drawer .mdl-navigation__link:hover {
   -webkit-filter: grayscale(0);
   filter: grayscale(0);
-  color: #F05f40;
-}
-footer {
-  color: #fff;
-  padding: 15px 15px 15px 15px;
-}
-footer a:hover {
-  color: #F05f40;
-}
-footer a:focus {
   color: #F05f40;
 }
 

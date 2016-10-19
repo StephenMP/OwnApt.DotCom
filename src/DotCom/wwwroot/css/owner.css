@@ -4,6 +4,14 @@
 #owner-container #card-container {
   margin: auto;
 }
+#owner-container #card-container button {
+  background: #666;
+  color: #333;
+}
+#owner-container #card-container button:hover {
+  background: #F05f40;
+  color: #fff;
+}
 #owner-container #card-container .property-card {
   margin: 5px 5px 5px 5px;
 }

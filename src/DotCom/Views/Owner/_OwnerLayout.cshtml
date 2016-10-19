@@ -6,10 +6,12 @@
 @section Styles{
     <environment names="Development">
         <link rel="stylesheet" type="text/css" href="~/css/owner.css" />
+        <script src="~/lib/imagesloaded/imagesloaded.pkgd.js"></script>
     </environment>
 
     <environment names="Staging,Production">
         <link rel="stylesheet" type="text/css" href="~/css/owner.min.css" />
+        <script src="~/lib/imagesloaded/imagesloaded.pkgd.min.js"></script>
     </environment>
 }
 @section HeaderLinks{
@@ -18,9 +20,11 @@
 }
 
 @section DrawerLinks{
-    <a class="mdl-navigation__link" href="@Url.Action("Index", "Owner")"><img src="~/images/views/owner/Owner_Index_OverviewIcon_Active_32x32.png" /> Overview</a>
+    <a class="mdl-navigation__link" href="@Url.Action("Index", "Owner")"><i class="material-icons">dashboard</i> Overview</a>
     @*<a class="mdl-navigation__link" href=""><img src="~/images/views/owner/Owner_Index_ViewProfileIcon_Active_32x32.png" /> Profile</a>
-    <a class="mdl-navigation__link" href=""><img src="~/images/views/owner/Owner_Index_AddHomeIcon_Active_32x32.png" /> Add a Home</a>*@
+        <a class="mdl-navigation__link" href=""><img src="~/images/views/owner/Owner_Index_AddHomeIcon_Active_32x32.png" /> Add a Home</a>*@
+
+    @RenderSection("DrawerOptions", false)
 }
 
 @RenderBody()
