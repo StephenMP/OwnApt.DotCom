@@ -56,7 +56,7 @@ gulp.task("watch", ["build"], function () {
     getBundles(".js").forEach(function (bundle) {
         bundle.inputFiles.forEach(function (inputFile) {
             gulp.watch(inputFile, ["min:js"]);
-        })
+        });
     });
 
     gulp.watch("./wwwroot/content/less/*.less", ["min:css"]);
