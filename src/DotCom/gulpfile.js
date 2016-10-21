@@ -62,7 +62,6 @@ gulp.task("watch", ["build"], function () {
         })
     });
 
-    gulp.watch("./wwwroot/content/js/*.js", ["min:js"]);
     gulp.watch("./wwwroot/content/less/*.less", ["min:css"]);
 });
 
