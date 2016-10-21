@@ -10,10 +10,13 @@ var gulp = require("gulp"),
     path = require("path"),
     less = require("gulp-less");
 
-var webroot = "./wwwroot/";
-var webrootlib = "./wwwroot/lib/";
-
-gulp.task("min", ["min:js", "min:css"]);
+gulp.task("less", function () {
+    return gulp.src("./wwwroot/content/less/**/*.less")
+      .pipe(less({
+          paths: [path.join(__dirname, "less", "includes")]
+      }))
+      .pipe(gulp.dest("./wwwroot/content/css"));
+});
 
 gulp.task("min:js", function () {
     var tasks = getBundles(".js").map(function (bundle) {
@@ -23,14 +26,6 @@ gulp.task("min:js", function () {
             .pipe(gulp.dest("."));
     });
     return merge(tasks);
-});
-
-gulp.task("less", function () {
-    return gulp.src("./wwwroot/content/less/**/*.less")
-      .pipe(less({
-          paths: [path.join(__dirname, "less", "includes")]
-      }))
-      .pipe(gulp.dest("./wwwroot/content/css"));
 });
 
 gulp.task("min:css", ["less"], function () {
@@ -57,7 +52,7 @@ gulp.task("build", ["clean", "min:js", "min:css"]);
 
 gulp.task("watch", ["build"], function () {
     getBundles(".js").forEach(function (bundle) {
-        bundle.inputFiles.forEach(function (inputFile){
+        bundle.inputFiles.forEach(function (inputFile) {
             gulp.watch(inputFile, ["min:js"]);
         })
     });
