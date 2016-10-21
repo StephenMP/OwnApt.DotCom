@@ -46,10 +46,11 @@
       "wwwroot/lib-unmanaged/creative/css/creative.css",
       "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "wwwroot/lib/font-awesome/css/font-awesome.css",
-      "wwwroot/lib/wow/css/libs/animate.css",
       "wwwroot/lib/toastr/toastr.css",
       "wwwroot/content/css/shared/ownapt.css",
-      "wwwroot/content/css/shared/_Layout.css"
+      "wwwroot/content/css/shared/_Layout.css",
+      "wwwroot/content/css/shared/creative.css",
+      "wwwroot/lib/animate.css/animate.min.css"
     ],
     "minify": { "enabled": true }
   },
