@@ -5,28 +5,36 @@
 
     @*Favicon*@
     <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
-
-    @*Material Design Lite*@
+    
+    @*Google Material Icons*@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="~/lib/material-design-lite/material.min.css">
-    <script defer src="~/lib/material-design-lite/material.min.js"></script>
 
-    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="~/styles/Shared/_layout.css" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <environment names="Development">
+        <link href="~/lib/material-design-lite/material.min.css"rel="stylesheet" type="text/css" />
+        <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/content/css/shared/_Layout.css" rel="stylesheet" type="text/css" />
 
+        <script src="~/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+        <script src="~/lib/material-design-lite/material.min.js" type="text/javascript"></script>
+    </environment>
 
-    @RenderSection("Styles", false)
+    <environment names="Staging,Production">
+        <link href="~/content-min/css/shared/_Layout.min.css" rel="stylesheet" type="text/css" />
+        <script src="~/content-min/js/shared/_Layout.min.js" type="text/javascript"></script>
+    </environment>
+
+    @RenderSection("_LayoutStyles", false)
+    @RenderSection("_LayoutScripts", false)
 </head>
 
-<body id="Body">
+<body id="oa-owner-body">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title"><img src="~/images/Logo/Logo_50x48.png" /> OwnApt</span>
                 <div class="mdl-layout-spacer"></div>
                 <nav class="mdl-navigation">
-                    @RenderSection("HeaderLinks", true)
+                    @RenderSection("_LayoutHeaderLinks", true)
                 </nav>
             </div>
             @if (!Convert.ToBoolean(User.Claims.FirstOrDefault(c => c.Type == "email_verified").Value))
@@ -37,18 +45,15 @@
             }
         </header>
         <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title"></span>
             <nav class="mdl-navigation">
-                <h5>Pages</h5>
-                @RenderSection("DrawerLinks", true)
+                <h5 class="oa-owner-drawer__subtitle">Pages</h5>
+                @RenderSection("_LayoutDrawerLinks", true)
             </nav>
         </div>
         <main class="mdl-layout__content">
             @RenderBody()
-            <div class="mdl-layout-spacer"></div>
         </main>
     </div>
-
 </body>
 </html>
-
-@RenderSection("Scripts", false)

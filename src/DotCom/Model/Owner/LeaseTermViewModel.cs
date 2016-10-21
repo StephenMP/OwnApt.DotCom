@@ -8,10 +8,10 @@ namespace OwnApt.DotCom.Model.Owner
     {
         #region Public Fields
 
-        public const string Lightgrey = "health-lightgrey";
-        public const string Green = "health-green";
-        public const string Red = "health-red";
-        public const string Yellow = "health-yellow";
+        public const string Lightgrey = "oa-owner-overview-container__status-indicator--lightgrey";
+        public const string Green = "oa-owner-overview-container__status-indicator--green";
+        public const string Red = "oa-owner-overview-container__status-indicator--red";
+        public const string Yellow = "oa-owner-overview-container__status-indicator--yellow";
 
         #endregion Public Fields
 
@@ -31,7 +31,7 @@ namespace OwnApt.DotCom.Model.Owner
 
         public DateTime EndDate { get; set; }
 
-        public string Health
+        public string StatusIndicatorModifier
         {
             get
             {

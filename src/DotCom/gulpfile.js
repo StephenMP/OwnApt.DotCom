@@ -1,100 +1,73 @@
-﻿/// <binding AfterBuild='minify:css' />
-/*
-This file in the main entry point for defining Gulp tasks and using Gulp plugins.
-Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
-*/
+﻿"use strict";
 
-var gulp = require('gulp'),
-    clean = require('gulp-rimraf'),
-    concat = require('gulp-concat'),
-    less = require("gulp-less"),
-    livereload = require('gulp-livereload'),
-    rename = require('gulp-rename'),
-    cssmin = require('gulp-cssmin'),
-    runSequence = require('run-sequence');
+var gulp = require("gulp"),
+    concat = require("gulp-concat"),
+    cssmin = require("gulp-cssmin"),
+    uglify = require("gulp-uglify"),
+    merge = require("merge-stream"),
+    del = require("del"),
+    bundleconfig = require("./bundleconfig.json"),
+    path = require("path"),
+    less = require("gulp-less");
 
 var webroot = "./wwwroot/";
 var webrootlib = "./wwwroot/lib/";
 
-var paths = {
-    cssSource: "./Styles/Shared/*.less",
-    cssDest: webroot + "styles/shared/",
-    css: webroot + "styles/shared/*.css",
-    cssBootstrap: webrootlib + "bootstrap/dist/css/bootstrap.css",
-    cssFontAwesome: webrootlib + "font-awesome/css/font-awesome.css",
-    cssWow: webrootlib + "wow/css/libs/animate.css",
-    cssToastr: webrootlib + "toastr/toastr.css",
-    concatCssDest: webroot + "css/site.css"
-};
+gulp.task("min", ["min:js", "min:css"]);
 
-var home = {
-    css: {
-        animate: webroot + "css/animate.min.css",
-        creative: webroot + "lib-unmanaged/creative/css/creative.css",
-        destination: webroot + "css/home.css"
-    }
-};
-
-var owner = {
-    less: {
-        source: "./Styles/Owner/*.less"
-    },
-    css: {
-        destination: webroot + "styles/owner/",
-        files: webroot + "styles/owner/*.css",
-        concat: webroot + "css/owner.css"
-    }
-};
-
-
-gulp.task('clean:css', function (cb) {
-    return gulp.src(webroot + "/css/*").pipe(clean());
+gulp.task("min:js", function () {
+    var tasks = getBundles(".js").map(function (bundle) {
+        return gulp.src(bundle.inputFiles, { base: "." })
+            .pipe(concat(bundle.outputFileName))
+            .pipe(uglify())
+            .pipe(gulp.dest("."));
+    });
+    return merge(tasks);
 });
 
-gulp.task('less', [], function () {
-    return gulp.src([paths.cssSource])
-           .pipe(less())
-           .pipe(gulp.dest(paths.cssDest));
+gulp.task("less", function () {
+    return gulp.src("./wwwroot/content/less/**/*.less")
+      .pipe(less({
+          paths: [path.join(__dirname, "less", "includes")]
+      }))
+      .pipe(gulp.dest("./wwwroot/content/css"));
 });
 
-gulp.task('less:owner', [], function () {
-    return gulp.src([owner.less.source])
-           .pipe(less())
-           .pipe(gulp.dest(owner.css.destination));
+gulp.task("min:css", ["less"], function () {
+    var tasks = getBundles(".css").map(function (bundle) {
+        return gulp.src(bundle.inputFiles, { base: "." })
+            .pipe(concat(bundle.outputFileName))
+            .pipe(cssmin())
+            .pipe(gulp.dest("."));
+    });
+    return merge(tasks);
 });
 
-gulp.task('concat:css', ['less'], function () {
-    return gulp.src([paths.css, paths.cssBootstrap, paths.cssFontAwesome, paths.cssWow, paths.cssToastr])
-           .pipe(concat(paths.concatCssDest))
-           .pipe(gulp.dest("."));
+gulp.task("clean", function () {
+    var files = bundleconfig.map(function (bundle) {
+        return bundle.outputFileName;
+    });
+
+    files.push("./wwwroot/content/css/**/*");
+
+    return del(files);
 });
 
-gulp.task('concat:owner:css', ['less:owner'], function () {
-    return gulp.src([owner.css.files])
-           .pipe(concat(owner.css.concat))
-           .pipe(gulp.dest("."));
+gulp.task("build", ["clean", "min:js", "min:css"]);
+
+gulp.task("watch", ["build"], function () {
+    getBundles(".js").forEach(function (bundle) {
+        bundle.inputFiles.forEach(function (inputFile){
+            gulp.watch(inputFile, ["min:js"]);
+        })
+    });
+
+    gulp.watch("./wwwroot/content/js/*.js", ["min:js"]);
+    gulp.watch("./wwwroot/content/less/*.less", ["min:css"]);
 });
 
-gulp.task('concat:home:css', [], function () {
-    return gulp.src([home.css.animate, home.css.creative])
-           .pipe(concat(home.css.destination))
-           .pipe(gulp.dest("."));
-});
-
-gulp.task('minify-css', ['concat:css', 'concat:home:css', 'concat:owner:css'], function(){
-    return gulp.src([paths.concatCssDest, home.css.destination, owner.css.concat])
-           .pipe(cssmin())
-           .pipe(rename({ suffix: '.min' }))
-           .pipe(gulp.dest(webroot + "css"));
-});
-
-gulp.task('build', function (done) {
-    runSequence('clean:css',
-                'minify-css',
-                 done);
-});
-
-gulp.task('watch', function () {
-    gulp.watch([paths.cssSource,owner.less.source] , ['build']);
-});
-
+function getBundles(outputFileNameRegex) {
+    return bundleconfig.filter(function (bundle) {
+        return new RegExp(outputFileNameRegex).test(bundle.outputFileName);
+    });
+}

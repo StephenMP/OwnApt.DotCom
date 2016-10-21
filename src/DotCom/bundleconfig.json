@@ -1,51 +1,73 @@
-﻿// Documentation: https://go.microsoft.com/fwlink/?LinkId=808241
-[
+﻿[
+  {
+    "outputFileName": "wwwroot/content-min/css/shared/_Layout.min.css",
+    "inputFiles": [
+      "wwwroot/lib/material-design-lite/material.min.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.min.css",
+      "wwwroot/content/css/shared/_layout.css"
+    ],
+    "minify": { "enabled": true }
+  },
+  {
+    "outputFileName": "wwwroot/content-min/js/shared/_Layout.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.min.js",
+      "wwwroot/lib/material-design-lite/material.min.js"
+    ],
+    "minify": { "enabled": true }
+  },
 
-  ////////////////////////
-  // JavaScript Bundles //
-  ////////////////////////
+
   {
-    "outputFileName": "wwwroot/js/site.min.js",
+    "outputFileName": "wwwroot/content-min/css/owner/_OwnerLayout.min.css",
+    "inputFiles": [
+      "wwwroot/content/css/owner/_OwnerLayout.css"
+    ],
+    "minify": { "enabled": true }
+  },
+  
+
+  {
+    "outputFileName": "wwwroot/content-min/css/owner/Index.min.css",
+    "inputFiles": [
+      "wwwroot/content/css/owner/Index.css"
+    ],
+    "minify": { "enabled": true }
+  },
+  {
+    "outputFileName": "wwwroot/content-min/js/owner/Index.min.js",
+    "inputFiles": [
+      "wwwroot/content/js/owner/Index.js"
+    ],
+    "minify": { "enabled": true }
+  },
+
+
+  {
+    "outputFileName": "wwwroot/content-min/css/home/_HomeLayout.min.css",
+    "inputFiles": [
+      "wwwroot/lib-unmanaged/creative/css/creative.css",
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/wow/css/libs/animate.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/content/css/shared/ownapt.css",
+      "wwwroot/content/css/shared/_Layout.css"
+    ],
+    "minify": { "enabled": true }
+  },
+  {
+    "outputFileName": "wwwroot/content-min/js/home/_HomeLayout.min.js",
     "inputFiles": [
       "wwwroot/lib/jquery/dist/jquery.js",
       "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "wwwroot/lib/wow/dist/wow.min.js",
       "wwwroot/lib/toastr/toastr.min.js",
-      "wwwroot/js/global.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/site.js",
-    "inputFiles": [
-      "wwwroot/lib/jquery/dist/jquery.js",
-      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
-      "wwwroot/lib/wow/dist/wow.min.js",
-      "wwwroot/lib/toastr/toastr.min.js",
-      "wwwroot/js/global.js"
-    ],
-    "minify": {
-      "enabled": false
-    },
-    "includeInProject": true
-  },
-  {
-    "outputFileName": "wwwroot/js/home/home.min.js",
-    "inputFiles": [
-      "wwwroot/lib/jquery.easing/js/jquery.easing.js",
-      "wwwroot/lib-unmanaged/jquery-fittext/js/jquery.fittext.js",
-      "wwwroot/lib-unmanaged/creative/js/creative.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/home/home.js",
-    "inputFiles": [
       "wwwroot/lib/jquery.easing/js/jquery.easing.js",
       "wwwroot/lib-unmanaged/jquery-fittext/js/jquery.fittext.js",
       "wwwroot/lib-unmanaged/creative/js/creative.js"
     ],
-    "minify": {
-      "enabled": false
-    },
-    "includeInProject": true
+    "minify": { "enabled": true }
   }
 ]
+

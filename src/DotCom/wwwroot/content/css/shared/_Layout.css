@@ -1,0 +1,24 @@
+#oa-owner-body {
+  background: #ddd;
+}
+.oa-owner-drawer__subtitle {
+  margin-left: 10px;
+}
+.mdl-layout__header {
+  background: #333;
+  color: #fff;
+}
+@media only screen and (max-width: 480px) {
+  .mdl-layout__header img {
+    display: none;
+  }
+}
+.mdl-layout__header .mdl-layout__drawer-button:hover {
+  color: #F05f40;
+}
+.mdl-layout__header .mdl-navigation__link:hover {
+  color: #F05f40;
+}
+.mdl-layout__drawer .mdl-navigation__link:hover {
+  color: #F05f40;
+}

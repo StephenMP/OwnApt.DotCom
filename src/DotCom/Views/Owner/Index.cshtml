@@ -5,132 +5,111 @@
     Layout = "_OwnerLayout";
 }
 
-@section DrawerOptions{
-    <h5>Filters</h5>
+@section _OwnerLayoutDrawerLinks{
+    <h5 class="oa-owner-drawer__subtitle">Filters</h5>
     <a id="resetFilter" class="mdl-navigation__link" href="javascript:void(0);"><i class="material-icons">compare_arrows</i> None</a>
     <a id="filterByGreen" class="mdl-navigation__link" href="javascript:void(0);"><i class="material-icons">compare_arrows</i> Healthy</a>
     <a id="filterByRed" class="mdl-navigation__link" href="javascript:void(0);"><i class="material-icons">compare_arrows</i> Unhealthy</a>
 }
 
-<div id="owner-container">
-    <div id="card-container">
-        @foreach (var property in Model.Properties)
-        {
-            var lease = Model.LeaseTermsByPropertyId[property.Id];
-            <div class="property-card @lease.Health">
-                <div class="mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title" style="background: url('@property.ImageUri') center / cover;">
-                        <h2 class="address mdl-card__title-text">@property.Address.ToString()</h2>
+@section _OwnerLayoutStyles{
+    <environment names="Development">
+        <link href="~/content/css/owner/Index.css" rel="stylesheet" type="text/css" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <link href="~/content-min/css/owner/Index.min.css" rel="stylesheet" type="text/css" />
+    </environment>
+}
+
+@section _OwnerLayoutScripts{
+    <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
+
+    <environment names="Development">
+        <script src="~/content/js/owner/Index.js" type="text/javascript"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/content-min/js/owner/Index.min.js" type="text/javascript"></script>
+    </environment>
+}
+
+<div id="oa-owner-overview-container">
+    @foreach (var property in Model.Properties)
+    {
+        var lease = Model.LeaseTermsByPropertyId[property.Id];
+        <div class="mdl-card mdl-shadow--2dp @lease.StatusIndicatorModifier">
+            <div class="mdl-card__title" style="background: url('@property.ImageUri') center / cover;">
+                <h2 class="address mdl-card__title-text">@property.Address.ToString()</h2>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#lease-panel" class="mdl-tabs__tab is-active">Lease</a>
+                        <a href="#overview-panel" class="mdl-tabs__tab mdl-js-ripple-effect">Overview</a>
                     </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-                            <div class="mdl-tabs__tab-bar">
-                                <a href="#lease-panel" class="mdl-tabs__tab is-active">Lease</a>
-                                <a href="#overview-panel" class="mdl-tabs__tab mdl-js-ripple-effect">Overview</a>
-                            </div>
 
-                            <div class="mdl-tabs__panel is-active" id="lease-panel">
-                                <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--12-col">
-                                        <h4>Details</h4>
-                                    </div>
-                                </div>
-                                <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--6-col">
-                                        <strong>Current Period:</strong><br /> @lease.CurrentPeriodDate.ToString("MMM, yyyy")
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--6-col">
-                                        <strong>Period Status:</strong><br /> @lease.CurrentPeriod.LeasePeriodStatus.GetEnumPropertiesShortDescription()
-                                    </div>
-                                </div>
-                                <div class="mdl-grid">
-                                    <div class="lease-start mdl-cell mdl-cell--6-col">
-                                        <strong>Lease Start Date:</strong><br /> @lease.StartDate.ToString("MMM dd, yyyy")
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--6-col">
-                                        <strong>Lease End Date:</strong><br /> @lease.EndDate.ToString("MMM dd, yyyy")
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--6-col">
-                                        <strong>Remaining Term:</strong><br /> @lease.TermRemaining months
-                                    </div>
-                                </div>
+                    <div class="mdl-tabs__panel is-active" id="lease-panel">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <h4>Details</h4>
                             </div>
-                            <div class="mdl-tabs__panel" id="overview-panel">
-                                <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--12-col">
-                                        <h4>Details</h4>
-                                    </div>
-                                </div>
-                                <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--4-col">
-                                        <strong>Rooms:</strong> @property.Features.Rooms
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--4-col">
-                                        <strong>Baths:</strong> @property.Features.Bathrooms
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--4-col">
-                                        <strong>Sq Ft:</strong> @property.Features.SqFootage
-                                    </div>
-                                </div>
-                                <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--12-col">
-                                        <h4>Amenities</h4>
-                                    </div>
-                                </div>
-                                <div class="mdl-grid">
-                                    @foreach (var amenity in property.Features.Amenities)
-                                    {
-                                        <div class="mdl-cell mdl-cell--6-col">
-                                            @amenity.Type
-                                        </div>
-                                    }
-                                </div>
-
+                        </div>
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <strong>Current Period:</strong><br /> @lease.CurrentPeriodDate.ToString("MMM, yyyy")
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <strong>Period Status:</strong><br /> @lease.CurrentPeriod.LeasePeriodStatus.GetEnumPropertiesShortDescription()
+                            </div>
+                        </div>
+                        <div class="mdl-grid">
+                            <div class="lease-start mdl-cell mdl-cell--6-col">
+                                <strong>Lease Start Date:</strong><br /> @lease.StartDate.ToString("MMM dd, yyyy")
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <strong>Lease End Date:</strong><br /> @lease.EndDate.ToString("MMM dd, yyyy")
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <strong>Remaining Term:</strong><br /> @lease.TermRemaining months
                             </div>
                         </div>
                     </div>
-                    <div class="status-indicator @lease.Health" data>@lease.HealthDescription</div>
+                    <div class="mdl-tabs__panel" id="overview-panel">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <h4>Details</h4>
+                            </div>
+                        </div>
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <strong>Rooms:</strong><br /> @property.Features.Rooms
+                            </div>
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <strong>Baths:</strong><br /> @property.Features.Bathrooms
+                            </div>
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <strong>Sq Ft:</strong><br /> @property.Features.SqFootage
+                            </div>
+                        </div>
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <h4>Amenities</h4>
+                            </div>
+                        </div>
+                        <div class="mdl-grid">
+                            @foreach (var amenity in property.Features.Amenities)
+                            {
+                                <div class="mdl-cell mdl-cell--6-col">
+                                    @amenity.Type
+                                </div>
+                            }
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        }
-    </div>
+            <div class="oa-owner-overview-container__status-indicator @lease.StatusIndicatorModifier" data>@lease.HealthDescription</div>
+        </div>
+    }
 </div>
-
-@section Scripts{
-    <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
-    <script>
-        $(function () {
-            $('#card-container').isotope({
-                itemSelector: '.property-card',
-                masonry: {
-                    isFitWidth: true
-                }
-            });
-
-            setTimeout(function () {
-                $('#card-container').isotope('layout');
-            }, 100);
-
-            $("#resetFilter").click(function () {
-                $('#card-container').isotope({ filter: '*' });
-            });
-
-            $("#filterByGreen").click(function () {
-                $('#card-container').isotope({ filter: '.health-green' });
-            });
-
-            $("#filterByRed").click(function () {
-                $('#card-container').isotope({ filter: '.health-red' });
-            });
-        });
-
-        var masonryUpdate = function () {
-            setTimeout(function () {
-                $('#card-container').isotope('layout')
-            }, 0);
-        }
-
-        $(document).on('click', masonryUpdate);
-        $(document).ajaxComplete(masonryUpdate);
-    </script>
-}

@@ -1,5 +1,7 @@
 ﻿<html lang="en">
 <head>
+    <title>@ViewData["Title"]</title>
+
     @*Metas*@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,30 +13,35 @@
     @*Favicon*@
     <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
 
-    <title>@ViewData["Title"]</title>
-
-    @*Initial Styles/Scripts*@
-    <environment names="Development">
-        <link href="~/css/site.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="~/css/home.css" type="text/css" />
-        <link rel="stylesheet/less" href="~/less/ownapt.less" type="text/css" />
-
-        <script src="~/js/site.js"></script>
-        <script src="~/js/home/home.js"></script>
-    </environment>
-
-    <environment names="Staging,Production">
-        <link href="~/css/site.min.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="~/css/home.min.css" type="text/css" />
-        <link rel="stylesheet/less" href="~/less/ownapt.less" type="text/css" />
-
-        <script src="~/js/site.min.js"></script>
-        <script src="~/js/home/home.min.js"></script>
-    </environment>
-
     @*Google Fonts*@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <environment names="Development">
+        <link href="~/lib-unmanaged/creative/css/creative.css" rel="stylesheet" type="text/css" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href="~/lib/wow/css/libs/animate.css" rel="stylesheet" type="text/css" />
+        <link href="~/lib/toastr/toastr.css" rel="stylesheet" type="text/css" />
+        <link href="~/content/css/shared/ownapt.css" rel="stylesheet" type="text/css" />
+        <link href="~/content/css/shared/_Layout.css" rel="stylesheet" type="text/css" />
+        <link href="~/content/css/shared/creative.css" rel="stylesheet" type="text/css" />
+
+        <script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+        <script src="~/lib/wow/dist/wow.min.js" type="text/javascript"></script>
+        <script src="~/lib/toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="~/lib/jquery.easing/js/jquery.easing.js" type="text/javascript"></script>
+        <script src="~/lib-unmanaged/jquery-fittext/js/jquery.fittext.js" type="text/javascript"></script>
+        <script src="~/lib-unmanaged/creative/js/creative.js" type="text/javascript"></script>
+        <script src="~/lib-unmanaged/animated-header/js/cbpAnimatedHeader.js" type="text/javascript"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <link href="~/content-min/css/home/_HomeLayout.min.css" rel="stylesheet" type="text/css" />
+        <script src="~/content-min/js/home/_HomeLayout.min.js" type="text/javascript"></script>
+    </environment>
+
 
     @RenderSection("Styles", false)
 
@@ -144,15 +151,6 @@
     </footer>
 </body>
 </html>
-
-@*Post Page Load Scripts*@
-<environment names="Development">
-    <script src="~/js/home/home.js"></script>
-</environment>
-
-<environment names="Staging,Production">
-    <script src="~/js/home/home.min.js"></script>
-</environment>
 
 @*Facebook Like/Share*@
 <script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>

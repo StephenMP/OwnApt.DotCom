@@ -3,29 +3,29 @@
     ViewData["DrawerTitle"] = "Owner Portal";
 }
 
-@section Styles{
+@section _LayoutStyles{
     <environment names="Development">
-        <link rel="stylesheet" type="text/css" href="~/css/owner.css" />
-        <script src="~/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+        <link href="~/content/css/owner/_OwnerLayout.css" rel="stylesheet" type="text/css" />
     </environment>
 
     <environment names="Staging,Production">
-        <link rel="stylesheet" type="text/css" href="~/css/owner.min.css" />
-        <script src="~/lib/imagesloaded/imagesloaded.pkgd.min.js"></script>
+        <link href="~/content-min/css/owner/_OwnerLayout.min.css" rel="stylesheet" type="text/css" />
     </environment>
 }
-@section HeaderLinks{
+@section _LayoutHeaderLinks{
     @*<a class="mdl-navigation__link" href="">Contact</a>*@
     <a class="mdl-navigation__link" href="@Url.Action("Logout", "Account")">Logout</a>
 }
 
-@section DrawerLinks{
+@section _LayoutDrawerLinks{
     <a class="mdl-navigation__link" href="@Url.Action("Index", "Owner")"><i class="material-icons">dashboard</i> Overview</a>
     @*<a class="mdl-navigation__link" href=""><img src="~/images/views/owner/Owner_Index_ViewProfileIcon_Active_32x32.png" /> Profile</a>
         <a class="mdl-navigation__link" href=""><img src="~/images/views/owner/Owner_Index_AddHomeIcon_Active_32x32.png" /> Add a Home</a>*@
 
-    @RenderSection("DrawerOptions", false)
+    @RenderSection("_OwnerLayoutDrawerLinks", false)
 }
 
+@RenderSection("_OwnerLayoutStyles", false)
+@RenderSection("_OwnerLayoutScripts", false)
+
 @RenderBody()
-@RenderSection("Scripts", false)

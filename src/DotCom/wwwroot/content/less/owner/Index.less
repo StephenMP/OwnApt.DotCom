@@ -1,0 +1,65 @@
+﻿@import "../Shared/variables.less";
+
+#oa-owner-overview-container {
+    margin: auto;
+
+    @media only screen and (max-width: 375px) {
+        .mdl-card {
+            width: 300px;
+        }
+    }
+
+    @media only screen and (min-width: 375px) {
+        .mdl-card {
+            width: 350px;
+        }
+    }
+
+    .mdl-card {
+        margin: 5px 5px 5px 5px;
+
+        .mdl-card__title {
+            width: 100%;
+            height: 263px;
+            background-repeat: no-repeat;
+            background-position: center;
+
+            .mdl-card__title-text {
+                background: rgba(0, 0, 0, 0.75);
+                color: #fff;
+            }
+        }
+
+        .oa-owner-overview-container__status-indicator {
+            text-align: center;
+        }
+
+        .oa-owner-overview-container__status-indicator--lightgrey {
+            background: @theme-ownapt-lightgrey;
+            color: @theme-ownapt-darkgrey;
+        }
+
+        .oa-owner-overview-container__status-indicator--green {
+            background: green;
+            color: @offwhite;
+        }
+
+        .oa-owner-overview-container__status-indicator--yellow {
+            background: yellow;
+            color: @theme-ownapt-darkgrey;
+        }
+
+        .oa-owner-overview-container__status-indicator--red {
+            background: red;
+            color: @offwhite;
+        }
+    }
+
+    .mdl-tabs__tab-bar {
+        .mdl-tabs__tab {
+            &::after {
+                background: @theme-ownapt-orange;
+            }
+        }
+    }
+}
