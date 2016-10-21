@@ -17,7 +17,6 @@
     "minify": { "enabled": true }
   },
 
-
   {
     "outputFileName": "wwwroot/content-min/css/owner/_OwnerLayout.min.css",
     "inputFiles": [
@@ -25,7 +24,6 @@
     ],
     "minify": { "enabled": true }
   },
-  
 
   {
     "outputFileName": "wwwroot/content-min/css/owner/Index.min.css",
@@ -41,7 +39,6 @@
     ],
     "minify": { "enabled": true }
   },
-
 
   {
     "outputFileName": "wwwroot/content-min/css/home/_HomeLayout.min.css",
@@ -70,4 +67,3 @@
     "minify": { "enabled": true }
   }
 ]
-

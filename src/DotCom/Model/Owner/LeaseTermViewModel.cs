@@ -8,8 +8,8 @@ namespace OwnApt.DotCom.Model.Owner
     {
         #region Public Fields
 
-        public const string Lightgrey = "oa-owner-overview-container__status-indicator--lightgrey";
         public const string Green = "oa-owner-overview-container__status-indicator--green";
+        public const string Lightgrey = "oa-owner-overview-container__status-indicator--lightgrey";
         public const string Red = "oa-owner-overview-container__status-indicator--red";
         public const string Yellow = "oa-owner-overview-container__status-indicator--yellow";
 
@@ -30,6 +30,20 @@ namespace OwnApt.DotCom.Model.Owner
         }
 
         public DateTime EndDate { get; set; }
+
+        public string HealthDescription { get; set; }
+
+        public bool IsActive => (DateTime.Now > this.StartDate && DateTime.Now < this.EndDate);
+
+        public string LeaseTermId { get; set; }
+
+        public string PropertyId { get; set; }
+
+        public decimal Rent { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public string Status => this.IsActive ? "Occupied" : "Vacant";
 
         public string StatusIndicatorModifier
         {
@@ -71,19 +85,6 @@ namespace OwnApt.DotCom.Model.Owner
                 return Red;
             }
         }
-
-        public string HealthDescription { get; set; }
-        public bool IsActive => (DateTime.Now > this.StartDate && DateTime.Now < this.EndDate);
-
-        public string LeaseTermId { get; set; }
-
-        public string PropertyId { get; set; }
-
-        public decimal Rent { get; set; }
-
-        public DateTime StartDate { get; set; }
-
-        public string Status => this.IsActive ? "Occupied" : "Vacant";
 
         public int TermRemaining => this.IsActive ? ((this.EndDate.Year - DateTime.Now.Year) * 12) + this.EndDate.Month - DateTime.Now.Month : 0;
 
