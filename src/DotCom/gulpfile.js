@@ -25,6 +25,7 @@ gulp.task("min:js", function () {
             .pipe(uglify())
             .pipe(gulp.dest("."));
     });
+
     return merge(tasks);
 });
 
@@ -35,6 +36,7 @@ gulp.task("min:css", ["less"], function () {
             .pipe(cssmin())
             .pipe(gulp.dest("."));
     });
+
     return merge(tasks);
 });
 
