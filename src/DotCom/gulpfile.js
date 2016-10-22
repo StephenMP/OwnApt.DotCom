@@ -53,13 +53,8 @@ gulp.task("clean", function () {
 gulp.task("build", ["clean", "min:js", "min:css"]);
 
 gulp.task("watch", ["build"], function () {
-    getBundles(".js").forEach(function (bundle) {
-        bundle.inputFiles.forEach(function (inputFile) {
-            gulp.watch(inputFile, ["min:js"]);
-        });
-    });
-
-    gulp.watch("./wwwroot/content/less/*.less", ["min:css"]);
+    gulp.watch("./wwwroot/content/**/*.less", ["min:css"]);
+    gulp.watch("./wwwroot/content/**/*.js", ["min:js"]);
 });
 
 function getBundles(outputFileNameRegex) {
