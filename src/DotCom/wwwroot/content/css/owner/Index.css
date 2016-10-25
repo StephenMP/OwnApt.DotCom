@@ -28,7 +28,7 @@
   text-align: center;
 }
 #oa-owner-overview-container .mdl-card .oa-owner-overview-container__status-indicator--lightgrey {
-  background: #666;
+  background: #999;
   color: #333;
 }
 #oa-owner-overview-container .mdl-card .oa-owner-overview-container__status-indicator--green {
