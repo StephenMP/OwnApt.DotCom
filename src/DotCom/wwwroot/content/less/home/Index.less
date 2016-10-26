@@ -1,6 +1,14 @@
 ﻿@import "../shared/variables.less";
 
 .oa-home-layout {
+    .error {
+        color: red;
+    }
+
+    .mdl-textfield__label:after {
+        background-color: @theme-ownapt-orange;
+    }
+
     .material-icons {
         &--large {
             font-size: 96px;
@@ -10,7 +18,7 @@
             color: @theme-ownapt-orange;
         }
 
-        &--white{
+        &--white {
             color: @theme-ownapt-white;
         }
     }
@@ -40,6 +48,8 @@
     }
 
     .oa-home-button {
+        margin-bottom: 15px;
+
         &--orange {
             background: @theme-ownapt-orange;
             color: @theme-ownapt-white;
@@ -92,15 +102,17 @@
             height: auto;
         }
 
-        .oa-button-group {
-        }
-
         .oa-section {
             display: flex;
             flex-direction: column;
             justify-content: center;
             height: auto;
             min-height: 50vh;
+
+            &__subhead{
+                margin-left: 50px;
+                margin-right: 50px;
+            }
 
             &--orange {
                 background: @theme-ownapt-orange;
@@ -119,7 +131,8 @@
         }
 
         .oa-home-top {
-            height: 100vh;
+            height: auto;
+            min-height: 100vh;
             background: url('../../../images/header.jpg') center / cover;
             background-size: cover;
         }

@@ -1,8 +1,17 @@
+.oa-home-layout .error {
+  color: red;
+}
+.oa-home-layout .mdl-textfield__label:after {
+  background-color: #F05f40;
+}
 .oa-home-layout .material-icons--large {
   font-size: 96px;
 }
 .oa-home-layout .material-icons--orange {
   color: #F05f40;
+}
+.oa-home-layout .material-icons--white {
+  color: #fff;
 }
 @media screen and (min-width: 840px) {
   .oa-home-layout .mdl-layout__drawer-button {
@@ -22,6 +31,9 @@
 }
 .oa-home-layout .oa-home-text__body {
   font-size: 18px;
+}
+.oa-home-layout .oa-home-button {
+  margin-bottom: 15px;
 }
 .oa-home-layout .oa-home-button--orange {
   background: #F05f40;
@@ -69,6 +81,10 @@
   height: auto;
   min-height: 50vh;
 }
+.oa-home-layout .oa-home-content .oa-section__subhead {
+  margin-left: 50px;
+  margin-right: 50px;
+}
 .oa-home-layout .oa-home-content .oa-section--orange {
   background: #F05f40;
   color: #fff;
@@ -82,7 +98,8 @@
   color: #fff;
 }
 .oa-home-layout .oa-home-content .oa-home-top {
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   background: url('../../../images/header.jpg') center / cover;
   background-size: cover;
 }

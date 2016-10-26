@@ -1,5 +1,9 @@
 ﻿@model OwnApt.DotCom.Model.Home.HomeIndexViewModel
 
+@{
+    var authText = User.Identity.IsAuthenticated ? "Logout" : "Login";
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,51 +33,51 @@
                 <span class="mdl-layout-title"><img src="~/images/Logo/Logo_50x48.png" /> OwnApt</span>
                 <div class="mdl-layout-spacer"></div>
                 <nav id="oa-header-nav" class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="">About</a>
-                    <a class="mdl-navigation__link" href="">Services</a>
-                    <a class="mdl-navigation__link" href="">Pricing</a>
-                    <a class="mdl-navigation__link" href="">Contact</a>
-                    <a class="mdl-navigation__link" href="">Listings</a>
-                    <a class="mdl-navigation__link" href="">Blog</a>
-                    <a class="mdl-navigation__link" href="">Login</a>
+                    <a class="mdl-navigation__link" href="#oa-about">About</a>
+                    <a class="mdl-navigation__link" href="#oa-services">Services</a>
+                    <a class="mdl-navigation__link" href="#oa-pricing">Pricing</a>
+                    <a class="mdl-navigation__link" href="#oa-contact">Contact</a>
+                    <a class="mdl-navigation__link" href="@Url.Action("Index", "Listings")">Listings</a>
+                    <a class="mdl-navigation__link" href="http://blog.ownapt.com">Blog</a>
+                    <a class="mdl-navigation__link" href="@Url.Action(authText, "Account")">@authText</a>
                 </nav>
             </div>
         </header>
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">Menu</span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">About</a>
-                <a class="mdl-navigation__link" href="">Services</a>
-                <a class="mdl-navigation__link" href="">Pricing</a>
-                <a class="mdl-navigation__link" href="">Contact</a>
-                <a class="mdl-navigation__link" href="">Listings</a>
-                <a class="mdl-navigation__link" href="">Blog</a>
-                <a class="mdl-navigation__link" href="">Login</a>
+                <a class="mdl-navigation__link" href="#oa-about">About</a>
+                <a class="mdl-navigation__link" href="#oa-services">Services</a>
+                <a class="mdl-navigation__link" href="#oa-pricing">Pricing</a>
+                <a class="mdl-navigation__link" href="#oa-contact">Contact</a>
+                <a class="mdl-navigation__link" href="@Url.Action("Index", "Listings")">Listings</a>
+                <a class="mdl-navigation__link" href="http://blog.ownapt.com">Blog</a>
+                <a class="mdl-navigation__link" href="@Url.Action(authText, "Account")">@authText</a>
             </nav>
         </div>
         <main class="oa-home-content mdl-layout__content">
             <section class="oa-home-top oa-section">
                 <div class="mdl-typography--text-center mdl-color-text--white">
                     <img width="200" height="193" src="~/images/Logo/Logo_250x241.png" />
-                    <h1>OwnApt</h1>
-                    <h3>Redefining Property Management</h3>
-                    <button class="oa-home-button oa-home-button--orange mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Learn More</button>
-                    <button class="oa-home-button oa-home-button--grey mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">See Listings</button>
-                    <button class="oa-home-button oa-home-button--white mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Get Started</button>
+                    <h1 class="mdl-typography--display-4">OwnApt</h1>
+                    <h3 class="mdl-typography--display-2">Redefining Property Management</h3>
+                    <a href="#oa-about"><button class="oa-home-button oa-home-button--orange mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Learn More</button></a>
+                    <a href="@Url.Action("Index", "Listings")"><button class="oa-home-button oa-home-button--grey mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">See Listings</button></a>
+                    <a href="#oa-contact"><button class="oa-home-button oa-home-button--white mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Get Started</button></a>
                 </div>
             </section>
 
             @*About*@
-            <section class="oa-section oa-section--orange">
+            <section id="oa-about" class="oa-section oa-section--orange">
                 <div class="mdl-typography--text-center">
-                    <h3 class="mdl-typography--headline">Redefining the Property Management World</h3>
+                    <h3 class="mdl-typography--display-2">Redefining the Property Management World</h3>
                     <div class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--5-col-desktop mdl-cell--1-offset-desktop mdl-cell--12-col-tablet">
-                            <video poster="~/images/header.jpg" preload="auto" controls="controls">
+                        <div class="mdl-cell mdl-cell--middle mdl-cell--5-col-desktop mdl-cell--1-offset-desktop mdl-cell--12-col-tablet">
+                            <video preload="auto" controls="controls">
                                 <source src="~/videos/explainer_HD1080.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <div class="mdl-cell mdl-cell--5-col-desktop mdl-cell--12-col-tablet">
+                        <div class="mdl-cell mdl-cell--middle mdl-cell--5-col-desktop mdl-cell--12-col-tablet">
                             <p class="oa-home-text__body mdl-typography--body-1">
                                 We believe in a two-fold approach to reshaping what it means to be a property management company. First, we believe in fostering strong relationships and strive to deliver a Welcome Home experience with our tenants. Second, we believe in innovating property management by implementing our own cutting-edge software solutions to provide a better, faster, more reliable management service.
                             </p>
@@ -83,9 +87,9 @@
             </section>
 
             @*Services*@
-            <section class="oa-section oa-section--white">
+            <section id="oa-services" class="oa-section oa-section--white">
                 <div class="mdl-typography--text-center">
-                    <h3 class="mdl-typography--headline">At Your Service</h3>
+                    <h3 class="mdl-typography--display-2">At Your Service</h3>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--6-col-phone">
                             <i class="material-icons material-icons--large material-icons--orange">computer</i>
@@ -132,7 +136,7 @@
             </section>
 
             @*Photos*@
-            <section class="oa-section">
+            <section class="oa-section oa-section--white">
                 <div class="oa-home-content--no-margin mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col-desktop">
                         <img src="~/images/portfolio/1.jpg" />
@@ -147,9 +151,9 @@
             </section>
 
             @*Pricing*@
-            <section class="oa-section oa-section--white">
+            <section id="oa-pricing" class="oa-section oa-section--white">
                 <div class="mdl-typography--text-center">
-                    <h3 class="mdl-typography--headline">Simple Pricing</h3>
+                    <h3 class="mdl-typography--display-2">Simple Pricing</h3>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col-tablet">
                             <i class="material-icons material-icons--large material-icons--orange">attach_money</i>
@@ -166,48 +170,87 @@
                             <p class="mdl-typography--headline">More Savings</p>
                             <p class="mdl-typography--body-1">More money in your pocket!</p>
                         </div>
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <a href="#oa-contact"><button class="oa-home-button oa-home-button--orange mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Get Started</button></a>
+                        </div>
                     </div>
-                    <button class="oa-home-button oa-home-button--orange mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Get Started</button>
+                </div>
+            </section>
+
+            @*Photos*@
+            <section class="oa-section oa-section--white">
+                <div class="oa-home-content--no-margin mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col-desktop">
+                        <img src="~/images/portfolio/4.jpg" />
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--hide-phone">
+                        <img src="~/images/portfolio/5.jpg" />
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
+                        <img src="~/images/portfolio/6.jpg" />
+                    </div>
                 </div>
             </section>
 
             @*Contact*@
-            <section class="oa-section oa-section--white mdl-typography--text-center">
-                <h3 class="mdl-typography--headline">Let's Get In Touch!</h3>
-                <p class="mdl-typography--subhead">Ready for us to take on your properties? That's great! Just give us a call, send us a text, or shoot us an email and we'll get started!</p>
+            <section id="oa-contact" class="oa-section oa-section--white mdl-typography--text-center">
+                <h3 class="mdl-typography--display-2">Let's Get In Touch!</h3>
+                <p class="oa-section__subhead mdl-typography--subhead">Ready for us to take on your properties? That's great! Just give us a call, send us a text, shoot us an email, or fill out and submit the contact form and we'll get started!</p>
                 <div class="mdl-grid">
-                    <i class="material-icons">phone</i> +1.208.991.0492
-                    <i class="material-icons">phone</i> support@ownapt.com
-                </div>
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input mdl-color-text--white" type="text" id="firstName">
-                            <label class="mdl-textfield__label" for="firstName">First Name</label>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <p><i class="material-icons material-icons--orange">phone</i> +1.208.991.0492</p>
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <p><i class="material-icons material-icons--orange">email</i> support@ownapt.com</p>
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <p><i class="material-icons material-icons--orange">markunread_mailbox</i> 6402 W. Bermuda Dr.<br />Boise, ID 83709</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="lastName">
-                            <label class="mdl-textfield__label" for="lastName">Last Name</label>
-                        </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="tel" id="phoneNumber">
-                            <label class="mdl-textfield__label" for="phoneNumber">Phone</label>
-                        </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="email" id="email">
-                            <label class="mdl-textfield__label" for="email">Email</label>
-                        </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <textarea class="mdl-textfield__input" type="text" rows="3" id="message"></textarea>
-                            <label class="mdl-textfield__label" for="message">Message (optional)</label>
+                    <div class="mdl-cell mdl-cell--middle mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+                        <div class="mdl-grid">
+                            @Html.AntiForgeryToken()
+                            <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" pattern="-?[a-zA-Z0-9]*(\.[a-zA-Z0-9]+)?" type="text" id="firstName">
+                                    <label class="mdl-textfield__label" for="firstName">First Name</label>
+                                    <span class="mdl-textfield__error">Only a-z, A-Z and 0-9 are allowed</span>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" pattern="-?[a-zA-Z0-9]*(\.[a-zA-Z0-9]+)?" type="text" id="lastName">
+                                    <label class="mdl-textfield__label" for="lastName">Last Name</label>
+                                    <span class="mdl-textfield__error">Only a-z, A-Z and 0-9 are allowed</span>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" type="tel" id="phoneNumber">
+                                    <label class="mdl-textfield__label" for="phoneNumber">Phone (with area code)</label>
+                                    <span class="mdl-textfield__error">Valid formats: (111) 222-3333, 1112223333, or 111-222-3333</span>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="email" id="email">
+                                    <label class="mdl-textfield__label" for="email">Email</label>
+                                    <span class="mdl-textfield__error">Invalid email format</span>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <textarea class="mdl-textfield__input" type="text" rows="3" id="message"></textarea>
+                                    <label class="mdl-textfield__label" for="message">Message (optional)</label>
+                                    <span id="message-count-remaining" class="mdl-typography--caption">1000 / 1000</span>
+                                </div>
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <button id="oa-submitform" class="oa-home-button oa-home-button--orange mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,5 +265,59 @@
             </footer>
         </main>
     </div>
+    <div id="oa-home-toast" class="mdl-js-snackbar mdl-snackbar mdl-color--white">
+        <div class="mdl-snackbar__text mdl-color-text--deep-orange"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+    <script>
+        (function () {
+            'use strict';
+            var snackbar = document.querySelector('#oa-home-toast');
+
+            $('#message').on('keyup', function () {
+                var countRemaining = 1000 - $('#message').val().length;
+                $('#message-count-remaining').text(countRemaining + ' / 1000').removeClass('error');
+
+                if (countRemaining < 0) {
+                    $('#message-count-remaining').text(countRemaining + ' / 1000 (message is too long)').addClass('error');
+                }
+            })
+
+            $('#oa-submitform').click(function () {
+                var data = {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                    Email: $('#email').val(),
+                    FirstName: $('#firstName').val(),
+                    LastName: $('#lastName').val(),
+                    Message: $('#message').val(),
+                    Phone: $('#phoneNumber').val()
+                };
+
+                $.ajax({
+                    url: '@Url.Action("SubmitForm", "Home")',
+                    type: 'POST',
+                    data: data,
+                    success: function (data) {
+                        if (data) {
+                            snackbar.MaterialSnackbar.showSnackbar({ message: "Message sent! We'll be in touch shortly." });
+                            $('#email').val('');
+                            $('#firstName').val('');
+                            $('#lastName').val('');
+                            $('#message').val('');
+                            $('#phoneNumber').val('');
+                            $('#message-count-remaining').text((1000 - $('#message').val().length) + ' / 1000').removeClass('error');
+                        }
+
+                        else {
+                            snackbar.MaterialSnackbar.showSnackbar({ message: "Something went wrong! Please contact by phone, text, or email." });
+                        }
+                    },
+                    error: function () {
+                        snackbar.MaterialSnackbar.showSnackbar({message: "Something went wrong! Please contact by phone, text, or email."});
+                    }
+                });
+            });
+        }());
+    </script>
 </body>
 </html>

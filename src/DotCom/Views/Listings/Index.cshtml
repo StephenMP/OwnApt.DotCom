@@ -1,19 +1,69 @@
-﻿@{
-    Layout = "/Views/Home/_HomeLayout.cshtml";
-    ViewData["Title"] = "Property Listings";
-    ViewData["ShowListings"] = true;
-    ViewData["ShowLogin"] = false;
+﻿@model OwnApt.DotCom.Model.Home.HomeIndexViewModel
+
+@{
+    var authText = User.Identity.IsAuthenticated ? "Logout" : "Login";
 }
 
-<header id="page-top">
-    <div class="header-content">
-        <div class="header-content-inner">
-            <img width="200" height="193" src="~/images/Logo/Logo_250x241.png" />
-            <h1>OwnApt, LLC</h1>
-            <p>
-                All of our homes are currently occupied.
-                Please contact us if you have any questions.
-            </p>        
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Introducing Lollipop, a sweet new take on Android.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
+
+    <title>OwnApt, LLC</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/lib/material-design-lite/material.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/content/css/home/Index.css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/material-design-lite/material.min.js"></script>
+
+</head>
+<body>
+    <div class="oa-home-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="oa-home-layout__header mdl-layout__header mdl-layout__header--waterfall">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title"><img src="~/images/Logo/Logo_50x48.png" /> OwnApt</span>
+                <div class="mdl-layout-spacer"></div>
+                <nav id="oa-header-nav" class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="@Url.Action("Index", "Home")">Home</a>
+                    <a class="mdl-navigation__link" href="http://blog.ownapt.com">Blog</a>
+                    <a class="mdl-navigation__link" href="@Url.Action(authText, "Account")">@authText</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Menu</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="@Url.Action("Index", "Home")">Home</a>
+                <a class="mdl-navigation__link" href="http://blog.ownapt.com">Blog</a>
+                <a class="mdl-navigation__link" href="@Url.Action(authText, "Account")">@authText</a>
+            </nav>
         </div>
+        <main class="oa-home-content mdl-layout__content">
+            <section class="oa-home-top oa-section">
+                <div class="mdl-typography--text-center mdl-color-text--white">
+                    <img width="200" height="193" src="~/images/Logo/Logo_250x241.png" />
+                    <h1 class="mdl-typography--display-4">OwnApt</h1>
+                    <h3 class="mdl-typography--body-1">All of our homes are currently occupied. Please contact us if you have any questions</h3>
+                </div>
+            </section>
+            <footer class="mdl-mini-footer">
+                <div class="mdl-mini-footer--left-section">
+                    <div class="mdl-typography--body-1">&copy; @DateTime.Now.Year OwnApt, LLC | All Rights Reserved.</div>
+                </div>
+                <div class="mdl-mini-footer--right-section">
+                    <div class="mdl-typography--body-1"><a class="mdl-navigation__link" href="#"><i class="fa fa-2x fa-facebook"></i></a></div>
+                </div>
+            </footer>
+        </main>
     </div>
-</header>
+</body>
+</html>

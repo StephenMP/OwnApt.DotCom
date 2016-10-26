@@ -40,6 +40,8 @@ namespace OwnApt.DotCom.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<bool> SubmitForm(ContactFormViewDto contactFormViewModel)
         {
             var meh = await this.emailSender.SendEmailAsync(contactFormViewModel.FullName, contactFormViewModel.ToString());
