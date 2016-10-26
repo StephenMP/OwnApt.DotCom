@@ -52,6 +52,7 @@
 }
 .oa-home-layout .oa-home-layout__header {
   background: #333;
+  transition: background-color 500ms ease, color 500ms ease;
 }
 .oa-home-layout .is-casting-shadow {
   background: #fff;
