@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Introducing Lollipop, a sweet new take on Android.">
+    <meta name="description" content="At OwnApt, we believe in redefining what it means to be a property management company. We value simplicity, personality, and technology which remain at the core of everything we do.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
@@ -93,7 +93,7 @@
                     <h3 class="mdl-typography--display-2">At Your Service</h3>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--6-col-phone">
-                            <i class="material-icons material-icons--large material-icons--orange wow bounceInUp">desktop_mac</i>
+                            <i class="material-icons material-icons--large material-icons--orange">desktop_mac</i>
                             <p class="mdl-typography--headline">Sturdy Software</p>
                             <p class="mdl-typography--body-1">We build our own custom software and update it regularly</p>
                         </div>
@@ -216,29 +216,29 @@
                             @Html.AntiForgeryToken()
                             <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
                                 <div class="mdl-textfield mdl-js-textfield">
-                                    <input class="mdl-textfield__input" pattern="-?[a-zA-Z0-9]*(\.[a-zA-Z0-9]+)?" type="text" id="firstName">
-                                    <label class="mdl-textfield__label" for="firstName">First Name</label>
+                                    <input class="mdl-textfield__input required" pattern="-?[a-zA-Z0-9\s]*(\.[a-zA-Z0-9\s]+)?" type="text" id="firstName">
+                                    <label class="mdl-textfield__label" for="firstName">First Name (required)</label>
                                     <span class="mdl-textfield__error">Only a-z, A-Z and 0-9 are allowed</span>
                                 </div>
                             </div>
                             <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
                                 <div class="mdl-textfield mdl-js-textfield">
-                                    <input class="mdl-textfield__input" pattern="-?[a-zA-Z0-9]*(\.[a-zA-Z0-9]+)?" type="text" id="lastName">
-                                    <label class="mdl-textfield__label" for="lastName">Last Name</label>
+                                    <input class="mdl-textfield__input required" pattern="-?[a-zA-Z0-9\s]*(\.[a-zA-Z0-9\s]+)?" type="text" id="lastName">
+                                    <label class="mdl-textfield__label" for="lastName">Last Name (required)</label>
                                     <span class="mdl-textfield__error">Only a-z, A-Z and 0-9 are allowed</span>
                                 </div>
                             </div>
                             <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
                                 <div class="mdl-textfield mdl-js-textfield">
-                                    <input class="mdl-textfield__input" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" type="tel" id="phoneNumber">
-                                    <label class="mdl-textfield__label" for="phoneNumber">Phone (with area code)</label>
-                                    <span class="mdl-textfield__error">Valid formats: (111) 222-3333, 1112223333, or 111-222-3333</span>
+                                    <input class="mdl-textfield__input required" pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" type="tel" id="phoneNumber">
+                                    <label class="mdl-textfield__label" for="phoneNumber">Phone # w/ Area Code (required)</label>
+                                    <span class="mdl-textfield__error">Valid formats: (111)222-3333, 1112223333, or 111-222-3333</span>
                                 </div>
                             </div>
                             <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet">
                                 <div class="mdl-textfield mdl-js-textfield">
-                                    <input class="mdl-textfield__input" type="email" id="email">
-                                    <label class="mdl-textfield__label" for="email">Email</label>
+                                    <input class="mdl-textfield__input required" type="email" id="email">
+                                    <label class="mdl-textfield__label" for="email">Email (required)</label>
                                     <span class="mdl-textfield__error">Invalid email format</span>
                                 </div>
                             </div>
@@ -246,8 +246,8 @@
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" type="text" rows="3" id="message"></textarea>
                                     <label class="mdl-textfield__label" for="message">Message (optional)</label>
-                                    <span id="message-count-remaining" class="mdl-typography--caption">1000 / 1000</span>
                                 </div>
+                                <span id="message-count-remaining" class="mdl-typography--caption">1000 / 1000</span>
                             </div>
                             <div class="mdl-cell mdl-cell--12-col">
                                 <button id="oa-submitform" class="oa-home-button oa-home-button--orange mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
@@ -270,11 +270,13 @@
         <div class="mdl-snackbar__text mdl-color-text--deep-orange"></div>
         <button class="mdl-snackbar__action" type="button"></button>
     </div>
-
     <script>
-
         (function () {
             'use strict';
+
+            function htmlEncode(value) {
+                return $('<div/>').text(value).html();
+            }
 
             $('a[href*="#"]:not([href="#"])').click(function () {
                 if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -301,13 +303,25 @@
             })
 
             $('#oa-submitform').click(function () {
+                var isValid = true;
+                $('.required').each(function () {
+                    if ($(this).val().length === 0) {
+                        isValid = false;
+                    }
+                });
+
+                if (!isValid) {
+                    snackbar.MaterialSnackbar.showSnackbar({ message: "Please complete all required fields." });
+                    return false;
+                }
+
                 var data = {
                     __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                    Email: $('#email').val(),
-                    FirstName: $('#firstName').val(),
-                    LastName: $('#lastName').val(),
-                    Message: $('#message').val(),
-                    Phone: $('#phoneNumber').val()
+                    Email: htmlEncode($('#email').val()), // HTML Encode
+                    FirstName: htmlEncode($('#firstName').val()),
+                    LastName: htmlEncode($('#lastName').val()),
+                    Message: htmlEncode($('#message').val()),
+                    Phone: htmlEncode($('#phoneNumber').val())
                 };
 
                 $.ajax({
@@ -335,6 +349,43 @@
                 });
             });
         }());
+
+        function isElementInViewport(el) {
+
+            if (typeof jQuery === "function" && el instanceof jQuery) {
+                el = el[0];
+            }
+
+            var rect = el.getBoundingClientRect();
+
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        $('.mdl-layout__content').scroll(function () {
+            if (isElementInViewport($('#oa-services'))) {
+                if ($('#oa-services i').hasClass('animated')) {
+                    return false;
+                }
+
+                $('#oa-services i').addClass('animated').addClass('tada');
+            }
+
+            if (isElementInViewport($('#oa-pricing'))) {
+                if ($('#oa-pricing i').hasClass('animated')) {
+                    return false;
+                }
+
+                $('#oa-pricing i').addClass('animated').addClass('zoomIn');
+            }
+        })
     </script>
+
+    @*Google Analytics*@
+    <script>(function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-77180345-1', 'auto'); ga('send', 'pageview');</script>
 </body>
 </html>
