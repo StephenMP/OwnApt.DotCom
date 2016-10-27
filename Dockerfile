@@ -24,8 +24,6 @@ RUN ["dotnet", "restore"]
 
 # Build the rest of the app
 COPY src/DotCom /app
-RUN ["dotnet", "build"]
-RUN ["dotnet", "bundle"]
 RUN ["npm", "install"]
 RUN ["bower", "install", "--allow-root"]
 RUN ["gulp", "build"]
