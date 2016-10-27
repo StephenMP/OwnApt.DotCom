@@ -26,6 +26,7 @@ RUN ["dotnet", "restore"]
 COPY src/DotCom /app
 RUN ["npm", "install"]
 RUN ["bower", "install", "--allow-root"]
+RUN ["npm", "install", "-g", "gulp"]
 RUN ["gulp", "build"]
 
 EXPOSE 5000/tcp
