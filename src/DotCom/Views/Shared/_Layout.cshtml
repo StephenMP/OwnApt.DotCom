@@ -5,23 +5,23 @@
 
     @*Favicon*@
     <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
-    
+
     @*Google Material Icons*@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <environment names="Development">
+    @*<environment names="Development">*@
         <link href="~/lib/material-design-lite/material.min.css"rel="stylesheet" type="text/css" />
         <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="~/content/css/shared/_Layout.css" rel="stylesheet" type="text/css" />
 
         <script src="~/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
         <script src="~/lib/material-design-lite/material.min.js" type="text/javascript"></script>
-    </environment>
+    @*</environment>
 
     <environment names="Staging,Production">
         <link href="~/content-min/css/shared/_Layout.min.css" rel="stylesheet" type="text/css" />
         <script src="~/content-min/js/shared/_Layout.min.js" type="text/javascript"></script>
-    </environment>
+    </environment>*@
 
     @RenderSection("_LayoutStyles", false)
     @RenderSection("_LayoutScripts", false)
