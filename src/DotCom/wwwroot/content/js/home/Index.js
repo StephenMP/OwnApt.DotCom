@@ -1,9 +1,45 @@
-﻿(function () {
+﻿var snackbar = document.querySelector('#oa-home-toast');
+
+function isElementInViewport(el) {
+
+    if (typeof jQuery === "function" && el instanceof jQuery) {
+        el = el[0];
+    }
+
+    var rect = el.getBoundingClientRect();
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+function htmlEncode(value) {
+    return $('<div/>').text(value).html();
+}
+
+(function () {
     'use strict';
 
-    function htmlEncode(value) {
-        return $('<div/>').text(value).html();
-    }
+    $('.mdl-layout__content').scroll(function () {
+        if (isElementInViewport($('#oa-services'))) {
+            if ($('#oa-services i').hasClass('animated')) {
+                return false;
+            }
+
+            $('#oa-services i').addClass('animated').addClass('tada');
+        }
+
+        if (isElementInViewport($('#oa-pricing'))) {
+            if ($('#oa-pricing i').hasClass('animated')) {
+                return false;
+            }
+
+            $('#oa-pricing i').addClass('animated').addClass('zoomIn');
+        }
+    });
 
     $('a[href*="#"]:not([href="#"])').click(function () {
         if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
@@ -18,7 +54,6 @@
         }
     });
 
-    var snackbar = document.querySelector('#oa-home-toast');
 
     $('#message').on('keyup', function () {
         var countRemaining = 1000 - $('#message').val().length;
@@ -77,36 +112,3 @@
     });
 }());
 
-function isElementInViewport(el) {
-
-    if (typeof jQuery === "function" && el instanceof jQuery) {
-        el = el[0];
-    }
-
-    var rect = el.getBoundingClientRect();
-
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-$('.mdl-layout__content').scroll(function () {
-    if (isElementInViewport($('#oa-services'))) {
-        if ($('#oa-services i').hasClass('animated')) {
-            return false;
-        }
-
-        $('#oa-services i').addClass('animated').addClass('tada');
-    }
-
-    if (isElementInViewport($('#oa-pricing'))) {
-        if ($('#oa-pricing i').hasClass('animated')) {
-            return false;
-        }
-
-        $('#oa-pricing i').addClass('animated').addClass('zoomIn');
-    }
-});

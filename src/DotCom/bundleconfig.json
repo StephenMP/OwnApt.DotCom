@@ -3,10 +3,8 @@
     "outputFileName": "wwwroot/content-min/css/home/Index.min.css",
     "inputFiles": [
       "wwwroot/lib/material-design-lite/material.min.css",
-      "wwwroot/lib/font-awesome/css/font-awesome.min.css",
       "wwwroot/content/css/home/Index.css",
-      "wwwroot/lib/animate.css/animate.min.css",
-      "wwwroot/lib/font-awesome/css/font-awesome.min.css"
+      "wwwroot/lib/animate.css/animate.min.css"
     ],
     "minify": { "enabled": true }
   },
