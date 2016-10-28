@@ -1,9 +1,22 @@
-﻿@{ 
+﻿@{
     Layout = null;
 }
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="@ViewData["MetaDescription"]">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
+    <script src="~/lib/auth0-lock/build/lock.min.js"></script>
+
+    <title>@ViewData["Title"]</title>
 </head>
 
-@RenderBody()
+<body>
+    @RenderBody()
+</body>
+</html>

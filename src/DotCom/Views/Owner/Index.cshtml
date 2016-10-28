@@ -13,25 +13,26 @@
 }
 
 @section _OwnerLayoutStyles{
-    @*<environment names="Development">*@
+    <environment names="Development">
         <link href="~/content/css/owner/Index.css" rel="stylesheet" type="text/css" />
-    @*</environment>
+    </environment>
 
     <environment names="Staging,Production">
         <link href="~/content-min/css/owner/Index.min.css" rel="stylesheet" type="text/css" />
-    </environment>*@
+    </environment>
 }
 
 @section _OwnerLayoutScripts{
     <script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
 
-    @*<environment names="Development">*@
+    <environment names="Development">
+        <script src="~/lib/isotope/dist/isotope.pkgd.min.js" type="text/javascript"></script>
         <script src="~/content/js/owner/Index.js" type="text/javascript"></script>
-    @*</environment>
+    </environment>
 
     <environment names="Staging,Production">
         <script src="~/content-min/js/owner/Index.min.js" type="text/javascript"></script>
-    </environment>*@
+    </environment>
 }
 
 <div id="oa-owner-overview-container">

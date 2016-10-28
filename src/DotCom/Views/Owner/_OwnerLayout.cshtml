@@ -1,17 +1,17 @@
 ﻿@{
     Layout = "_Layout";
-    ViewData["DrawerTitle"] = "Owner Portal";
+    ViewData["Title"] = "OwnApt, LLC - Owner Portal Overview";
+    ViewData["MetaDescription"] = "The Owner Portal Overview page is where owners can see the most important information about their properties at a glance.";
 }
 
 @section _LayoutStyles{
-    @*<environment names="Development">*@
-        <link href="~/content/css/owner/_OwnerLayout.css" rel="stylesheet" type="text/css" />
-    @*</environment>
-
-    <environment names="Staging,Production">
-        <link href="~/content-min/css/owner/_OwnerLayout.min.css" rel="stylesheet" type="text/css" />
-    </environment>*@
+    @RenderSection("_OwnerLayoutStyles", false)
 }
+
+@section _LayoutScripts{
+    @RenderSection("_OwnerLayoutScripts", false)
+}
+
 @section _LayoutHeaderLinks{
     @*<a class="mdl-navigation__link" href="">Contact</a>*@
     <a class="mdl-navigation__link" href="@Url.Action("Logout", "Account")">Logout</a>
@@ -24,8 +24,5 @@
 
     @RenderSection("_OwnerLayoutDrawerLinks", false)
 }
-
-@RenderSection("_OwnerLayoutStyles", false)
-@RenderSection("_OwnerLayoutScripts", false)
 
 @RenderBody()

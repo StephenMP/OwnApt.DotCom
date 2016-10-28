@@ -1,16 +1,10 @@
-﻿@{ 
+﻿@{
     Layout = "_AccountLayout";
+    ViewData["Title"] = "OwnApt, LLC - Sign Up";
+    ViewData["MetaDescription"] = "Sign up for OwnApt Owner Portal access and gain insight into all of your account and property information.";
 }
 
 @model OwnApt.DotCom.Model.Account.LockContextModel
-
-<environment names="Development">
-    <script src="~/lib/auth0-lock/build/lock.js"></script>
-</environment>
-
-<environment names="Staging,Production">
-    <script src="~/lib/auth0-lock/build/lock.min.js"></script>
-</environment>
 
 <script>
     var redirectUrl = '@Model.CallbackUrl';
