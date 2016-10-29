@@ -75,12 +75,12 @@ namespace OwnApt.DotCom.Presentation.Service
 
         public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail)
         {
-            return await this.accountDomainService.CreateOwner(ownerId, ownerEmail);
+            return await this.accountDomainService.CreateOwnerAsync(ownerId, ownerEmail);
         }
 
         public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token)
         {
-            return await this.accountDomainService.CreateOwner(ownerId, ownerEmail, token);
+            return await this.accountDomainService.CreateOwnerAsync(ownerId, ownerEmail, token);
         }
 
         public async Task RegisterSignUpTokenAsync(string token)

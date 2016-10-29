@@ -41,16 +41,14 @@ namespace OwnApt.DotCom.Domain.Service
 
         private readonly ILogger logger;
         private readonly IMailGunRestClient restClient;
-        private IDataProtector dataProtector;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public SignUpService(IMailGunRestClient restClient, IDataProtectionProvider dataProtectionProvider, ILoggerFactory loggerFactory)
+        public SignUpService(IMailGunRestClient restClient, ILoggerFactory loggerFactory)
         {
             this.restClient = restClient;
-            this.dataProtector = dataProtectionProvider.CreateProtector(nameof(SignUpService));
             this.logger = loggerFactory.CreateLogger<SignUpService>();
         }
 

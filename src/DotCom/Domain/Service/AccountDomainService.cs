@@ -16,9 +16,9 @@ namespace OwnApt.DotCom.Domain.Service
     {
         #region Public Methods
 
-        Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail);
+        Task<OwnerModel> CreateOwnerAsync(string ownerId, string ownerEmail);
 
-        Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token);
+        Task<OwnerModel> CreateOwnerAsync(string ownerId, string ownerEmail, string token);
 
         Task RegisterSignUpTokenAsync(string token);
 
@@ -65,7 +65,7 @@ namespace OwnApt.DotCom.Domain.Service
 
         #region Public Methods
 
-        public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail)
+        public async Task<OwnerModel> CreateOwnerAsync(string ownerId, string ownerEmail)
         {
             var ownerModel = new OwnerModel
             {
@@ -87,7 +87,7 @@ namespace OwnApt.DotCom.Domain.Service
             throw ExceptionUtility.RaiseException(createOwnerResult, this.logger);
         }
 
-        public async Task<OwnerModel> CreateOwner(string ownerId, string ownerEmail, string token)
+        public async Task<OwnerModel> CreateOwnerAsync(string ownerId, string ownerEmail, string token)
         {
             var signUpToken = await this.signUpService.ParseTokenAsync(token);
             var ownerModel = new OwnerModel
