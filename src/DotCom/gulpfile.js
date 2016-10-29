@@ -8,7 +8,8 @@ var gulp = require("gulp"),
     del = require("del"),
     bundleconfig = require("./bundleconfig.json"),
     path = require("path"),
-    less = require("gulp-less");
+    less = require("gulp-less"),
+    runSequence = require('run-sequence');
 
 gulp.task("less", function () {
     return gulp.src("./wwwroot/content/less/**/*.less")
@@ -50,7 +51,9 @@ gulp.task("clean", function () {
     return del(files);
 });
 
-gulp.task("build", ["clean", "min:js", "min:css"]);
+gulp.task("build", function () {
+    runSequence("clean", ["min:js", "min:css"]);
+});
 
 gulp.task("watch", ["build"], function () {
     gulp.watch("./wwwroot/content/**/*.less", ["min:css"]);
