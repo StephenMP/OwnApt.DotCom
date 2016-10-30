@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using AutoMapper;
 using DotCom.Tests.Component.TestingUtilities;
 using Microsoft.Extensions.Logging;
@@ -33,9 +34,8 @@ namespace DotCom.Tests.Component.Domain.Service
         #region Public Methods
 
         [Fact]
-        public void CanCreateOwnerAsyncFromToken()
+        public async Task CanCreateOwnerAsyncFromToken()
         {
-            this.steps.GivenIHaveServiceUris();
             this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
             this.steps.GivenIHaveMockedSignUpService();
             this.steps.GivenIHaveAnOwnerToCreate();
@@ -44,7 +44,22 @@ namespace DotCom.Tests.Component.Domain.Service
             this.steps.GivenIHaveAMockedProxy();
             this.steps.GivenIHaveAnAccountDomainService();
 
-            this.steps.WhenICreateOwner();
+            await this.steps.WhenICreateOwnerAsyncFromToken();
+
+            this.steps.ThenICanVerifyICreateOwner();
+        }
+
+        [Fact]
+        public async Task CanCreateOwnerAsync()
+        {
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAnOwnerToCreate();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveAMockedProxy();
+            this.steps.GivenIHaveAnAccountDomainService();
+
+            await this.steps.WhenICreateOwnerAsync();
 
             this.steps.ThenICanVerifyICreateOwner();
         }
@@ -136,19 +151,17 @@ namespace DotCom.Tests.Component.Domain.Service
         internal void GivenIHaveMockedSystemAndThirdPartyObjects()
         {
             this.mapper = OwnAptStartup.BuildAutoMapper();
-            this.loggerFactory = LoggerFactoryMockBuilder
-                                    .NewBuilder()
-                                    .AddSerilog()
-                                    .Build();
-        }
 
-        internal void GivenIHaveServiceUris()
-        {
             this.serviceUris = new ServiceUris { ApiBaseUri = "http://this.is/a/test" };
             this.serviceUriOptions = OptionsMockBuilder<ServiceUris>
                                         .NewBuilder()
                                         .Value(this.serviceUris)
                                         .Build();
+
+            this.loggerFactory = LoggerFactoryMockBuilder
+                                    .NewBuilder()
+                                    .AddSerilog()
+                                    .Build();
         }
 
         internal void ThenICanVerifyICreateOwner()
@@ -157,9 +170,14 @@ namespace DotCom.Tests.Component.Domain.Service
             Assert.Equal(this.ownerToCreate, this.ownerModelResult);
         }
 
-        internal void WhenICreateOwner()
+        internal async Task WhenICreateOwnerAsyncFromToken()
         {
-            this.ownerModelResult = this.accountDomainService.CreateOwnerAsync(this.ownerId, this.ownerEmail, this.token).Result;
+            this.ownerModelResult = await this.accountDomainService.CreateOwnerAsync(this.ownerId, this.ownerEmail, this.token);
+        }
+
+        internal async Task WhenICreateOwnerAsync()
+        {
+            this.ownerModelResult = await this.accountDomainService.CreateOwnerAsync(this.ownerId, this.ownerEmail);
         }
 
         #endregion Internal Methods

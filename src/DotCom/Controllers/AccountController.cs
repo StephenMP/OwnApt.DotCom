@@ -87,7 +87,7 @@ namespace OwnApt.DotCom.Controllers
             var ownerId = this.claimsService.GetUserId(User);
             var ownerEmail = this.claimsService.GetUserEmail(User);
 
-            await this.accountPresentationService.CreateOwner(ownerId, ownerEmail, token);
+            await this.accountPresentationService.CreateOwnerAsync(ownerId, ownerEmail, token);
             await this.accountPresentationService.RegisterSignUpTokenAsync(token);
 
             return RedirectToAction("Index", "Owner");
