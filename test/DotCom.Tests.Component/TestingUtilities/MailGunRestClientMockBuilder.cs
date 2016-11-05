@@ -11,7 +11,7 @@ namespace DotCom.Tests.Component.TestingUtilities
 {
     public class MailGunRestClientMockBuilder : MockBuilder<IMailGunRestClient>
     {
-        public static MailGunRestClientMockBuilder NewBuilder() => new MailGunRestClientMockBuilder();
+        public static MailGunRestClientMockBuilder New() => new MailGunRestClientMockBuilder();
 
         public MailGunRestClientMockBuilder ExecuteAny(HttpStatusCode returnStatusCode)
         {

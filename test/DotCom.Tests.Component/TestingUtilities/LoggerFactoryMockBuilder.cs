@@ -5,24 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Serilog;
+using Serilog.Core;
 
 namespace DotCom.Tests.Component.TestingUtilities
 {
-    public class LoggerFactoryMockBuilder : MockBuilder<ILoggerFactory>
+    public class LoggerFactoryMockBuilder
     {
-        public static LoggerFactoryMockBuilder NewBuilder() => new LoggerFactoryMockBuilder();
+        public static LoggerFactoryMockBuilder New() => new LoggerFactoryMockBuilder();
 
-        public LoggerFactoryMockBuilder AddSerilog()
+        public ILoggerFactory Build()
         {
             Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .MinimumLevel.Debug()
-                .WriteTo.Async(a => a.Console())
-                .CreateLogger();
+                            .Enrich.FromLogContext()
+                            .MinimumLevel.Debug()
+                            .WriteTo.Async(a => a.Console())
+                            .CreateLogger();
 
-            this.Mock.Object.AddSerilog();
-
-            return this;
+            return new LoggerFactory().AddSerilog();
         }
     }
 }

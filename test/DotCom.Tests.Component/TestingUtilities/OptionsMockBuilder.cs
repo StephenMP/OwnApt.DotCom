@@ -8,7 +8,7 @@ namespace DotCom.Tests.Component.TestingUtilities
 {
     public class OptionsMockBuilder<TSettings> : MockBuilder<IOptions<TSettings>> where TSettings : class, new()
     {
-        public static OptionsMockBuilder<TSettings> NewBuilder() => new OptionsMockBuilder<TSettings>();
+        public static OptionsMockBuilder<TSettings> New() => new OptionsMockBuilder<TSettings>();
         public OptionsMockBuilder<TSettings> Value(TSettings value)
         {
             this.Mock.Setup(m => m.Value).Returns(value);

@@ -24,7 +24,7 @@ namespace OwnApt.DotCom.Domain.Service
 
         Task<IRestResponse> SendSignUpEmailAsync(string name, string email, string[] propertyIds);
 
-        Task UpdateOwnerPropertyIds(string ownerId, string token);
+        Task UpdateOwnerPropertyIdsAsync(string ownerId, string token);
 
         Task<bool> ValidateSignUpTokenAsync(string token);
 
@@ -135,7 +135,7 @@ namespace OwnApt.DotCom.Domain.Service
             return await this.signUpService.SendSignUpEmailAsync(name, email, propertyIds);
         }
 
-        public async Task UpdateOwnerPropertyIds(string ownerId, string token)
+        public async Task UpdateOwnerPropertyIdsAsync(string ownerId, string token)
         {
             var signUpToken = await this.signUpService.ParseTokenAsync(token);
             var readOwnerRequest = new ReadOwnerProxyRequest(this.serviceUris, ownerId);

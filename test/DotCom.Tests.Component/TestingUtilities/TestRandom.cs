@@ -7,7 +7,7 @@ namespace DotCom.Tests.Component.TestingUtilities
 {
     public static class TestRandom
     {
-        private static Random Random = new Random(Guid.NewGuid().ToString().GetHashCode());
+        private static readonly Random Random = new Random(Guid.NewGuid().ToString().GetHashCode());
 
         public static int Integer => Random.Next();
 

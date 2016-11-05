@@ -9,7 +9,7 @@ namespace DotCom.Tests.Component.TestingUtilities
 {
     public class ProxyMockBuilder : MockBuilder<IProxy>
     {
-        public static ProxyMockBuilder NewBuilder() => new ProxyMockBuilder();
+        public static ProxyMockBuilder New() => new ProxyMockBuilder();
 
         public ProxyMockBuilder InvokeAsyncAny<TRequestDto, TResponseDto>(IProxyResponse<TResponseDto> response)
         {

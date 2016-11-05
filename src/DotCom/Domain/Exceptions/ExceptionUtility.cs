@@ -36,7 +36,6 @@ namespace OwnApt.DotCom.Domain.Exceptions
             builder.AppendLine($"ResponseMessage: {proxyResponse.ResponseMessage}");
             builder.AppendLine($"StatusCode: {proxyResponse.StatusCode}");
 
-            var message = proxyResponse.ResponseMessage ?? $": {proxyResponse.StatusCode.ToString()}";
             return HandleException(new Exception(builder.ToString()), logger, LogLevel.Critical);
         }
 
