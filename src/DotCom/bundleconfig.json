@@ -18,8 +18,6 @@
     "minify": { "enabled": true }
   },
 
-
-
   {
     "outputFileName": "wwwroot/content-min/css/listings/Index.min.css",
     "inputFiles": [
@@ -37,8 +35,6 @@
     "minify": { "enabled": true }
   },
 
-
-
   {
     "outputFileName": "wwwroot/content-min/css/owner/Index.min.css",
     "inputFiles": [
@@ -54,8 +50,6 @@
     ],
     "minify": { "enabled": true }
   },
-
-
 
   {
     "outputFileName": "wwwroot/content-min/css/shared/_Layout.min.css",

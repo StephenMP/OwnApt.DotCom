@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using DotCom.Tests.Component.TestingUtilities;
 using OwnApt.DotCom.Domain.Service;
@@ -10,14 +7,26 @@ using Xunit;
 
 namespace DotCom.Tests.Component.Domain.Service
 {
-    public class SignUpServiceSteps : Steps
+    public class SignUpServiceGiven : Given
     {
-        private string propertyId;
-        private ISignUpService signupService;
-        private string token;
-        private SignUpTokenDto signUpToken;
+        #region Private Fields
 
-        internal void GivenIAHaveMockedSignUpService()
+        private SignUpServiceSteps signUpServiceSteps;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public SignUpServiceGiven(SignUpServiceSteps steps) : base(steps)
+        {
+            this.signUpServiceSteps = steps;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void IHaveAMockedSignUpService()
         {
             var mailGunRestClient = MailGunRestClientMockBuilder
                                         .New()
@@ -28,39 +37,120 @@ namespace DotCom.Tests.Component.Domain.Service
                                         .New()
                                         .Build();
 
-            this.signupService = new SignUpService(mailGunRestClient, signUpLoggerFactory);
+            this.signUpServiceSteps.signupService = new SignUpService(mailGunRestClient, signUpLoggerFactory);
         }
 
-        internal async Task GivenIHaveATokenToParse()
+        public void IHaveAPropertyId()
         {
-            this.token = await this.signupService.CreateTokenAsync(this.propertyId);
+            this.signUpServiceSteps.propertyId = TestRandom.String;
         }
 
-        internal void ThenICanVerifyICanParseSignUpToken()
+        public async Task IHaveATokenToParse()
         {
-            Assert.NotNull(this.signUpToken);
-            Assert.Equal(this.propertyId, this.signUpToken.PropertyIds[0]);
+            this.signUpServiceSteps.token = await this.signUpServiceSteps.signupService.CreateTokenAsync(this.signUpServiceSteps.propertyId);
         }
 
-        internal async Task WhenIParseSignUpTokenAsync()
+        #endregion Public Methods
+    }
+
+    public class SignUpServiceSteps : Steps
+    {
+        #region Internal Fields
+
+        internal string propertyId;
+        internal ISignUpService signupService;
+        internal SignUpTokenDto signUpToken;
+        internal string token;
+
+        #endregion Internal Fields
+
+        #region Public Constructors
+
+        public SignUpServiceSteps()
         {
-            this.signUpToken = await this.signupService.ParseTokenAsync(this.token);
+            this.Given = new SignUpServiceGiven(this);
+            this.When = new SignUpServiceWhen(this);
+            this.Then = new SignUpServiceThen(this);
         }
 
-        internal void ThenICanVerifyICreateToken()
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public SignUpServiceGiven Given { get; }
+        public SignUpServiceThen Then { get; }
+        public SignUpServiceWhen When { get; }
+
+        #endregion Public Properties
+    }
+
+    public class SignUpServiceThen : Then
+    {
+        #region Private Fields
+
+        private SignUpServiceSteps signUpServiceSteps;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public SignUpServiceThen(SignUpServiceSteps steps) : base(steps)
         {
-            Assert.NotNull(this.token);
-            Assert.NotEmpty(this.token);
+            this.signUpServiceSteps = steps;
         }
 
-        internal void GivenIHaveAPropertyId()
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void ICanVerifyICanParseSignUpToken()
         {
-            this.propertyId = TestRandom.String;
+            Assert.NotNull(this.signUpServiceSteps.signUpToken);
+            Assert.Equal(this.signUpServiceSteps.propertyId, this.signUpServiceSteps.signUpToken.PropertyIds[0]);
         }
 
-        internal async Task WhenICreateSignUpToken()
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void ICanVerifyICreateToken()
         {
-            this.token = await this.signupService.CreateTokenAsync(this.propertyId);
+            Assert.NotNull(this.signUpServiceSteps.token);
+            Assert.NotEmpty(this.signUpServiceSteps.token);
         }
+
+        #endregion Internal Methods
+    }
+
+    public class SignUpServiceWhen : When
+    {
+        #region Private Fields
+
+        private SignUpServiceSteps signUpServiceSteps;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public SignUpServiceWhen(SignUpServiceSteps steps) : base(steps)
+        {
+            this.signUpServiceSteps = steps;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public async Task ICreateSignUpToken()
+        {
+            this.signUpServiceSteps.token = await this.signUpServiceSteps.signupService.CreateTokenAsync(this.signUpServiceSteps.propertyId);
+        }
+
+        public async Task IParseSignUpTokenAsync()
+        {
+            this.signUpServiceSteps.signUpToken = await this.signUpServiceSteps.signupService.ParseTokenAsync(this.signUpServiceSteps.token);
+        }
+
+        #endregion Public Methods
     }
 }

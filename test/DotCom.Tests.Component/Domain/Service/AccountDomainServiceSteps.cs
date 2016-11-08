@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using DotCom.Tests.Component.TestingUtilities;
 using OwnApt.Api.Contract.Model;
@@ -10,60 +7,56 @@ using Xunit;
 
 namespace DotCom.Tests.Component.Domain.Service
 {
-    internal class AccountDomainServiceSteps : Steps
+    internal class AccountDomainServiceGiven : Given
     {
-        #region Internal Fields
-
-        internal OwnerModel ownerToCreate;
-
-        #endregion Internal Fields
-
         #region Private Fields
 
-        private IAccountDomainService accountDomainService;
-        private string ownerEmail;
-        private string ownerId;
-        private OwnerModel ownerModelResult;
-        private string propertyId;
-        private ISignUpService signupService;
-        private string token;
-        private bool validateSignUpTokenResult;
+        private AccountDomainServiceSteps steps;
 
         #endregion Private Fields
 
-        #region Internal Methods
+        #region Public Constructors
 
-        internal void GivenIHaveAnAccountDomainService()
+        public AccountDomainServiceGiven(AccountDomainServiceSteps steps) : base(steps)
         {
-            this.accountDomainService = new AccountDomainService(this.signupService, this.proxy, this.mapper, this.serviceUriOptions, this.loggerFactory);
+            this.steps = steps;
         }
 
-        internal void GivenIHaveAnOwnerToCreate()
-        {
-            this.ownerId = TestRandom.String;
-            this.ownerEmail = TestRandom.String;
+        #endregion Public Constructors
 
-            this.ownerToCreate = new OwnerModel
+        #region Internal Methods
+
+        internal void IHaveAnAccountDomainService()
+        {
+            this.steps.accountDomainService = new AccountDomainService(this.steps.signupService, this.baseSteps.proxy, this.baseSteps.mapper, this.baseSteps.serviceUriOptions, this.baseSteps.loggerFactory);
+        }
+
+        internal void IHaveAnOwnerToCreate()
+        {
+            this.steps.ownerId = TestRandom.String;
+            this.steps.ownerEmail = TestRandom.String;
+
+            this.steps.ownerToCreate = new OwnerModel
             {
-                Id = this.ownerId,
+                Id = this.steps.ownerId,
                 Contact = new ContactModel
                 {
-                    Email = this.ownerEmail
+                    Email = this.steps.ownerEmail
                 }
             };
         }
 
-        internal void GivenIHaveAPropertyId()
+        internal void IHaveAPropertyId()
         {
-            this.propertyId = TestRandom.String;
+            this.steps.propertyId = TestRandom.String;
         }
 
-        internal void GivenIHaveASignUpTokenString()
+        internal void IHaveASignUpTokenString()
         {
-            this.token = this.signupService.CreateTokenAsync(this.propertyId).Result;
+            this.steps.token = this.steps.signupService.CreateTokenAsync(this.steps.propertyId).Result;
         }
 
-        internal void GivenIHaveMockedSignUpService()
+        internal void IHaveMockedSignUpService()
         {
             var mailGunRestClient = MailGunRestClientMockBuilder
                                         .New()
@@ -74,79 +67,153 @@ namespace DotCom.Tests.Component.Domain.Service
                                         .New()
                                         .Build();
 
-            this.signupService = new SignUpService(mailGunRestClient, signUpLoggerFactory);
+            this.steps.signupService = new SignUpService(mailGunRestClient, signUpLoggerFactory);
         }
 
-        internal void ThenICanVerifyICreateOwner()
+        #endregion Internal Methods
+    }
+
+    internal class AccountDomainServiceSteps : Steps
+    {
+        #region Internal Fields
+
+        internal IAccountDomainService accountDomainService;
+        internal string ownerEmail;
+        internal string ownerId;
+        internal OwnerModel ownerModelResult;
+        internal OwnerModel ownerToCreate;
+        internal string propertyId;
+        internal ISignUpService signupService;
+        internal string token;
+        internal bool validateSignUpTokenResult;
+
+        #endregion Internal Fields
+
+        #region Public Constructors
+
+        public AccountDomainServiceSteps()
         {
-            Assert.NotNull(this.ownerModelResult);
-            Assert.Equal(this.ownerToCreate, this.ownerModelResult);
+            this.Given = new AccountDomainServiceGiven(this);
+            this.When = new AccountDomainServiceWhen(this);
+            this.Then = new AccountDomainServiceThen(this);
         }
 
-        internal void ThenICanVerifyICanRegisterSignUpTokenAsync()
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public AccountDomainServiceGiven Given { get; }
+        public AccountDomainServiceThen Then { get; }
+        public AccountDomainServiceWhen When { get; }
+
+        #endregion Public Properties
+    }
+
+    internal class AccountDomainServiceThen : Then
+    {
+        #region Private Fields
+
+        private AccountDomainServiceSteps steps;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public AccountDomainServiceThen(AccountDomainServiceSteps steps) : base(steps)
         {
-            this.ExecuteAction();
+            this.steps = steps;
         }
 
-        internal async Task WhenICreateOwnerAsync()
+        #endregion Public Constructors
+
+        #region Internal Methods
+
+        internal void ICanVerifyICanRegisterSignUpTokenAsync()
         {
-            this.ownerModelResult = await this.accountDomainService.CreateOwnerAsync(this.ownerId, this.ownerEmail);
+            this.baseSteps.asyncActionToExecute();
         }
 
-        internal async Task WhenICreateOwnerAsyncFromToken()
+        internal void ICanVerifyICanUpdateOwnerPropertyIdsAsync()
         {
-            this.ownerModelResult = await this.accountDomainService.CreateOwnerAsync(this.ownerId, this.ownerEmail, this.token);
+            this.baseSteps.asyncActionToExecute();
         }
 
-        internal void WhenIRegisterSignupTokenAsync()
+        internal void ICanVerifyICanValidateSignUpTokenAsync()
         {
-            this.asyncActionToExecute = async () => { await this.accountDomainService.RegisterSignUpTokenAsync(this.token); };
+            Assert.True(this.steps.validateSignUpTokenResult);
         }
 
-        private void ExecuteAction()
+        internal void ICanVerifyICreateOwner()
         {
-            // If no exception throws, we are good to go!
-            this.asyncActionToExecute();
+            Assert.NotNull(this.steps.ownerModelResult);
+            Assert.Equal(this.steps.ownerToCreate, this.steps.ownerModelResult);
         }
 
-        internal void WhenIUpdateOwnerPropertyIdsAsync()
+        #endregion Internal Methods
+    }
+
+    internal class AccountDomainServiceWhen : When
+    {
+        #region Private Fields
+
+        private AccountDomainServiceSteps steps;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public AccountDomainServiceWhen(AccountDomainServiceSteps steps) : base(steps)
         {
-            this.asyncActionToExecute = async () => { await this.accountDomainService.UpdateOwnerPropertyIdsAsync(this.ownerId, this.token); };
+            this.steps = steps;
         }
 
-        internal void ThenICanVerifyICanUpdateOwnerPropertyIdsAsync()
+        #endregion Public Constructors
+
+        #region Internal Methods
+
+        internal async Task ICreateOwnerAsync()
         {
-            this.ExecuteAction();
+            this.steps.ownerModelResult = await this.steps.accountDomainService.CreateOwnerAsync(this.steps.ownerId, this.steps.ownerEmail);
         }
 
-        internal async Task WhenIValidateSignUpTokenAsync()
+        internal void ICreateOwnerAsyncAction()
         {
-            this.validateSignUpTokenResult = await this.accountDomainService.ValidateSignUpTokenAsync(this.token);
+            this.baseSteps.asyncActionToExecute = async () => { await this.steps.accountDomainService.CreateOwnerAsync(this.steps.ownerId, this.steps.ownerEmail); };
         }
 
-        internal void ThenICanVerifyICanValidateSignUpTokenAsync()
+        internal async Task ICreateOwnerAsyncFromToken()
         {
-            Assert.True(this.validateSignUpTokenResult);
+            this.steps.ownerModelResult = await this.steps.accountDomainService.CreateOwnerAsync(this.steps.ownerId, this.steps.ownerEmail, this.steps.token);
         }
 
-        internal void WhenICreateOwnerAsyncAction()
+        internal void ICreateOwnerAsyncFromTokenAction()
         {
-            this.asyncActionToExecute = async () => { await this.accountDomainService.CreateOwnerAsync(this.ownerId, this.ownerEmail); };
+            this.baseSteps.asyncActionToExecute = async () => { await this.steps.accountDomainService.CreateOwnerAsync(this.steps.ownerId, this.steps.ownerEmail, this.steps.token); };
         }
 
-        internal void WhenICreateOwnerAsyncFromTokenAction()
+        internal void IRegisterSignupTokenAsync()
         {
-            this.asyncActionToExecute = async () => { await this.accountDomainService.CreateOwnerAsync(this.ownerId, this.ownerEmail, this.token); };
+            this.baseSteps.asyncActionToExecute = async () => { await this.steps.accountDomainService.RegisterSignUpTokenAsync(this.steps.token); };
         }
 
-        internal void WhenIValidateSignUpTokenAsyncAction()
+        internal void IUpdateOwnerPropertyIdsAsync()
         {
-            this.asyncActionToExecute = async () => { await this.accountDomainService.ValidateSignUpTokenAsync(this.token); };
+            this.baseSteps.asyncActionToExecute = async () => { await this.steps.accountDomainService.UpdateOwnerPropertyIdsAsync(this.steps.ownerId, this.steps.token); };
         }
 
-        internal void WhenIUpdateOwnerPropertyIdsAsyncAction()
+        internal void IUpdateOwnerPropertyIdsAsyncAction()
         {
-            this.asyncActionToExecute = async () => { await this.accountDomainService.UpdateOwnerPropertyIdsAsync(this.ownerId, this.token); };
+            this.baseSteps.asyncActionToExecute = async () => { await this.steps.accountDomainService.UpdateOwnerPropertyIdsAsync(this.steps.ownerId, this.steps.token); };
+        }
+
+        internal async Task IValidateSignUpTokenAsync()
+        {
+            this.steps.validateSignUpTokenResult = await this.steps.accountDomainService.ValidateSignUpTokenAsync(this.steps.token);
+        }
+
+        internal void IValidateSignUpTokenAsyncAction()
+        {
+            this.baseSteps.asyncActionToExecute = async () => { await this.steps.accountDomainService.ValidateSignUpTokenAsync(this.steps.token); };
         }
 
         #endregion Internal Methods

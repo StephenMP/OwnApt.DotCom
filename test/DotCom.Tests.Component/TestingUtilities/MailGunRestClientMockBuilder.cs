@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 using Moq;
 using OwnApt.DotCom.Domain.Service;
 using RestSharp;
@@ -11,6 +7,8 @@ namespace DotCom.Tests.Component.TestingUtilities
 {
     public class MailGunRestClientMockBuilder : MockBuilder<IMailGunRestClient>
     {
+        #region Public Methods
+
         public static MailGunRestClientMockBuilder New() => new MailGunRestClientMockBuilder();
 
         public MailGunRestClientMockBuilder ExecuteAny(HttpStatusCode returnStatusCode)
@@ -19,5 +17,7 @@ namespace DotCom.Tests.Component.TestingUtilities
 
             return this;
         }
+
+        #endregion Public Methods
     }
 }

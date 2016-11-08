@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Moq;
 using OwnApt.RestfulProxy.Interface;
 
@@ -9,6 +6,8 @@ namespace DotCom.Tests.Component.TestingUtilities
 {
     public class ProxyMockBuilder : MockBuilder<IProxy>
     {
+        #region Public Methods
+
         public static ProxyMockBuilder New() => new ProxyMockBuilder();
 
         public ProxyMockBuilder InvokeAsyncAny<TRequestDto, TResponseDto>(IProxyResponse<TResponseDto> response)
@@ -17,5 +16,7 @@ namespace DotCom.Tests.Component.TestingUtilities
 
             return this;
         }
+
+        #endregion Public Methods
     }
 }

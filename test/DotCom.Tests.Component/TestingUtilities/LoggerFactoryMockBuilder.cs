@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Moq;
+﻿using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Core;
 
 namespace DotCom.Tests.Component.TestingUtilities
 {
     public class LoggerFactoryMockBuilder
     {
+        #region Public Methods
+
         public static LoggerFactoryMockBuilder New() => new LoggerFactoryMockBuilder();
 
         public ILoggerFactory Build()
@@ -23,5 +19,7 @@ namespace DotCom.Tests.Component.TestingUtilities
 
             return new LoggerFactory().AddSerilog();
         }
+
+        #endregion Public Methods
     }
 }
