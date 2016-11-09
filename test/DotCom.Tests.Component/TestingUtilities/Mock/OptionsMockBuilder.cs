@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace DotCom.Tests.Component.TestingUtilities
+namespace DotCom.Tests.Component.TestingUtilities.Mock
 {
     public class OptionsMockBuilder<TSettings> : MockBuilder<IOptions<TSettings>> where TSettings : class, new()
     {

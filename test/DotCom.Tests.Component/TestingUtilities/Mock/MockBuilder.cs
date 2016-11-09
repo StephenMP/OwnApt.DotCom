@@ -1,12 +1,13 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 
-namespace DotCom.Tests.Component.TestingUtilities
+namespace DotCom.Tests.Component.TestingUtilities.Mock
 {
     public class MockBuilder<TMock> where TMock : class
     {
         #region Public Constructors
 
-        public MockBuilder()
+        protected MockBuilder()
         {
             this.Mock = new Mock<TMock>();
         }

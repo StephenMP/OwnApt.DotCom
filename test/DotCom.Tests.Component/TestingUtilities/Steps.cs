@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using DotCom.Tests.Component.TestingUtilities.Mock;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OwnApt.DotCom.AppStart;

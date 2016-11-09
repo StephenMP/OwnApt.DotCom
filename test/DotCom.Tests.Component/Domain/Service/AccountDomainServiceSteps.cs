@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using DotCom.Tests.Component.TestingUtilities;
+using DotCom.Tests.Component.TestingUtilities.Mock;
 using OwnApt.Api.Contract.Model;
 using OwnApt.DotCom.Domain.Service;
 using Xunit;
