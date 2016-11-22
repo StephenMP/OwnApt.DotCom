@@ -12,55 +12,6 @@ using Xunit;
 
 namespace DotCom.Tests.Component.TestingUtilities
 {
-    public class Given
-    {
-        #region Protected Fields
-
-        protected readonly Steps baseSteps;
-
-        #endregion Protected Fields
-
-        #region Public Constructors
-
-        public Given(Steps steps)
-        {
-            this.baseSteps = steps;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Methods
-
-        public void IHaveAMockedProxy<TRequestDto, TResponseDto>(bool isSuccessfulStatusCode, TResponseDto responseDto = null) where TRequestDto : class where TResponseDto : class
-        {
-            var mockedProxyResponse = new ProxyResponse<TResponseDto>
-            {
-                IsSuccessfulStatusCode = isSuccessfulStatusCode,
-                ResponseDto = responseDto
-            };
-
-            this.baseSteps.proxy = ProxyMockBuilder
-                            .New()
-                            .InvokeAsyncAny<TRequestDto, TResponseDto>(mockedProxyResponse)
-                            .Build();
-        }
-
-        public void IHaveMockedSystemAndThirdPartyObjects()
-        {
-            this.baseSteps.mapper = OwnAptStartup.BuildAutoMapper();
-
-            this.baseSteps.serviceUris = new ServiceUris { ApiBaseUri = "http://this.is/a/test" };
-            this.baseSteps.serviceUriOptions = OptionsMockBuilder<ServiceUris>.New()
-                                                                    .Value(this.baseSteps.serviceUris)
-                                                                    .Build();
-
-            this.baseSteps.loggerFactory = LoggerFactoryMockBuilder.New()
-                                                         .Build();
-        }
-
-        #endregion Public Methods
-    }
-
     public class Steps
     {
         #region Internal Fields
@@ -73,30 +24,39 @@ namespace DotCom.Tests.Component.TestingUtilities
         internal ServiceUris serviceUris;
 
         #endregion Internal Fields
-    }
-
-    public class Then
-    {
-        #region Protected Fields
-
-        protected readonly Steps baseSteps;
-
-        #endregion Protected Fields
-
-        #region Public Constructors
-
-        public Then(Steps steps)
-        {
-            this.baseSteps = steps;
-        }
-
-        #endregion Public Constructors
 
         #region Public Methods
 
-        public async Task ICanVerifyIThrowAsync<T>(string errorMessage = null) where T : Exception
+        public void GivenIHaveAMockedProxy<TRequestDto, TResponseDto>(bool isSuccessfulStatusCode, TResponseDto responseDto = null) where TRequestDto : class where TResponseDto : class
         {
-            var exception = await Assert.ThrowsAsync<T>(this.baseSteps.asyncActionToExecute);
+            var mockedProxyResponse = new ProxyResponse<TResponseDto>
+            {
+                IsSuccessfulStatusCode = isSuccessfulStatusCode,
+                ResponseDto = responseDto
+            };
+
+            this.proxy = ProxyMockBuilder
+                            .New()
+                            .InvokeAsyncAny<TRequestDto, TResponseDto>(mockedProxyResponse)
+                            .Build();
+        }
+
+        public void GivenIHaveMockedSystemAndThirdPartyObjects()
+        {
+            this.mapper = OwnAptStartup.BuildAutoMapper();
+
+            this.serviceUris = new ServiceUris { ApiBaseUri = "http://this.is/a/test" };
+            this.serviceUriOptions = OptionsMockBuilder<ServiceUris>.New()
+                                                                    .Value(this.serviceUris)
+                                                                    .Build();
+
+            this.loggerFactory = LoggerFactoryMockBuilder.New()
+                                                         .Build();
+        }
+
+        public async Task ThenICanVerifyIThrowAsync<T>(string errorMessage = null) where T : Exception
+        {
+            var exception = await Assert.ThrowsAsync<T>(this.asyncActionToExecute);
 
             if (!string.IsNullOrWhiteSpace(errorMessage))
             {
@@ -105,23 +65,5 @@ namespace DotCom.Tests.Component.TestingUtilities
         }
 
         #endregion Public Methods
-    }
-
-    public class When
-    {
-        #region Protected Fields
-
-        protected readonly Steps baseSteps;
-
-        #endregion Protected Fields
-
-        #region Public Constructors
-
-        public When(Steps steps)
-        {
-            this.baseSteps = steps;
-        }
-
-        #endregion Public Constructors
     }
 }

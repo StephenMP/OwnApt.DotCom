@@ -28,138 +28,138 @@ namespace DotCom.Tests.Component.Domain.Service
         [Fact]
         public async Task CanCreateOwnerAsync()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAnOwnerToCreate();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveAMockedProxy<OwnerModel, OwnerModel>(true, this.steps.ownerToCreate);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAnOwnerToCreate();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveAMockedProxy<OwnerModel, OwnerModel>(true, this.steps.ownerToCreate);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            await this.steps.When.ICreateOwnerAsync();
+            await this.steps.WhenICreateOwnerAsync();
 
-            this.steps.Then.ICanVerifyICreateOwner();
+            this.steps.ThenICanVerifyICreateOwner();
         }
 
         [Fact]
         public async Task CanCreateOwnerAsyncFromToken()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAnOwnerToCreate();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveASignUpTokenString();
-            this.steps.Given.IHaveAMockedProxy<OwnerModel, OwnerModel>(true, this.steps.ownerToCreate);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAnOwnerToCreate();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveASignUpTokenString();
+            this.steps.GivenIHaveAMockedProxy<OwnerModel, OwnerModel>(true, this.steps.ownerToCreate);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            await this.steps.When.ICreateOwnerAsyncFromToken();
+            await this.steps.WhenICreateOwnerAsyncFromToken();
 
-            this.steps.Then.ICanVerifyICreateOwner();
+            this.steps.ThenICanVerifyICreateOwner();
         }
 
         [Fact]
         public async Task CannotCreateOwnerAsyncFromTokenDueToApiIssue()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAnOwnerToCreate();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveASignUpTokenString();
-            this.steps.Given.IHaveAMockedProxy<OwnerModel, OwnerModel>(false);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAnOwnerToCreate();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveASignUpTokenString();
+            this.steps.GivenIHaveAMockedProxy<OwnerModel, OwnerModel>(false);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            this.steps.When.ICreateOwnerAsyncFromTokenAction();
+            this.steps.WhenICreateOwnerAsyncFromTokenAction();
 
-            await this.steps.Then.ICanVerifyIThrowAsync<Exception>();
+            await this.steps.ThenICanVerifyIThrowAsync<Exception>();
         }
 
         [Fact]
         public async Task CannotCreateOwnerDueToApiIssue()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAnOwnerToCreate();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveAMockedProxy<OwnerModel, OwnerModel>(false);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAnOwnerToCreate();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveAMockedProxy<OwnerModel, OwnerModel>(false);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            this.steps.When.ICreateOwnerAsyncAction();
+            this.steps.WhenICreateOwnerAsyncAction();
 
-            await this.steps.Then.ICanVerifyIThrowAsync<Exception>();
+            await this.steps.ThenICanVerifyIThrowAsync<Exception>();
         }
 
         [Fact]
         public async Task CannotUpdateOwnerPropertyIdsAsyncDueToApiIssue()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveASignUpTokenString();
-            this.steps.Given.IHaveAMockedProxy<Missing, OwnerModel>(false);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveASignUpTokenString();
+            this.steps.GivenIHaveAMockedProxy<Missing, OwnerModel>(false);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            this.steps.When.IUpdateOwnerPropertyIdsAsyncAction();
+            this.steps.WhenIUpdateOwnerPropertyIdsAsyncAction();
 
-            await this.steps.Then.ICanVerifyIThrowAsync<Exception>();
+            await this.steps.ThenICanVerifyIThrowAsync<Exception>();
         }
 
         [Fact]
         public async Task CannotValidateSignUpTokenAsyncDueToApiIssue()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveASignUpTokenString();
-            this.steps.Given.IHaveAMockedProxy<RegisteredTokenModel, RegisteredTokenModel>(false);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveASignUpTokenString();
+            this.steps.GivenIHaveAMockedProxy<RegisteredTokenModel, RegisteredTokenModel>(false);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            this.steps.When.IValidateSignUpTokenAsyncAction();
+            this.steps.WhenIValidateSignUpTokenAsyncAction();
 
-            await this.steps.Then.ICanVerifyIThrowAsync<Exception>();
+            await this.steps.ThenICanVerifyIThrowAsync<Exception>();
         }
 
         [Fact]
         public void CanRegisterSignUpTokenAsync()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveASignUpTokenString();
-            this.steps.Given.IHaveAMockedProxy<RegisteredTokenModel, RegisteredTokenModel>(true);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveASignUpTokenString();
+            this.steps.GivenIHaveAMockedProxy<RegisteredTokenModel, RegisteredTokenModel>(true);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            this.steps.When.IRegisterSignupTokenAsync();
+            this.steps.WhenIRegisterSignupTokenAsync();
 
-            this.steps.Then.ICanVerifyICanRegisterSignUpTokenAsync();
+            this.steps.ThenICanVerifyICanRegisterSignUpTokenAsync();
         }
 
         [Fact]
         public void CanUpdateOwnerPropertyIdsAsync()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveASignUpTokenString();
-            this.steps.Given.IHaveAMockedProxy<Missing, OwnerModel>(true);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveASignUpTokenString();
+            this.steps.GivenIHaveAMockedProxy<Missing, OwnerModel>(true);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            this.steps.When.IUpdateOwnerPropertyIdsAsync();
+            this.steps.WhenIUpdateOwnerPropertyIdsAsync();
 
-            this.steps.Then.ICanVerifyICanUpdateOwnerPropertyIdsAsync();
+            this.steps.ThenICanVerifyICanUpdateOwnerPropertyIdsAsync();
         }
 
         [Fact]
         public async Task CanValidateSignUpTokenAsync()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveMockedSignUpService();
-            this.steps.Given.IHaveAPropertyId();
-            this.steps.Given.IHaveASignUpTokenString();
-            this.steps.Given.IHaveAMockedProxy<RegisteredTokenModel, RegisteredTokenModel>(true);
-            this.steps.Given.IHaveAnAccountDomainService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveMockedSignUpService();
+            this.steps.GivenIHaveAPropertyId();
+            this.steps.GivenIHaveASignUpTokenString();
+            this.steps.GivenIHaveAMockedProxy<RegisteredTokenModel, RegisteredTokenModel>(true);
+            this.steps.GivenIHaveAnAccountDomainService();
 
-            await this.steps.When.IValidateSignUpTokenAsync();
+            await this.steps.WhenIValidateSignUpTokenAsync();
 
-            this.steps.Then.ICanVerifyICanValidateSignUpTokenAsync();
+            this.steps.ThenICanVerifyICanValidateSignUpTokenAsync();
         }
 
         #endregion Public Methods

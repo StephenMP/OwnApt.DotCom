@@ -20,7 +20,7 @@ namespace OwnApt.DotCom.Domain.Service
 
         Task<OwnerModel> ReadOwnerAsync(string ownerId);
 
-        Task<PropertyModel[]> ReadPropertiesAsync(IEnumerable<string> propertyIds);
+        Task<IEnumerable<PropertyModel>> ReadPropertiesAsync(IEnumerable<string> propertyIds);
 
         Task<PropertyModel> ReadPropertyAsync(string propertyId);
 
@@ -80,7 +80,7 @@ namespace OwnApt.DotCom.Domain.Service
             throw ExceptionUtility.RaiseException(readOwnerResponse, this.logger);
         }
 
-        public async Task<PropertyModel[]> ReadPropertiesAsync(IEnumerable<string> propertyIds)
+        public async Task<IEnumerable<PropertyModel>> ReadPropertiesAsync(IEnumerable<string> propertyIds)
         {
             var readPropertiesRequest = new ReadPropertiesProxyRequest(this.serviceUris, propertyIds);
             var readPropertiesResponse = await this.proxy.InvokeAsync(readPropertiesRequest);

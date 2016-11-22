@@ -25,24 +25,24 @@ namespace DotCom.Tests.Component.Domain.Service
         [Fact]
         public async Task CanCreateSignUpTokenAsync()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveAMockedSignUpService();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveAMockedSignUpService();
 
-            await this.steps.When.ICreateSignUpToken();
+            await this.steps.WhenICreateSignUpToken();
 
-            this.steps.Then.ICanVerifyICreateToken();
+            this.steps.ThenICanVerifyICreateToken();
         }
 
         [Fact]
         public async Task CanParseSignUpTokenAsync()
         {
-            this.steps.Given.IHaveMockedSystemAndThirdPartyObjects();
-            this.steps.Given.IHaveAMockedSignUpService();
-            await this.steps.Given.IHaveATokenToParse();
+            this.steps.GivenIHaveMockedSystemAndThirdPartyObjects();
+            this.steps.GivenIHaveAMockedSignUpService();
+            await this.steps.GivenIHaveATokenToParse();
 
-            await this.steps.When.IParseSignUpTokenAsync();
+            await this.steps.WhenIParseSignUpTokenAsync();
 
-            this.steps.Then.ICanVerifyICanParseSignUpToken();
+            this.steps.ThenICanVerifyICanParseSignUpToken();
         }
 
         #endregion Public Methods
